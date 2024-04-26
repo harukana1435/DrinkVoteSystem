@@ -44,9 +44,10 @@ export async function authenticate(
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {
-                case 'CredentialsSignin':
-                    return 'Invalid credentials.';
-                default:
+                case 'CredentialsSignin': //CredentialsSigninの時にエラーが出た場合の警告文
+                    //return 'Invalid credentials.';
+                    return 'EmailかPasswordが間違っています';
+                default: //それ以外の場合の警告文
                     return 'Something went wrong.';
             }
         }

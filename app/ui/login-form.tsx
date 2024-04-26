@@ -5,20 +5,23 @@ import {
     AtSymbolIcon,
     KeyIcon,
     ExclamationCircleIcon,
+    LockClosedIcon,
+    EnvelopeIcon,
 } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
 
+
 export default function LoginForm() {
     const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
     return (
         <form action={dispatch} className="space-y-3">
-            <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
+            <div className="flex-1 rounded-lg bg-blue-50 px-6 pb-4 pt-8">
                 <h1 className={`${lusitana.className} mb-3 text-2xl`}>
-                    Please log in to continue.
+                    ログイン (研究室メール)
                 </h1>
                 <div className="w-full">
                     <div>
@@ -30,14 +33,14 @@ export default function LoginForm() {
                         </label>
                         <div className="relative">
                             <input
-                                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                                className="peer block w-full rounded-lg border border--200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                                 id="email"
                                 type="email"
                                 name="email"
-                                placeholder="Enter your email address"
+                                placeholder="Enter your lab email address"
                                 required
                             />
-                            <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                            <EnvelopeIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
                         </div>
                     </div>
                     <div className="mt-4">
@@ -49,15 +52,15 @@ export default function LoginForm() {
                         </label>
                         <div className="relative">
                             <input
-                                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                                className="peer block w-full rounded-lg border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                                 id="password"
                                 type="password"
                                 name="password"
-                                placeholder="Enter password"
+                                placeholder="Enter password (your name)"
                                 required
                                 minLength={6}
                             />
-                            <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                            <LockClosedIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
                         </div>
                     </div>
                 </div>
@@ -86,5 +89,16 @@ function LoginButton() {
         <Button className="mt-4 w-full" aria-disabled={pending}>
             Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
+    );
+}
+
+
+export function Header_login() {
+    return (
+        <div className="flex-1 bg-green-500 pb-20 pt-20 ">
+            <h1 className="text-center text-4xl font-family:'Meiryo';">
+                田原・清研究室　　飲料管理サイト
+            </h1>
+        </div>
     );
 }
