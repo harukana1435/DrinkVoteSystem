@@ -30,7 +30,7 @@ const users = [
         name: 'kimura akikazu',
         email: 'kimura.akikazu@ohsuga.lab.uec.ac.jp',
         password: 'kimuraakikazu',
-    }
+    },
 ];
 
 const customers = [
