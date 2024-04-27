@@ -11,25 +11,25 @@ const users = [
         id: '27d445c3-47aa-f1b3-c13c-c94adc30984a',
         name: 'sato go',
         email: 'sato.go@ohsuga.lab.uec.ac.jp',
-        password: 'sato go',
+        password: 'satogo',
     },
     {
         id: '32bf1fc7-3fe4-fe3c-85e4-17127e429f4e',
         name: 'okano haruka',
         email: 'okano.haruka@ohsuga.lab.uec.ac.jp',
-        password: 'okano haruka',
+        password: 'okanoharuka',
     },
     {
         id: 'a17c981f-8d70-6e5e-97be-7a144e274a68',
         name: 'minooka tomoki',
         email: 'minooka.tomoki@ohsuga.lab.uec.ac.jp',
-        password: 'minooka tomoki',
+        password: 'minookatomoki',
     },
     {
         id: '2aab4549-6d36-d015-96fe-50b0fddfa39c',
         name: 'kimura akikazu',
         email: 'kimura.akikazu@ohsuga.lab.uec.ac.jp',
-        password: 'kimura akikazu',
+        password: 'kimuraakikazu',
     }
 ];
 
