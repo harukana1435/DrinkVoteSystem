@@ -7,6 +7,7 @@ const users = [
         email: 'user@nextmail.com',
         password: '123456',
     },
+    /*
     {
         id: '27d445c3-47aa-f1b3-c13c-c94adc30984a',
         name: 'satogo',
@@ -31,6 +32,7 @@ const users = [
         email: 'kimura.akikazu@ohsuga.lab.uec.ac.jp',
         password: 'kimuraakikazu',
     },
+    */
 ];
 
 const customers = [
