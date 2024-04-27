@@ -9,7 +9,7 @@ const users = [
     },
     {
         id: '27d445c3-47aa-f1b3-c13c-c94adc30984a',
-        name: 'sato go',
+        name: 'satogo',
         email: 'sato.go@ohsuga.lab.uec.ac.jp',
         password: 'satogo',
     },
