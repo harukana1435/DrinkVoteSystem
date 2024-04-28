@@ -23,7 +23,7 @@ export default function Drink() {
 }
 
 
-export function Vote() {
+function Vote() {
     const [value, setValue] = useState(0);
 
     const handleChange = (e: any) => {

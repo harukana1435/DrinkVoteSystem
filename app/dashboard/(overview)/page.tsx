@@ -1,6 +1,6 @@
 import { lusitana } from '@/app/ui/fonts';
 import Drink from '@/app/ui/drink_vote/page';
-import { Vote } from '@/app/ui/drink_vote/page';
+// import { Vote } from '@/app/ui/drink_vote/page';
 
 
 export default async function Page() {
