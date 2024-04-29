@@ -2,7 +2,7 @@
 
 import { lusitana } from '@/app/ui/fonts';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 export default function Drink() {
 
@@ -24,19 +24,50 @@ export default function Drink() {
 
 
 function Vote() {
-    const [value, setValue] = useState(0);
+    const [value_Slide, setValue_Slide] = useState(0);
+    const [value_Box, setValue_Box] = useState(0);
+    const [clicked, setclicked] = useState(false);
 
-    const handleChange = (e: any) => {
-        const value = e.target.value;
-        setValue(value);
+    const handleSlideChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value_Slide = parseInt(e.target.value);
+        //スライダーとボックスの値を同期させる
+        setValue_Slide(value_Slide);
+        setValue_Box(value_Slide);
     };
+
+    const handleBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value_Box = e.target.value;
+
+        if (value_Box == '') { //ボックスの中身が空になったら
+            setValue_Slide(0); //スライダーの値は0にする
+            setValue_Box(parseInt('')); ///ボックスの中身は空のまま
+        }
+        else {     //空じゃない時はスライダーとボックスの値を同期させる
+            setValue_Slide(parseInt(value_Box));
+            setValue_Box(parseInt(value_Box));
+        }
+    };
+
+    const handleClick = () => {
+        setclicked(true);
+    }
+
     return (
         <div>
             <div className="flex flex-col items-center justify-center" >
-                <input type="range" id="number_of_vote" min="0" max="15" step="1" defaultValue={0} onChange={(e) => handleChange(e)}></input>
-                <div>{value}</div>
-                <button className="m-3 rounded-md bg-green-400">投票</button>
-            </div >
+                <input type="range" id="number_of_vote" min="0" max="15" step="1" defaultValue={0} value={value_Slide} onChange={(e) => handleSlideChange(e)}></input>
+                {/* <div>{value}</div> */}
+                <div className='mt-5'></div>  {/*スライダーとboxの隙間*/}
+                <input className="rounded-md text-center" type="number" id="number_of_vote" defaultValue={0} value={value_Box} onChange={(e) => handleBoxChange(e)} style={{ width: '50px' }}></input>
+                <button className="m-5 rounded-md bg-green-400" onClick={handleClick}>
+                    <div className="m-1 mx-3">投票</div>
+                </button>
+                {clicked && <p>{value_Slide}票分投票しました</p>}
+            </div>
         </div>
     );
+}
+
+function resullt() {
+
 }
