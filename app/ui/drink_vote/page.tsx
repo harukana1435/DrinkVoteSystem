@@ -9,11 +9,16 @@ export default function Drink() {
     return (
         <div className="display: flex gap-10">
             {['/mitsuyacider.png', '/cocacola.png', '/calpis.png'].map((image, index) => (
-                <div key={index} className="rounded-md bg-blue-200">
-                    <div key={index} className="mt-3 flex flex-col items-center justify-center">
-                        <Image src={image} width={200} height={200} className="hidden md:block" alt="Screenshots of the dashboard project showing desktop version" />
-                        <div className='mt-5'></div>  {/*画像とボタンの隙間*/}
-                        <Vote />
+                <div>
+                    <div key={index} className="rounded-md bg-blue-200">
+                        <div key={index} className="mt-3 flex flex-col items-center justify-center">
+                            <Image src={image} width={200} height={200} className="hidden md:block" alt="Screenshots of the dashboard project showing desktop version" />
+                            <div className='mt-5'></div>  {/*画像とボタンの隙間*/}
+                            <Vote />
+                        </div>
+                    </div>
+                    <div className='flex flex-col items-center justify-center'>
+                        <Result />
                     </div>
                 </div>
             ))}
@@ -42,15 +47,29 @@ function Vote() {
             setValue_Slide(0); //スライダーの値は0にする
             setValue_Box(parseInt('')); ///ボックスの中身は空のまま
         }
+        else if (parseInt(value_Box) > 15) { //最大値は15に設定 (後で最大値は残り投票数に変える必要あり)
+            setValue_Box(15);
+        }
         else {     //空じゃない時はスライダーとボックスの値を同期させる
             setValue_Slide(parseInt(value_Box));
             setValue_Box(parseInt(value_Box));
         }
     };
 
+    const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value_Box = e.target.value;
+        if (value_Box == '') {
+            setValue_Box(0);
+        }
+
+    };
+
+
     const handleClick = () => {
         setclicked(true);
     }
+
+
 
     return (
         <div>
@@ -58,16 +77,43 @@ function Vote() {
                 <input type="range" id="number_of_vote" min="0" max="15" step="1" defaultValue={0} value={value_Slide} onChange={(e) => handleSlideChange(e)}></input>
                 {/* <div>{value}</div> */}
                 <div className='mt-5'></div>  {/*スライダーとboxの隙間*/}
-                <input className="rounded-md text-center" type="number" id="number_of_vote" defaultValue={0} value={value_Box} onChange={(e) => handleBoxChange(e)} style={{ width: '50px' }}></input>
-                <button className="m-5 rounded-md bg-green-400" onClick={handleClick}>
+                <input className="mb-5 rounded-md text-center" type="number" id="number_of_vote" defaultValue={0} value={value_Box} onChange={(e) => handleBoxChange(e)} onBlur={(e) => handleBlur(e)} style={{ width: '50px' }}></input>
+                {/* <button className="m-5 rounded-md bg-green-400" onClick={handleClick}>
                     <div className="m-1 mx-3">投票</div>
                 </button>
-                {clicked && <p>{value_Slide}票分投票しました</p>}
+                {clicked && <p>{value_Slide}票投票しました</p>} */}
             </div>
         </div>
     );
 }
 
-function resullt() {
+function Result() {
+    const [clicked, setclicked] = useState(false);
 
+    const handleClick = () => {
+        setclicked(true);
+    }
+
+    const handleConfirmClick = () => {
+        setclicked(false);
+    }
+
+    return (
+        <div>
+            <button className="m-5 rounded-md bg-green-400" onClick={handleClick}>
+                <div className="m-1 mx-3">投票</div>
+            </button>
+
+            {/* 確認画面 */}
+            {clicked &&
+                <div className="rounded-md bg-gray-200">
+                    <p className='text-center'>投票しますか？</p>
+                    <div className=" display: flex gap-10">
+                        <button className="m-5 rounded-md bg-green-400" onClick={handleConfirmClick}>はい</button>
+                        <button className="m-5 rounded-md bg-green-400" onClick={() => setclicked(false)}>いいえ</button>
+                    </div>
+                </div>
+            }
+        </div>
+    );
 }
