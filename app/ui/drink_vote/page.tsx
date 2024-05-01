@@ -9,7 +9,7 @@ export default function Drink() {
     return (
         <div className="display: flex gap-10">
             {['/mitsuyacider.png', '/cocacola.png', '/calpis.png'].map((image, index) => (
-                <div>
+                <div key={index} >
                     <div key={index} className="rounded-md bg-blue-200">
                         <div key={index} className="mt-3 flex flex-col items-center justify-center">
                             <Image src={image} width={200} height={200} className="hidden md:block" alt="Screenshots of the dashboard project showing desktop version" />
