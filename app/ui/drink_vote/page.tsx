@@ -7,13 +7,13 @@ import type { Drink } from '@/app/lib/definitions';
 import { fetchUser_vote, fetchDrink, fetchVote } from '@/app/lib/data';
 import Drink_info from './drink_info';
 
-export default function Drink() {
+// export default function Drink() {
 
-    return (
-        <Drink_list />
-    );
+//     return (
+//         <Drink_list />
+//     );
 
-}
+// }
 
 export async function Drink_list() {
     const [clicked, setclicked] = useState(0);
