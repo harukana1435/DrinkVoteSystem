@@ -2,37 +2,37 @@
 // https://nextjs.org/learn/dashboard-app/fetching-data
 const users = [
     {
-        id: '410544b2-4001-4271-9855-fec4b6a6442a',
-        name: 'User',
-        email: 'user@nextmail.com',
-        password: '123456',
-    },
-    /*
-    {
         id: '27d445c3-47aa-f1b3-c13c-c94adc30984a',
-        name: 'satogo',
+        name: '佐藤豪',
         email: 'sato.go@ohsuga.lab.uec.ac.jp',
         password: 'satogo',
+        voted: 'false',
+        sum_voted: '0'
     },
     {
         id: '32bf1fc7-3fe4-fe3c-85e4-17127e429f4e',
-        name: 'okano haruka',
+        name: '岡野日翔',
         email: 'okano.haruka@ohsuga.lab.uec.ac.jp',
         password: 'okanoharuka',
+        voted: 'false',
+        sum_voted: '0'
     },
     {
         id: 'a17c981f-8d70-6e5e-97be-7a144e274a68',
-        name: 'minooka tomoki',
+        name: '美濃岡知樹',
         email: 'minooka.tomoki@ohsuga.lab.uec.ac.jp',
         password: 'minookatomoki',
+        voted: 'false',
+        sum_voted: '0'
     },
     {
         id: '2aab4549-6d36-d015-96fe-50b0fddfa39c',
-        name: 'kimura akikazu',
+        name: '木村晃和',
         email: 'kimura.akikazu@ohsuga.lab.uec.ac.jp',
         password: 'kimuraakikazu',
+        voted: 'false',
+        sum_voted: '0'
     },
-    */
 ];
 
 const customers = [
@@ -206,9 +206,48 @@ const revenue = [
     { month: 'Dec', revenue: 4800 },
 ];
 
+const drink = [
+    {
+        id: '0',
+        name: 'cider',
+        voted: '0',
+        price: '150',
+        path: '/cider.png',
+        exist: 'true',
+    },
+    {
+        id: '1',
+        name: 'cocacola',
+        voted: '0',
+        price: '150',
+        path: '/cocacola.png',
+        exist: 'true',
+    },
+    {
+        id: '2',
+        name: 'calpis',
+        voted: '0',
+        price: '150',
+        path: '/calpis.png',
+        exist: 'true',
+    },
+];
+
+const vote = [
+    {
+        id: '',
+        name: '',
+        drink: '',
+        voting: '',
+    },
+];
+
+
 module.exports = {
     users,
     customers,
     invoices,
     revenue,
+    drink,
+    vote,
 };
