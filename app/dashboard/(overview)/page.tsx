@@ -1,5 +1,5 @@
 import { lusitana } from '@/app/ui/fonts';
-import Drink from '@/app/ui/drink_vote/page';
+//mport Drink from '@/app/ui/drink_vote/page';
 // import { Vote } from '@/app/ui/drink_vote/page';
 import Drink_info from '@/app/ui/drink_vote/drink_info';
 
