@@ -4,6 +4,8 @@ const {
     customers,
     revenue,
     users,
+    drink,
+    vote
 } = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
@@ -27,10 +29,12 @@ async function seedUsers(client) {
             users.map(async (user) => {
                 const hashedPassword = await bcrypt.hash(user.password, 10);
                 return client.sql`
-        INSERT INTO users (id, name, email, password)
-        VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
+        INSERT INTO users (id, name, email, password, voted, sum_voted) 
+        VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword}, ${user.voted}, ${user.sum_voted})
         ON CONFLICT (id) DO NOTHING;
     `;
+                //INSERTだから一回データを作ってからはplaceholderの値を変えても反映されない。vercel上でデータを一度消してから「npm run seed」を実行してデータを更新する必要あり
+                //「ON CONFLICT (id) DO NOTHING;」のところを「ON CONFLICT (id) DO UPDATE SET ...　」に変えれば楽に更新できるかも
             }),
         );
 
@@ -160,6 +164,81 @@ async function seedRevenue(client) {
     }
 }
 
+
+
+//追加↓
+async function seedDrink(client) {
+    try {
+        // Create the "revenue" table if it doesn't exist
+        //     const createTable = await client.sql`
+        //   CREATE TABLE IF NOT EXISTS drink (
+        //     month VARCHAR(4) NOT NULL UNIQUE,
+        //     revenue INT NOT NULL
+        //   );
+        // `;
+
+        // console.log(`Created "revenue" table`);
+
+        // Insert data into the "revenue" table
+        const insertedDrink = await Promise.all(
+            drink.map(
+                (drink) => client.sql`
+        INSERT INTO drink (id, name, exist, voted, price, path)
+        VALUES (${drink.id}, ${drink.name}, ${drink.exist}, ${drink.voted}, ${drink.price}, ${drink.path})
+        ON CONFLICT (id) DO NOTHING;
+      `,
+            ),
+        );
+
+        console.log(`Seeded ${insertedDrink.length} drink data`);
+
+        return {
+            //createTable,
+            drink: insertedDrink,
+        };
+    } catch (error) {
+        console.error('Error seeding drink data:', error);
+        throw error;
+    }
+}
+
+//追加↓
+async function seedVote(client) {
+    try {
+        // Create the "revenue" table if it doesn't exist
+        //     const createTable = await client.sql`
+        //   CREATE TABLE IF NOT EXISTS drink (
+        //     month VARCHAR(4) NOT NULL UNIQUE,
+        //     revenue INT NOT NULL
+        //   );
+        // `;
+
+        // console.log(`Created "revenue" table`);
+
+        // Insert data into the "revenue" table
+        const insertedVote = await Promise.all(
+            vote.map(
+                (vote) => client.sql`
+        INSERT INTO vote (id, name, drink, voting)
+        VALUES (${vote.id}, ${vote.name}, ${vote.drink}, ${vote.voting})
+        ON CONFLICT (id) DO NOTHING;
+      `,
+            ),
+        );
+
+        console.log(`Seeded ${insertedVote.length} vote data`);
+
+        return {
+            //createTable,
+            vote: insertedVote,
+        };
+    } catch (error) {
+        console.error('Error seeding vote data:', error);
+        throw error;
+    }
+}
+
+
 async function main() {
     const client = await db.connect();
 
@@ -167,6 +246,8 @@ async function main() {
     await seedCustomers(client);
     await seedInvoices(client);
     await seedRevenue(client);
+    await seedDrink(client);
+    await seedVote(client);
 
     await client.end();
 }

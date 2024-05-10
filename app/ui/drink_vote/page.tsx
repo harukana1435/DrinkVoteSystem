@@ -3,29 +3,49 @@
 import { lusitana } from '@/app/ui/fonts';
 import Image from 'next/image';
 import React, { useState, useRef, useEffect } from 'react';
+import type { Drink } from '@/app/lib/definitions';
+import { fetchUser_vote, fetchDrink, fetchVote } from '@/app/lib/data';
+import Drink_info from './drink_info';
 
-export default function Drink() {
+// export function Drink() {
+
+//     return (
+//         <Drink_list />
+//     );
+
+// }
+
+export default async function Drink_list() {
+    const [clicked, setclicked] = useState(0);
+    const drink_datas = await fetchDrink();
+
+    const handleClick = () => {
+        setclicked(1)
+    }
 
     return (
         <div className="display: flex gap-10">
-            {['/mitsuyacider.png', '/cocacola.png', '/calpis.png'].map((image, index) => (
-                <div key={index} >
-                    <div key={index} className="rounded-md bg-blue-200">
-                        <div key={index} className="mt-3 flex flex-col items-center justify-center">
-                            <Image src={image} width={200} height={200} className="hidden md:block" alt="Screenshots of the dashboard project showing desktop version" />
+            {drink_datas.map((drink_data) => (
+                <div key={drink_data.id} >
+                    <div key={drink_data.id}>
+                        <div key={drink_data.id} className="mt-3 flex flex-col items-center justify-center">
+                            <button onClick={() => handleClick()} className={clicked === parseInt(drink_data.id) ? 'rounded-md bg-blue-200' : 'rounded-md bg-gray-200'}>
+                                <Image src={drink_data.path} width={250} height={250} className="hidden md:block" alt="Screenshots of the dashboard project showing desktop version" />
+                            </button>
                             <div className='mt-5'></div>  {/*画像とボタンの隙間*/}
-                            <Vote />
+                            {/* <Vote /> */}
                         </div>
                     </div>
-                    <div className='flex flex-col items-center justify-center'>
+                    {/* <div className='flex flex-col items-center justify-center'>
                         <Result />
-                    </div>
+                    </div> */}
                 </div>
             ))}
         </div>
     );
-
 }
+
+
 
 
 function Vote() {
