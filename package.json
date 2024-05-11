@@ -22,6 +22,7 @@
         "clsx": "^2.0.0",
         "igniteui-react": "^18.6.0",
         "igniteui-react-core": "^18.6.0",
+        "moize": "^6.1.6",
         "next": "14.2",
         "next-auth": "^5.0.0-beta.17",
         "postcss": "8.4.31",
