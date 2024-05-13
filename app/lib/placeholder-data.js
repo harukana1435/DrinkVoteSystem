@@ -20,8 +20,8 @@ const users = [
     {
         id: 'a17c981f-8d70-6e5e-97be-7a144e274a68',
         name: '美濃岡知樹',
-        email: 'minooka.tomoki@ohsuga.lab.uec.ac.jp',
-        password: 'minookatomoki',
+        email: 'minoka.tomoki@ohsuga.lab.uec.ac.jp',
+        password: 'minokatomoki',
         voted: 'false',
         sum_voted: '0'
     },
