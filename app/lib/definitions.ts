@@ -1,106 +1,332 @@
-// This file contains type definitions for your data.
-// It describes the shape of the data, and what data type each property should accept.
-// For simplicity of teaching, we're manually defining these types.
-// However, these types are generated automatically if you're using an ORM such as Prisma.
-export type User = {
-    id: string;
-    name: string;
-    email: string;
-    password: string;
-    voted: string; //今日1回でも投票を行ったかどうか
-    sum_voted: string; //現在の総投票数
-};
+// This file contains placeholder data that you'll be replacing with real data in the Data Fetching chapter:
+// https://nextjs.org/learn/dashboard-app/fetching-data
+const users = [
+  {
+    id: '27d445c3-47aa-f1b3-c13c-c94adc30984a',
+    name: '佐藤豪',
+    email: 'sato.go@ohsuga.lab.uec.ac.jp',
+    password: 'satogo',
+    voted: 'false',
+    sum_voted: '0',
+  },
+  {
+    id: '32bf1fc7-3fe4-fe3c-85e4-17127e429f4e',
+    name: '岡野日翔',
+    email: 'okano.haruka@ohsuga.lab.uec.ac.jp',
+    password: 'okanoharuka',
+    voted: 'false',
+    sum_voted: '0',
+  },
+  {
+    id: 'a17c981f-8d70-6e5e-97be-7a144e274a68',
+    name: '美濃岡知樹',
+    email: 'minooka.tomoki@ohsuga.lab.uec.ac.jp',
+    password: 'minookatomoki',
+    voted: 'false',
+    sum_voted: '0',
+  },
+  {
+    id: '2aab4549-6d36-d015-96fe-50b0fddfa39c',
+    name: '木村晃和',
+    email: 'kimura.akikazu@ohsuga.lab.uec.ac.jp',
+    password: 'kimuraakikazu',
+    voted: 'false',
+    sum_voted: '0',
+  },
+];
 
-export type Vote = {
-    id: string;
-    name: string;
-    drink: string;
-    voting: string;
-};
+const customers = [
+  {
+    id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
+    name: 'Delba de Oliveira',
+    email: 'delba@oliveira.com',
+    image_url: '/customers/delba-de-oliveira.png',
+  },
+  {
+    id: '3958dc9e-742f-4377-85e9-fec4b6a6442a',
+    name: 'Lee Robinson',
+    email: 'lee@robinson.com',
+    image_url: '/customers/lee-robinson.png',
+  },
+  {
+    id: '3958dc9e-737f-4377-85e9-fec4b6a6442a',
+    name: 'Hector Simpson',
+    email: 'hector@simpson.com',
+    image_url: '/customers/hector-simpson.png',
+  },
+  {
+    id: '50ca3e18-62cd-11ee-8c99-0242ac120002',
+    name: 'Steven Tey',
+    email: 'steven@tey.com',
+    image_url: '/customers/steven-tey.png',
+  },
+  {
+    id: '3958dc9e-787f-4377-85e9-fec4b6a6442a',
+    name: 'Steph Dietz',
+    email: 'steph@dietz.com',
+    image_url: '/customers/steph-dietz.png',
+  },
+  {
+    id: '76d65c26-f784-44a2-ac19-586678f7c2f2',
+    name: 'Michael Novotny',
+    email: 'michael@novotny.com',
+    image_url: '/customers/michael-novotny.png',
+  },
+  {
+    id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
+    name: 'Evil Rabbit',
+    email: 'evil@rabbit.com',
+    image_url: '/customers/evil-rabbit.png',
+  },
+  {
+    id: '126eed9c-c90c-4ef6-a4a8-fcf7408d3c66',
+    name: 'Emil Kowalski',
+    email: 'emil@kowalski.com',
+    image_url: '/customers/emil-kowalski.png',
+  },
+  {
+    id: 'CC27C14A-0ACF-4F4A-A6C9-D45682C144B9',
+    name: 'Amy Burns',
+    email: 'amy@burns.com',
+    image_url: '/customers/amy-burns.png',
+  },
+  {
+    id: '13D07535-C59E-4157-A011-F8D2EF4E0CBB',
+    name: 'Balazs Orban',
+    email: 'balazs@orban.com',
+    image_url: '/customers/balazs-orban.png',
+  },
+];
 
-export type Drink = {
-    id: string;
-    name: string;
-    voted: string;
-    price: string; //値段
-    path: string;
-    exist: string;
-};
+const invoices = [
+  {
+    customer_id: customers[0].id,
+    amount: 15795,
+    status: 'pending',
+    date: '2022-12-06',
+  },
+  {
+    customer_id: customers[1].id,
+    amount: 20348,
+    status: 'pending',
+    date: '2022-11-14',
+  },
+  {
+    customer_id: customers[4].id,
+    amount: 3040,
+    status: 'paid',
+    date: '2022-10-29',
+  },
+  {
+    customer_id: customers[3].id,
+    amount: 44800,
+    status: 'paid',
+    date: '2023-09-10',
+  },
+  {
+    customer_id: customers[5].id,
+    amount: 34577,
+    status: 'pending',
+    date: '2023-08-05',
+  },
+  {
+    customer_id: customers[7].id,
+    amount: 54246,
+    status: 'pending',
+    date: '2023-07-16',
+  },
+  {
+    customer_id: customers[6].id,
+    amount: 666,
+    status: 'pending',
+    date: '2023-06-27',
+  },
+  {
+    customer_id: customers[3].id,
+    amount: 32545,
+    status: 'paid',
+    date: '2023-06-09',
+  },
+  {
+    customer_id: customers[4].id,
+    amount: 1250,
+    status: 'paid',
+    date: '2023-06-17',
+  },
+  {
+    customer_id: customers[5].id,
+    amount: 8546,
+    status: 'paid',
+    date: '2023-06-07',
+  },
+  {
+    customer_id: customers[1].id,
+    amount: 500,
+    status: 'paid',
+    date: '2023-08-19',
+  },
+  {
+    customer_id: customers[5].id,
+    amount: 8945,
+    status: 'paid',
+    date: '2023-06-03',
+  },
+  {
+    customer_id: customers[2].id,
+    amount: 8945,
+    status: 'paid',
+    date: '2023-06-18',
+  },
+  {
+    customer_id: customers[0].id,
+    amount: 8945,
+    status: 'paid',
+    date: '2023-10-04',
+  },
+  {
+    customer_id: customers[2].id,
+    amount: 1000,
+    status: 'paid',
+    date: '2022-06-05',
+  },
+];
 
-export type Customer = {
-    id: string;
-    name: string;
-    email: string;
-    image_url: string;
-};
+const revenue = [
+  { month: 'Jan', revenue: 2000 },
+  { month: 'Feb', revenue: 1800 },
+  { month: 'Mar', revenue: 2200 },
+  { month: 'Apr', revenue: 2500 },
+  { month: 'May', revenue: 2300 },
+  { month: 'Jun', revenue: 3200 },
+  { month: 'Jul', revenue: 3500 },
+  { month: 'Aug', revenue: 3700 },
+  { month: 'Sep', revenue: 2500 },
+  { month: 'Oct', revenue: 2800 },
+  { month: 'Nov', revenue: 3000 },
+  { month: 'Dec', revenue: 4800 },
+];
 
-export type Invoice = {
-    id: string;
-    customer_id: string;
-    amount: number;
-    date: string;
-    // In TypeScript, this is called a string union type.
-    // It means that the "status" property can only be one of the two strings: 'pending' or 'paid'.
-    status: 'pending' | 'paid';
-};
+const drink = [
+  {
+    id: '0',
+    name: 'cider',
+    voted: '0',
+    price: '150',
+    path: '/cider.png',
+    exist: 'true',
+  },
+  {
+    id: '1',
+    name: 'cocacola',
+    voted: '0',
+    price: '150',
+    path: '/cocacola.png',
+    exist: 'true',
+  },
+  {
+    id: '2',
+    name: 'calpis',
+    voted: '0',
+    price: '150',
+    path: '/calpis.png',
+    exist: 'true',
+  },
+  {
+    id: '3',
+    name: 'grape_calpis',
+    voted: '0',
+    price: '150',
+    path: '/grape_calpis.png',
+    exist: 'true',
+  },
+  {
+    id: '4',
+    name: 'fanta_orange',
+    voted: '0',
+    price: '150',
+    path: '/fanta_orange.png',
+    exist: 'true',
+  },
+  {
+    id: '5',
+    name: 'calpis_soda',
+    voted: '0',
+    price: '150',
+    path: '/calpis_soda.png',
+    exist: 'true',
+  },
+  {
+    id: '6',
+    name: 'cclemon',
+    voted: '0',
+    price: '150',
+    path: '/cclemon.png',
+    exist: 'true',
+  },
+  {
+    id: '7',
+    name: 'mets_cola',
+    voted: '0',
+    price: '150',
+    path: '/mets_cola.png',
+    exist: 'true',
+  },
+  {
+    id: '8',
+    name: 'orangina',
+    voted: '0',
+    price: '150',
+    path: '/orangina.png',
+    exist: 'true',
+  },
+  {
+    id: '9',
+    name: 'iemon',
+    voted: '0',
+    price: '150',
+    path: '/iemon.png',
+    exist: 'true',
+  },
+  {
+    id: '10',
+    name: 'kirin_lemon',
+    voted: '0',
+    price: '150',
+    path: '/kirin_lemon.png',
+    exist: 'true',
+  },
+  {
+    id: '11',
+    name: 'pepsi_zero',
+    voted: '0',
+    price: '150',
+    path: '/pepsi_zero.png',
+    exist: 'true',
+  },
+  {
+    id: '12',
+    name: 'soukenbicha',
+    voted: '0',
+    price: '150',
+    path: '/soukenbicha.png',
+    exist: 'true',
+  },
+];
 
-export type Revenue = {
-    month: string;
-    revenue: number;
-};
+const vote = [
+  {
+    id: '',
+    name: '',
+    drink: '',
+    voting: '',
+  },
+];
 
-export type LatestInvoice = {
-    id: string;
-    name: string;
-    image_url: string;
-    email: string;
-    amount: string;
-};
-
-// The database returns a number for amount, but we later format it to a string with the formatCurrency function
-export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
-    amount: number;
-};
-
-export type InvoicesTable = {
-    id: string;
-    customer_id: string;
-    name: string;
-    email: string;
-    image_url: string;
-    date: string;
-    amount: number;
-    status: 'pending' | 'paid';
-};
-
-export type CustomersTableType = {
-    id: string;
-    name: string;
-    email: string;
-    image_url: string;
-    total_invoices: number;
-    total_pending: number;
-    total_paid: number;
-};
-
-export type FormattedCustomersTable = {
-    id: string;
-    name: string;
-    email: string;
-    image_url: string;
-    total_invoices: number;
-    total_pending: string;
-    total_paid: string;
-};
-
-export type CustomerField = {
-    id: string;
-    name: string;
-};
-
-export type InvoiceForm = {
-    id: string;
-    customer_id: string;
-    amount: number;
-    status: 'pending' | 'paid';
+module.exports = {
+  users,
+  customers,
+  invoices,
+  revenue,
+  drink,
+  vote,
 };
