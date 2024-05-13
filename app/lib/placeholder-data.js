@@ -1,38 +1,38 @@
 // This file contains placeholder data that you'll be replacing with real data in the Data Fetching chapter:
 // https://nextjs.org/learn/dashboard-app/fetching-data
 const users = [
-  {
-    id: '27d445c3-47aa-f1b3-c13c-c94adc30984a',
-    name: '佐藤豪',
-    email: 'sato.go@ohsuga.lab.uec.ac.jp',
-    password: 'satogo',
-    voted: 'false',
-    sum_voted: '0',
-  },
-  {
-    id: '32bf1fc7-3fe4-fe3c-85e4-17127e429f4e',
-    name: '岡野日翔',
-    email: 'okano.haruka@ohsuga.lab.uec.ac.jp',
-    password: 'okanoharuka',
-    voted: 'false',
-    sum_voted: '0',
-  },
-  {
-    id: 'a17c981f-8d70-6e5e-97be-7a144e274a68',
-    name: '美濃岡知樹',
-    email: 'minooka.tomoki@ohsuga.lab.uec.ac.jp',
-    password: 'minookatomoki',
-    voted: 'false',
-    sum_voted: '0',
-  },
-  {
-    id: '2aab4549-6d36-d015-96fe-50b0fddfa39c',
-    name: '木村晃和',
-    email: 'kimura.akikazu@ohsuga.lab.uec.ac.jp',
-    password: 'kimuraakikazu',
-    voted: 'false',
-    sum_voted: '0',
-  },
+    {
+        id: '27d445c3-47aa-f1b3-c13c-c94adc30984a',
+        name: '佐藤豪',
+        email: 'sato.go@ohsuga.lab.uec.ac.jp',
+        password: 'satogo',
+        voted: 'false',
+        sum_voted: '0'
+    },
+    {
+        id: '32bf1fc7-3fe4-fe3c-85e4-17127e429f4e',
+        name: '岡野日翔',
+        email: 'okano.haruka@ohsuga.lab.uec.ac.jp',
+        password: 'okanoharuka',
+        voted: 'false',
+        sum_voted: '0'
+    },
+    {
+        id: 'a17c981f-8d70-6e5e-97be-7a144e274a68',
+        name: '美濃岡知樹',
+        email: 'minoka.tomoki@ohsuga.lab.uec.ac.jp',
+        password: 'minokatomoki',
+        voted: 'false',
+        sum_voted: '0'
+    },
+    {
+        id: '2aab4549-6d36-d015-96fe-50b0fddfa39c',
+        name: '木村晃和',
+        email: 'kimura.akikazu@ohsuga.lab.uec.ac.jp',
+        password: 'kimuraakikazu',
+        voted: 'false',
+        sum_voted: '0'
+    },
 ];
 
 const customers = [
