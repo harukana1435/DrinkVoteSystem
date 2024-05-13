@@ -44,10 +44,8 @@ export function Select_Button({ id, path }: { id: string; path: string }) {
 }
 
 export function Vote_Button() {
-  const searchParams = useSearchParams();
-
   return (
-    <div className="m-4">
+    <div className="m-4s">
       <button className="rounded-md bg-green-500">
         <p>投票</p>
       </button>
