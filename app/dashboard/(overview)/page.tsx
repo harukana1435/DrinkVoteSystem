@@ -7,14 +7,14 @@ import { Voting_Button } from '@/app/ui/drink_vote/drink_info';
 export default async function Page() {
     return (
         <main>
-            <div className="relative">
+            <div className="">
                 <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
                     飲料投票ページ
                 </h1>
                 <div className="p-4 md:h-40">
                     <Drink_info />
                 </div>
-                <div className="bottom--100 absolute right-3">
+                <div className="absolute bottom-0 right-3">
                     <Voting_Button />
                     {/* <Drink /> */}
                     {/* <Vote /> */}
