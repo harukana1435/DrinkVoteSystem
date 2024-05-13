@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
-export function VoteButton({ id, path }: { id: string; path: string }) {
+export function Select_Button({ id, path }: { id: string; path: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -38,6 +38,18 @@ export function VoteButton({ id, path }: { id: string; path: string }) {
           className="hidden md:block"
           alt="Screenshots of the dashboard project showing desktop version"
         />
+      </button>
+    </div>
+  );
+}
+
+export function Vote_Button() {
+  const searchParams = useSearchParams();
+
+  return (
+    <div className="m-4">
+      <button className="rounded-md bg-green-500">
+        <p>投票</p>
       </button>
     </div>
   );
