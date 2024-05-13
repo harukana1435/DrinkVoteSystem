@@ -189,8 +189,18 @@ async function seedDrink(client) {
       `,
             ),
         );
-
         console.log(`Seeded ${insertedDrink.length} drink data`);
+
+        //データの追加ではなく更新を行う
+        const updatedDrink = await Promise.all(
+            drink.map(
+                (drink) => client.sql`
+        UPDATE drink SET id = ${drink.id}, name = ${drink.name}, exist = ${drink.exist}, voted = ${drink.voted}, price = ${drink.price}, path = ${drink.path} WHERE id = ${drink.id}
+      `,
+            ),
+        );
+        console.log(`updated ${updatedDrink.length} drink data`);
+
 
         return {
             //createTable,

@@ -31,7 +31,7 @@ export async function Voting_Button() {
     const drink_datas = await fetchDrink();
 
     return (
-        <div>
+        <div >
             <Vote_Button />
         </div>
     );

@@ -27,14 +27,14 @@ export function Select_Button({ id, path }: { id: string; path: string }) {
                 onClick={() => handleClick(id)}
                 className={
                     searchParams.get('query')?.toString() === id
-                        ? 'rounded-md bg-blue-200'
-                        : 'rounded-md bg-gray-200'
+                        ? 'p-3 rounded-md bg-blue-200'
+                        : 'p-3 rounded-md bg-gray-200'
                 }
             >
                 <Image
                     src={path}
-                    width={250}
-                    height={250}
+                    width={200}
+                    height={200}
                     className="hidden md:block"
                     alt="Screenshots of the dashboard project showing desktop version"
                 />
@@ -47,8 +47,8 @@ export function Vote_Button() {
     const searchParams = useSearchParams();
 
     return (
-        <div className='m-4'>
-            <button className='rounded-md bg-green-500'>
+        <div className=''>
+            <button className='p-5 rounded-md bg-green-500' style={{ fontSize: '40px' }}>
                 <p>投票</p>
             </button>
         </div>
