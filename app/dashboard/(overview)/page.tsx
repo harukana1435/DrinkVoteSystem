@@ -15,7 +15,9 @@ export default async function Page() {
             <div className="md:h-200 p-4">
                 <Drink_info />
             </div>
-            <Vote_Button />
+            <div className="flex justify-end">
+                <Vote_Button />
+            </div>
             {/* <Drink /> */}
             {/* <Vote /> */}
         </main>
