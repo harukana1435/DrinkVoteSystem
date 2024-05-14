@@ -55,7 +55,7 @@ export async function authenticate(
   }
 }
 
-export async function createInvoice(prevState: State, formData: FormData) {
+export async function createVote(prevState: State, formData: FormData) {
   // Validate form fields using Zod
   const validatedFields = CreateInvoice.safeParse({
     customerId: formData.get('customerId'),
@@ -93,7 +93,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
   redirect('/dashboard/invoices');
 }
 
-export async function updateInvoice(
+export async function updateVote(
   id: string,
   prevState: State,
   formData: FormData,
@@ -128,7 +128,7 @@ export async function updateInvoice(
   redirect('/dashboard/invoices');
 }
 
-export async function deleteInvoice(id: string) {
+export async function deleteVote(id: string) {
   try {
     await sql`DELETE FROM invoices WHERE id = ${id}`;
     revalidatePath('/dashboard/invoices');
