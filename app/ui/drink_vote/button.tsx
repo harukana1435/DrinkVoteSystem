@@ -26,28 +26,18 @@ export function Select_Button({ id, path }: { id: string; path: string }) {
         key={id}
         onClick={() => handleClick(id)}
         className={
-          searchParams.get('query')?.toString() === id
+          searchParams.get('query')?.toString() === id.toString()
             ? 'rounded-md bg-blue-200'
             : 'rounded-md bg-gray-200'
         }
       >
         <Image
           src={path}
-          width={250}
-          height={250}
+          width={200}
+          height={200}
           className="hidden md:block"
           alt="Screenshots of the dashboard project showing desktop version"
         />
-      </button>
-    </div>
-  );
-}
-
-export function Vote_Button() {
-  return (
-    <div className="m-4s">
-      <button className="rounded-md bg-green-500">
-        <p>投票</p>
       </button>
     </div>
   );
