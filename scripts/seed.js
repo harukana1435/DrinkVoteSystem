@@ -48,7 +48,7 @@ async function seedDrink(client) {
         // Create the "drink" table if it doesn't exist
         const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS drink (
-        id SERIAL PRIMARY KEY,
+        id TEXT NOT NULL,
         name VARCHAR(255) NOT NULL,
         voted INTEGER NOT NULL DEFAULT 0,
         price DECIMAL(10, 2) NOT NULL,

@@ -14,7 +14,7 @@ export default async function Page() {
                 </h1>
             </div>
             <div className="md:h-200 p-4">
-                <Drink_info page={'1'} />
+                <Drink_info page={'2'} />
             </div>
 
             <Vote_Button />
