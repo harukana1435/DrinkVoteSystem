@@ -5,7 +5,7 @@ import Drink_info from '@/app/ui/drink_vote/drink_info';
 import { Vote_Button } from '@/app/ui/drink_vote/submit-vote';
 import NewpageLinks from '@/app/ui/drink_vote/newpage_links';
 
-export default async function Page() {
+export default async function Page({ searchParams }: { searchParams: Record<string, string | string[] | undefined> }) {
     return (
         <main>
             <div>
@@ -14,7 +14,7 @@ export default async function Page() {
                 </h1>
             </div>
             <div className="md:h-200 p-4">
-                <Drink_info page={'1'} />
+                <Drink_info url={searchParams} />
             </div>
 
             <Vote_Button />

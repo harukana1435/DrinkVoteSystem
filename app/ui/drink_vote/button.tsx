@@ -33,8 +33,8 @@ export function Select_Button({ id, path }: { id: string; path: string }) {
             >
                 <Image
                     src={path}
-                    width={250}
-                    height={250}
+                    width={200}
+                    height={200}
                     className="hidden md:block"
                     alt="Screenshots of the dashboard project showing desktop version"
                 />

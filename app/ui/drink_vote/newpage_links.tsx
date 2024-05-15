@@ -5,66 +5,66 @@ import {
     ChevronLeftIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import clsx from 'clsx';
-
-const links_dashboard = [
-    { name: '2', href: '/dashboard/page=2', icon: ChevronRightIcon },
-];
-
-const links = [
-    { name: '1', href: '/dashboard/', icon: ChevronLeftIcon },
-    { name: '2', href: '/dashboard/page=2', icon: ChevronRightIcon },
-];
+import { Button } from '../button';
+import Drink_info from './drink_info';
 
 export default function NewpageLinks() {
+    const searchParams = useSearchParams();
     const pathname = usePathname();
-    if (pathname === '/dashboard') {
-        return (
-            <div className="display: flex justify-center">
-                {links_dashboard.map((link) => {
+    const { replace } = useRouter();
+    const page = parseInt(searchParams.toString().substring(searchParams.toString().indexOf('=') + 1, searchParams.toString().indexOf('=') + 2)) || 0 //現在のページを取得
+
+    var links = [
+        { icon: ChevronLeftIcon },
+        { icon: ChevronRightIcon },
+    ];
+
+    if (page === 0) {
+        links = [
+            { icon: ChevronRightIcon },
+        ];
+    }
+
+    function handleClick(term: string) {
+        const params = new URLSearchParams(searchParams);
+        if (term) {
+            params.set('page', term);
+        } else {
+            params.delete('page');
+        }
+        params.delete('query')
+        replace(`${pathname}?${params.toString()}`);
+    }
+
+    return (
+        <div className="display: flex justify-center gap-4">
+            {links
+                .map((link) => {
+                    // 指定された範囲内の要素のみを抽出
                     const LinkIcon = link.icon;
                     return (
-                        <Link
-                            key={link.name}
-                            href={link.href}
+                        <Button
+                            onClick={() => {
+                                if (LinkIcon === ChevronLeftIcon) {
+                                    handleClick((page - 1).toString())
+                                }
+                                else if (LinkIcon === ChevronRightIcon) {
+                                    handleClick((page + 1).toString())
+                                }
+                            }
+                            }
+
                             className={clsx(
                                 'text-sm font-medium hover:text-blue-600 md:flex-none md:p-2 md:px-3',
-                                {
-                                    'bg-sky-100 text-blue-600': pathname === link.href,
-                                },
                             )}
                         >
                             <LinkIcon className="w-6" />
                             {/* <p className="hidden md:block">{link.name}</p> */}
-                        </Link>
+                        </Button>
                     );
                 })}
-            </div>
-        );
-    }
-    else {
-        return (
-            <div className="display: flex justify-center">
-                {links.map((link) => {
-                    const LinkIcon = link.icon;
-                    return (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className={clsx(
-                                'text-sm font-medium hover:text-blue-600 md:flex-none md:p-2 md:px-3',
-                                {
-                                    'bg-sky-100 text-blue-600': pathname === link.href,
-                                },
-                            )}
-                        >
-                            <LinkIcon className="w-6" />
-                            {/* <p className="hidden md:block">{link.name}</p> */}
-                        </Link>
-                    );
-                })}
-            </div>
-        );
-    }
+        </div>
+    );
 }
