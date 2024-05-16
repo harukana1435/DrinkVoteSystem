@@ -4,13 +4,17 @@ const bcrypt = require('bcrypt');
 
 async function seedUsers(client) {
   try {
+    await client.sql`
+      DROP TABLE IF EXISTS users;
+    `;
+
     // Create the "users" table if it doesn't exist
     const createTable = await client.sql`
         CREATE TABLE IF NOT EXISTS users (
         name VARCHAR(255) NOT NULL,
         email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
-        voted BOOLEAN NOT NULL,
+        voted BOOLEAN NOT NULL DEFAULT false,
         sum_voted INTEGER NOT NULL DEFAULT 0
     );
     `;
@@ -45,10 +49,14 @@ async function seedUsers(client) {
 //追加↓
 async function seedDrink(client) {
   try {
+    await client.sql`
+      DROP TABLE IF EXISTS drink CASCADE;
+    `;
+
     // Create the "drink" table if it doesn't exist
     const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS drink (
-        id TEXT NOT NULL,
+        id TEXT NOT NULL UNIQUE,
         name VARCHAR(255) NOT NULL,
         voted INTEGER NOT NULL DEFAULT 0,
         price DECIMAL(10, 2) NOT NULL,
@@ -86,13 +94,17 @@ async function seedDrink(client) {
 
 //追加↓
 async function seedVote(client) {
+  await client.sql`
+      DROP TABLE IF EXISTS vote;
+    `;
+
   try {
     // Create the "vote" table if it doesn't exist
     const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS vote (
         voter TEXT NOT NULL,
         drink TEXT NOT NULL REFERENCES drink(id),
-        date TIMESTAMP NOT NULL,
+        date TEXT NOT NULL,
         CONSTRAINT unique_voter_date UNIQUE (voter, date)
     );
 `;

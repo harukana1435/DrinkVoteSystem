@@ -24,3 +24,7 @@ export type Drink = {
   path: string; //画像ファイルのパス
   totalvoted: number; //総投票数
 };
+
+export type DrinkID = {
+  drink: string;
+};

@@ -19,6 +19,8 @@ const CreateVote = FormSchema.omit({ date: true });
 
 const UpdateVote = FormSchema.omit({ date: true });
 
+const DeleteVote = FormSchema.omit({ drink: true, date: true });
+
 // This is temporary until @types/react-dom is updated
 export type State = {
   errors?: {
@@ -93,14 +95,14 @@ export async function createVote(
             INSERT INTO vote (voter, drink, date)
             VALUES (${email}, ${drink}, ${date})
         `;
-
+    console.log({ email, drink, date });
     await sql`
     UPDATE users
     SET voted = ${true}
     WHERE email = ${email}
       `;
 
-    console.log(email, drink, voted);
+    console.log({ email, drink, voted });
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
@@ -120,7 +122,7 @@ export async function updateVote(
   prevState: State,
 ) {
   // Validate form fields using Zod
-  const validatedFields = CreateVote.safeParse({
+  const validatedFields = UpdateVote.safeParse({
     email: _email,
     drink: _drink,
     voted: _voted,
@@ -149,8 +151,6 @@ export async function updateVote(
   }
 
   try {
-    console.log({ email, drink, date });
-
     await sql`
             UPDATE vote
             SET drink= ${drink}
@@ -162,6 +162,7 @@ export async function updateVote(
     SET voted = ${true}
     WHERE email = ${email}
       `;
+    console.log({ email, drink, date });
   } catch (error) {
     return { message: 'Database Error: Failed to Update Vote.' };
   }
@@ -176,7 +177,7 @@ export async function deleteVote(
   prevState: State,
 ) {
   // Validate form fields using Zod
-  const validatedFields = CreateVote.safeParse({
+  const validatedFields = DeleteVote.safeParse({
     email: _email,
     voted: _voted,
   });
@@ -190,21 +191,17 @@ export async function deleteVote(
 
   const { email, voted } = validatedFields.data;
   const date = new Date().toISOString().split('T')[0];
-
   if (!voted) {
     return {
       message: 'You has not voted yet',
     };
   }
-
   if ((await VoteExist(email, date)) == false) {
     return {
       message: 'no drink',
     };
   }
-
   try {
-    console.log({ email, date });
     await sql`
     DELETE FROM vote
     WHERE voter = ${email} AND date = ${date}
@@ -215,6 +212,7 @@ export async function deleteVote(
       SET voted = ${false}
       WHERE email = ${email}
         `;
+    console.log({ email, date });
   } catch (error) {
     return { message: 'Database Error: Failed to Delete Vote.' };
   }

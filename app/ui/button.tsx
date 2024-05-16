@@ -17,10 +17,12 @@ export function Button({
       className={clsx(
         'flex h-10 items-center rounded-lg px-4 text-sm font-medium transition-colors',
         {
-          'bg-blue-500 text-white hover:bg-blue-400': !isdeActive,
-          'cursor-not-allowed bg-gray-500 text-gray-400 opacity-50': isdeActive,
+          'bg-blue-500 text-white hover:bg-blue-400 focus-visible:outline-blue-500 active:bg-blue-600':
+            !isdeActive,
+          'cursor-not-allowed bg-gray-500 text-gray-400 opacity-50 focus-visible:outline-gray-500':
+            isdeActive,
         },
-        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 active:bg-blue-600',
+        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2  ',
         className,
       )}
       disabled={isdeActive} // isdeActiveがtrueの場合にボタンを無効にする

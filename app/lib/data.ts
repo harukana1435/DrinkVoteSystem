@@ -1,6 +1,6 @@
 import { sql } from '@vercel/postgres';
 import { unstable_noStore as noStore } from 'next/cache';
-import { User, Vote, Drink } from './definitions';
+import { User, Vote, Drink, DrinkID } from './definitions';
 import { formatCurrency } from './utils';
 
 export async function getUser(email: string) {
@@ -56,6 +56,19 @@ export async function fetchDrink() {
   }
 }
 
+export async function fetchSelectDrink(email: string, date: string) {
+  noStore();
+  try {
+    const data =
+      await sql<DrinkID>`SELECT vote.drink FROM vote WHERE vote.voter =${email} AND vote.date = ${date}`;
+
+    return data.rows[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch User Vote data.');
+  }
+}
+
 export async function fetchDrinkNum(): Promise<number> {
   noStore();
   try {
@@ -68,36 +81,40 @@ export async function fetchDrinkNum(): Promise<number> {
   }
 }
 
-export async function fetchDrinkExist(id: string): Promise<Boolean> {
+//あるidの飲料が存在していたらtrueを返す
+export async function fetchDrinkExist(id: string): Promise<boolean> {
   noStore();
   try {
-    const data = await sql`SELECT * FROM drink WHERE id = ${id}`;
-    const has = !!data;
-    console.log(has);
-    return has;
+    const data = await sql`SELECT COUNT(*) FROM drink WHERE id = ${id}`;
+    if (data.rows[0].count == 0) {
+      return false;
+    } else {
+      return true;
+    }
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch drink data.');
+    throw new Error('Failed to fetch the exist of the drink.');
   }
 }
 
-export async function VoteExist(email: string, date: string): Promise<Boolean> {
+//指定した日にちに指定したユーザが投票していたらtrueを返す
+export async function VoteExist(email: string, date: string): Promise<boolean> {
   noStore();
   try {
     const data =
-      await sql`SELECT * FROM vote WHERE voter = ${email} AND date = ${date}`;
-    const has = !!data;
-    console.log(has);
-    return has;
+      await sql`SELECT COUNT(*) FROM vote WHERE voter = ${email} AND date = ${date}`;
+    if (data.rows[0].count == 0) {
+      return false;
+    } else {
+      return true;
+    }
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch drink data.');
+    throw new Error('Failed to fetch the exist of vote data.');
   }
 }
 
 export async function fetchVote() {
-  // Add noStore() here to prevent the response from being cached.
-  // This is equivalent to in fetch(..., {cache: 'no-store'}).
   noStore();
   try {
     const data = await sql<Vote>`SELECT * FROM vote`;

@@ -10,9 +10,9 @@ export default async function VoteButton() {
   console.log('server component');
   const session: Session | null = await auth();
   const user: User | null = await fetchUserByEmail(session?.user?.email ?? '');
-
+  const votedata = await fetchVote();
   console.log(await fetchUserByEmail(session?.user?.email ?? ''));
-  console.log(await fetchVote);
+  console.log(votedata[0]);
   return (
     <>
       <div>
