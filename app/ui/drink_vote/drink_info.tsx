@@ -3,6 +3,7 @@ import {
   fetchDrink,
   fetchVote,
   fetchSelectDrink,
+  fetchFilteredDrink,
 } from '@/app/lib/data';
 import { Drink_Panel } from './drink_panels';
 import { Session } from 'next-auth';
@@ -10,8 +11,15 @@ import { User } from '@/app/lib/definitions';
 import { auth } from '@/auth';
 import { fetchUserByEmail } from '@/app/lib/data';
 
-export default async function Drink_info() {
-  const DrinkDatas = await fetchDrink();
+export default async function Drink_info({
+  search,
+  currentPage,
+}: {
+  search: string;
+  currentPage: number;
+}) {
+  //const DrinkDatas = await fetchDrink();
+  const DrinkDatas = await fetchFilteredDrink(search, currentPage);
   const session: Session | null = await auth();
   const date = new Date().toISOString().split('T')[0];
   const selectDrink = await fetchSelectDrink(session?.user?.email ?? '', date);
