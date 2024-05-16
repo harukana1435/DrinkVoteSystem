@@ -6,7 +6,7 @@ export type User = {
   name: string;
   email: string;
   password: string;
-  voted: Boolean; //今日1回でも投票を行ったかどうか
+  voted: boolean; //今日1回でも投票を行ったかどうか
   sum_voted: number; //現在の総投票数
 };
 
@@ -23,4 +23,8 @@ export type Drink = {
   price: number; //値段
   path: string; //画像ファイルのパス
   totalvoted: number; //総投票数
+};
+
+export type DrinkID = {
+  drink: string;
 };
