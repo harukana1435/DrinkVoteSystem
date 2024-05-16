@@ -4,13 +4,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
-export function Select_Button({ id, path }: { id: string; path: string }) {
+export function Drink_Panel({ id, path }: { id: string; path: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
   function handleClick(term: string) {
     const params = new URLSearchParams(searchParams);
+    console.log(searchParams.get('query')?.toString());
     if (term) {
       params.set('query', term);
     } else {

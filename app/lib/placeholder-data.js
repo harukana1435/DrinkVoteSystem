@@ -34,7 +34,7 @@ const users = [
 
 const drink = [
   {
-    id: '0',
+    id: 'd0',
     name: 'cider',
     voted: 0,
     price: 150,
@@ -42,7 +42,7 @@ const drink = [
     totalvoted: 0,
   },
   {
-    id: '1',
+    id: 'd1',
     name: 'cocacola',
     voted: 0,
     price: 150,
@@ -50,7 +50,7 @@ const drink = [
     totalvoted: 0,
   },
   {
-    id: '2',
+    id: 'd2',
     name: 'calpis',
     voted: 0,
     price: 150,
@@ -58,7 +58,7 @@ const drink = [
     totalvoted: 0,
   },
   {
-    id: '3',
+    id: 'd3',
     name: 'grape_calpis',
     voted: 0,
     price: 150,
@@ -66,7 +66,7 @@ const drink = [
     totalvoted: 0,
   },
   {
-    id: '4',
+    id: 'd4',
     name: 'fanta_orange',
     voted: 0,
     price: 150,
@@ -74,7 +74,7 @@ const drink = [
     totalvoted: 0,
   },
   {
-    id: '5',
+    id: 'd5',
     name: 'calpis_soda',
     voted: 0,
     price: 150,
@@ -82,7 +82,7 @@ const drink = [
     totalvoted: 0,
   },
   {
-    id: '6',
+    id: 'd6',
     name: 'cclemon',
     voted: 0,
     price: 150,
@@ -90,7 +90,7 @@ const drink = [
     totalvoted: 0,
   },
   {
-    id: '7',
+    id: 'd7',
     name: 'mets_cola',
     voted: 0,
     price: 150,
@@ -98,7 +98,7 @@ const drink = [
     totalvoted: 0,
   },
   {
-    id: '8',
+    id: 'd8',
     name: 'orangina',
     voted: 0,
     price: 150,
@@ -106,7 +106,7 @@ const drink = [
     totalvoted: 0,
   },
   {
-    id: '9',
+    id: 'd9',
     name: 'iemon',
     voted: 0,
     price: 150,
@@ -114,7 +114,7 @@ const drink = [
     totalvoted: 0,
   },
   {
-    id: '10',
+    id: 'd10',
     name: 'kirin_lemon',
     voted: 0,
     price: 150,
@@ -122,7 +122,7 @@ const drink = [
     totalvoted: 0,
   },
   {
-    id: '11',
+    id: 'd11',
     name: 'pepsi_zero',
     voted: 0,
     price: 150,
@@ -130,7 +130,7 @@ const drink = [
     totalvoted: 0,
   },
   {
-    id: '12',
+    id: 'd12',
     name: 'soukenbicha',
     voted: 0,
     price: 150,

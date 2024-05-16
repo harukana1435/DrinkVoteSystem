@@ -2,7 +2,7 @@ import { lusitana } from '@/app/ui/fonts';
 //import Drink from '@/app/ui/drink_vote/page';
 // import { Vote } from '@/app/ui/drink_vote/page';
 import Drink_info from '@/app/ui/drink_vote/drink_info';
-import { Vote_Button } from '@/app/ui/drink_vote/submit-vote';
+import VoteButton from '@/app/ui/drink_vote/vote-button';
 
 export default async function Page() {
   return (
@@ -16,7 +16,7 @@ export default async function Page() {
         <Drink_info />
       </div>
 
-      <Vote_Button />
+      <VoteButton />
 
       {/* <Drink /> */}
       {/* <Vote /> */}
