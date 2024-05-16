@@ -6,7 +6,13 @@ import { Vote_Button } from '@/app/ui/drink_vote/submit-vote';
 import NewpageLinks from '@/app/ui/drink_vote/newpage_links';
 // import { CurrentPage } from '@/app/ui/drink_vote/newpage_links';
 
-export default async function Page() {
+export default async function Page({ searchParams, }:
+    {
+        searchParams?: {
+            page?: string;
+        };
+    }) {
+    const currentPage = Number(searchParams?.page) || 0;
     return (
         <main>
             <div>
@@ -15,7 +21,7 @@ export default async function Page() {
                 </h1>
             </div>
             <div className="md:h-200 p-4">
-                <Drink_info />
+                <Drink_info pagenumber={currentPage} />
             </div>
             <Vote_Button />
             <NewpageLinks />
