@@ -4,8 +4,9 @@ import { lusitana } from '@/app/ui/fonts';
 import Drink_info from '@/app/ui/drink_vote/drink_info';
 import { Vote_Button } from '@/app/ui/drink_vote/submit-vote';
 import NewpageLinks from '@/app/ui/drink_vote/newpage_links';
+// import { CurrentPage } from '@/app/ui/drink_vote/newpage_links';
 
-export default async function Page({ searchParams }: { searchParams: Record<string, string | string[] | undefined> }) {
+export default async function Page() {
     return (
         <main>
             <div>
@@ -14,9 +15,8 @@ export default async function Page({ searchParams }: { searchParams: Record<stri
                 </h1>
             </div>
             <div className="md:h-200 p-4">
-                <Drink_info url={searchParams} />
+                <Drink_info pagenumber={2} />
             </div>
-
             <Vote_Button />
             <NewpageLinks />
 

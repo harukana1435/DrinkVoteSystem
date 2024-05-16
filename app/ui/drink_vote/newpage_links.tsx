@@ -8,13 +8,19 @@ import Link from 'next/link';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import clsx from 'clsx';
 import { Button } from '../button';
-import Drink_info from './drink_info';
+
+export var pages = 0;
+export const CurrentPage = () => {
+    const searchParams = useSearchParams();
+    const page = parseInt(searchParams.toString().substring(searchParams.toString().indexOf('=') + 1, searchParams.toString().indexOf('=') + 3)) || 0; //現在のページを取得   
+    return page;
+}
 
 export default function NewpageLinks() {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
-    const page = parseInt(searchParams.toString().substring(searchParams.toString().indexOf('=') + 1, searchParams.toString().indexOf('=') + 2)) || 0 //現在のページを取得
+    const page = parseInt(searchParams.toString().substring(searchParams.toString().indexOf('=') + 1, searchParams.toString().indexOf('=') + 3)) || 0; //現在のページを取得
 
     var links = [
         { icon: ChevronLeftIcon },
@@ -34,9 +40,10 @@ export default function NewpageLinks() {
         } else {
             params.delete('page');
         }
-        params.delete('query')
+        params.delete('query') //ページが変わったら選択解除
         replace(`${pathname}?${params.toString()}`);
     }
+
 
     return (
         <div className="display: flex justify-center gap-4">
