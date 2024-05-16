@@ -33,6 +33,7 @@ export default async function VoteButton() {
           voted={user?.voted ?? false}
         />
       </div>
+      <div>{votedata[0]?.drink}</div>
     </>
   );
 }

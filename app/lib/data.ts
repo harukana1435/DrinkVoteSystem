@@ -125,3 +125,45 @@ export async function fetchVote() {
     throw new Error('Failed to fetch vote data.');
   }
 }
+
+const ITEMS_PER_PAGE = 10;
+export async function fetchDrinkPages(query: string) {
+  noStore();
+  try {
+    const count = await sql`SELECT COUNT(*)
+    FROM drink
+    WHERE
+      drink.id ILIKE ${`%${query}%`} OR
+      drink.name ILIKE ${`%${query}%`} OR
+      drink.price::text ILIKE ${`%${query}%`}
+  `;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of invoices.');
+  }
+}
+
+export async function fetchFilteredDrink(query: string, currentPage: number) {
+  noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const invoices = await sql<Drink>`
+      SELECT * FROM drink
+      WHERE
+      drink.id ILIKE ${`%${query}%`} OR
+      drink.name ILIKE ${`%${query}%`} OR
+      drink.price::text ILIKE ${`%${query}%`}
+      ORDER BY drink.voted DESC
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    `;
+
+    return invoices.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch invoices.');
+  }
+}
