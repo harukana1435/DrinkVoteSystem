@@ -15,13 +15,10 @@ export default async function Page() {
                 </h1>
             </div>
             <div className="md:h-200 p-4">
-                <Drink_info pagenumber={2} />
+                <Drink_info />
             </div>
             <Vote_Button />
             <NewpageLinks />
-
-            {/* <Drink /> */}
-            {/* <Vote /> */}
         </main>
     );
 }

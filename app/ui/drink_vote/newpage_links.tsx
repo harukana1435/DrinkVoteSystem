@@ -8,19 +8,15 @@ import Link from 'next/link';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import clsx from 'clsx';
 import { Button } from '../button';
+import type { Drink } from '@/app/lib/definitions';
+import { Select_Button } from './button';
 
-export var pages = 0;
-export const CurrentPage = () => {
-    const searchParams = useSearchParams();
-    const page = parseInt(searchParams.toString().substring(searchParams.toString().indexOf('=') + 1, searchParams.toString().indexOf('=') + 3)) || 0; //現在のページを取得   
-    return page;
-}
 
 export default function NewpageLinks() {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
-    const page = parseInt(searchParams.toString().substring(searchParams.toString().indexOf('=') + 1, searchParams.toString().indexOf('=') + 3)) || 0; //現在のページを取得
+    const page = parseInt(searchParams.toString().substring(searchParams.toString().indexOf('page=') + 5, searchParams.toString().indexOf('page=') + 7)) || 0; //現在のページを取得
 
     var links = [
         { icon: ChevronLeftIcon },
@@ -73,6 +69,26 @@ export default function NewpageLinks() {
                         </Button>
                     );
                 })}
+        </div>
+    );
+}
+
+export function DrinkList({ drinkdatas }: { drinkdatas: Drink[] }) {
+    const searchParams = useSearchParams();
+    const pagenumber = parseInt(searchParams.toString().substring(searchParams.toString().indexOf('page=') + 5, searchParams.toString().indexOf('page=') + 7)) || 0; //現在のページを取得
+
+    return (
+        <div className="display: flex flex-wrap gap-10">
+            {drinkdatas
+                .slice((pagenumber) * 10, (pagenumber + 1) * 10) // 指定された範囲内の要素のみを抽出
+                .map((drink_data) => (
+                    <div
+                        key={drink_data.id}
+                        className="mt-3 flex flex-col items-center justify-center"
+                    >
+                        {<Select_Button id={drink_data.id} path={drink_data.path} />}
+                    </div>
+                ))}
         </div>
     );
 }
