@@ -41,11 +41,12 @@ export default function NewpageLinks() {
     return (
         <div className="display: flex justify-center gap-4">
             {links
-                .map((link) => {
+                .map((link, index) => {
                     // 指定された範囲内の要素のみを抽出
                     const LinkIcon = link.icon;
                     return (
                         <Button
+                            key={index}
                             onClick={() => {
                                 if (LinkIcon === ChevronLeftIcon) {
                                     handleClick((page - 1).toString())
