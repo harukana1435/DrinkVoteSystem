@@ -16,7 +16,7 @@ export function SubmitVote({
   const createVotewithUserinfo = createVote.bind(
     null,
     email,
-    searchParams.get('query') ?? '',
+    searchParams.get('select') ?? '',
     voted,
   );
   const [state, dispatch] = useFormState(createVotewithUserinfo, initialState);

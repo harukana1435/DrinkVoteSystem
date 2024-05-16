@@ -16,7 +16,7 @@ export function ChangeVote({
   const updateVotewithUserinfo = updateVote.bind(
     null,
     email,
-    searchParams.get('query') ?? '',
+    searchParams.get('select') ?? '',
     voted,
   );
   const [state, dispatch] = useFormState(updateVotewithUserinfo, initialState);
