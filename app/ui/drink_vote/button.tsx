@@ -47,8 +47,8 @@ export function Vote_Button() {
     const searchParams = useSearchParams();
 
     return (
-        <div className="m-4">
-            <button className='p-5 rounded-md bg-green-500' style={{ fontSize: '40px' }}>
+        <div className="m-6">
+            <button className='p-10 rounded-full bg-cyan-600 hover:bg-cyan-500 text-white text-5xl'>
                 <p>投票</p>
             </button>
         </div>
