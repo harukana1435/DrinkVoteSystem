@@ -19,8 +19,8 @@ export default function LoginForm() {
   return (
     <form action={dispatch} className="space-y-3">
       <div className="flex-1 rounded-lg bg-blue-50 px-6 pb-4 pt-8">
-        <h1 className={`${lusitana.className} mb-3 text-2xl`}>
-          ログイン (研究室メール)
+        <h1 className={`${lusitana.className} text-center mb-3 text-2xl`}>
+          ログイン
         </h1>
         <div className="w-full">
           <div>
@@ -93,9 +93,12 @@ function LoginButton() {
 
 export function Header_login() {
   return (
-    <div className="flex-1 bg-green-500 pb-20 pt-20 ">
-      <h1 className="font-family:'Yu Gothic'; text-center text-4xl">
-        田原・清研究室　　飲料管理サイト
+    <div className="flex-1 pb-10 pt-20 "> {/*bg-green-500*/}
+      <h1 className="font-family:'Comic Sans MS'; text-center text-3xl">
+        Tahara, Sei Lab
+      </h1>
+      <h1 className="font-family:'Yu Gothic'; text-center text-4xl font-bold">
+        飲料管理サイト
       </h1>
     </div>
   );

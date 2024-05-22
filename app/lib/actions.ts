@@ -1,140 +1,222 @@
 'use server';
 
-import { z } from 'zod';
+import { number, z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import { fetchDrinkExist, fetchDrinkNum, VoteExist } from './data';
 
 const FormSchema = z.object({
-    id: z.string(),
-    customerId: z.string({
-        invalid_type_error: 'Please select a customer.',
-    }),
-    amount: z.coerce
-        .number()
-        .gt(0, { message: 'Please enter an amount greater than $0.' }),
-    status: z.enum(['pending', 'paid'], {
-        invalid_type_error: 'Please select an invoice status.',
-    }),
-    date: z.string(),
+  email: z.string(),
+  drink: z.string(),
+  voted: z.coerce.boolean(),
+  date: z.string(),
 });
 
-const CreateInvoice = FormSchema.omit({ id: true, date: true });
+const CreateVote = FormSchema.omit({ date: true });
 
-const UpdateInvoice = FormSchema.omit({ id: true, date: true });
+const UpdateVote = FormSchema.omit({ date: true });
+
+const DeleteVote = FormSchema.omit({ drink: true, date: true });
 
 // This is temporary until @types/react-dom is updated
 export type State = {
-    errors?: {
-        customerId?: string[];
-        amount?: string[];
-        status?: string[];
-    };
-    message?: string | null;
+  errors?: {
+    email?: string[];
+    drink?: string[];
+    voted?: string[];
+    date?: string[];
+  };
+  message?: string | null;
 };
 
 export async function authenticate(
-    prevState: string | undefined,
-    formData: FormData,
+  prevState: string | undefined,
+  formData: FormData,
 ) {
-    try {
-        await signIn('credentials', formData);
-    } catch (error) {
-        if (error instanceof AuthError) {
-            switch (error.type) {
-                case 'CredentialsSignin': //CredentialsSigninの時にエラーが出た場合の警告文
-                    //return 'Invalid credentials.';
-                    return 'EmailかPasswordが間違っています';
-                default: //それ以外の場合の警告文
-                    return 'Something went wrong.';
-            }
-        }
-        throw error;
+  try {
+    await signIn('credentials', formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin': //CredentialsSigninの時にエラーが出た場合の警告文
+          //return 'Invalid credentials.';
+          return 'EmailかPasswordが間違っています';
+        default: //それ以外の場合の警告文
+          return 'Something went wrong.';
+      }
     }
+    throw error;
+  }
 }
 
+export async function createVote(
+  _email: string,
+  _drink: string,
+  _voted: boolean,
+  prevState: State,
+) {
+  // Validate form fields using Zod
+  const validatedFields = CreateVote.safeParse({
+    email: _email,
+    drink: _drink,
+    voted: _voted,
+  });
 
-export async function createInvoice(prevState: State, formData: FormData) {
-    // Validate form fields using Zod
-    const validatedFields = CreateInvoice.safeParse({
-        customerId: formData.get('customerId'),
-        amount: formData.get('amount'),
-        status: formData.get('status'),
-    });
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Create Vote.',
+    };
+  }
 
-    // If form validation fails, return errors early. Otherwise, continue.
-    if (!validatedFields.success) {
-        return {
-            errors: validatedFields.error.flatten().fieldErrors,
-            message: 'Missing Fields. Failed to Create Invoice.',
-        };
-    }
+  // Prepare data for insertion into the database
+  const { email, drink, voted } = validatedFields.data;
+  const date = new Date().toISOString().split('T')[0];
 
-    // Prepare data for insertion into the database
-    const { customerId, amount, status } = validatedFields.data;
-    const amountInCents = amount * 100;
-    const date = new Date().toISOString().split('T')[0];
+  if (voted) {
+    return {
+      message: 'You has voted already',
+    };
+  }
 
-    try {
-        await sql`
-            INSERT INTO invoices (customer_id, amount, status, date)
-            VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
+  if ((await fetchDrinkExist(drink)) == false) {
+    return {
+      message: 'You has voted already',
+    };
+  }
+
+  try {
+    console.log({ email, drink, date });
+    await sql`
+            INSERT INTO vote (voter, drink, date)
+            VALUES (${email}, ${drink}, ${date})
         `;
-    } catch (error) {
-        // If a database error occurs, return a more specific error.
-        return {
-            message: 'Database Error: Failed to Create Invoice.',
-        };
-    }
+    console.log({ email, drink, date });
+    await sql`
+    UPDATE users
+    SET voted = ${true}
+    WHERE email = ${email}
+      `;
 
-    // Revalidate the cache for the invoices page and redirect the user.
-    revalidatePath('/dashboard/invoices');
-    redirect('/dashboard/invoices');
+    console.log({ email, drink, voted });
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to Create Invoice.',
+    };
+  }
+
+  // Revalidate the cache for the invoices page and redirect the user.
+  revalidatePath('/dashboard');
+  redirect('/dashboard');
 }
 
-export async function updateInvoice(id: string, prevState: State, formData: FormData) {
-    const validatedFields = UpdateInvoice.safeParse({
-        customerId: formData.get('customerId'),
-        amount: formData.get('amount'),
-        status: formData.get('status'),
-    });
+export async function updateVote(
+  _email: string,
+  _drink: string,
+  _voted: boolean,
+  prevState: State,
+) {
+  // Validate form fields using Zod
+  const validatedFields = UpdateVote.safeParse({
+    email: _email,
+    drink: _drink,
+    voted: _voted,
+  });
 
-    if (!validatedFields.success) {
-        return {
-            errors: validatedFields.error.flatten().fieldErrors,
-            message: 'Missing Fields. Failed to Update Invoice.',
-        };
-    }
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Vote.',
+    };
+  }
 
-    const { customerId, amount, status } = validatedFields.data;
-    const amountInCents = amount * 100;
+  const { email, drink, voted } = validatedFields.data;
+  const date = new Date().toISOString().split('T')[0];
 
-    try {
-        await sql`
-            UPDATE invoices
-            SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
-            WHERE id = ${id}
+  if (!voted) {
+    return {
+      message: 'You has not voted yet',
+    };
+  }
+
+  if ((await VoteExist(email, date)) == false) {
+    return {
+      message: 'no drink',
+    };
+  }
+
+  try {
+    await sql`
+            UPDATE vote
+            SET drink= ${drink}
+            WHERE voter = ${email} AND date=${date}
         `;
-    } catch (error) {
-        return { message: 'Database Error: Failed to Update Invoice.' };
-    }
 
-    revalidatePath('/dashboard/invoices');
-    redirect('/dashboard/invoices');
+    await sql`
+    UPDATE users
+    SET voted = ${true}
+    WHERE email = ${email}
+      `;
+    console.log({ email, drink, date });
+  } catch (error) {
+    return { message: 'Database Error: Failed to Update Vote.' };
+  }
+
+  revalidatePath('/dashboard');
+  redirect('/dashboard');
 }
 
+export async function deleteVote(
+  _email: string,
+  _voted: boolean,
+  prevState: State,
+) {
+  // Validate form fields using Zod
+  const validatedFields = DeleteVote.safeParse({
+    email: _email,
+    voted: _voted,
+  });
 
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Vote.',
+    };
+  }
 
-export async function deleteInvoice(id: string) {
-    throw new Error('Failed to Delete Invoice');
+  const { email, voted } = validatedFields.data;
+  const date = new Date().toISOString().split('T')[0];
+  if (!voted) {
+    return {
+      message: 'You has not voted yet',
+    };
+  }
+  if ((await VoteExist(email, date)) == false) {
+    return {
+      message: 'no drink',
+    };
+  }
+  try {
+    await sql`
+    DELETE FROM vote
+    WHERE voter = ${email} AND date = ${date}
+          `;
 
-    try {
-        await sql`DELETE FROM invoices WHERE id = ${id}`;
-        revalidatePath('/dashboard/invoices');
-        return { message: 'Deleted Invoice.' };
-    } catch (error) {
-        return { message: 'Database Error: Failed to Delete Invoice.' };
-    }
+    await sql`
+      UPDATE users
+      SET voted = ${false}
+      WHERE email = ${email}
+        `;
+    console.log({ email, date });
+  } catch (error) {
+    return { message: 'Database Error: Failed to Delete Vote.' };
+  }
+
+  revalidatePath('/dashboard');
+  redirect('/dashboard');
 }

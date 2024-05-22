@@ -5,7 +5,7 @@ import { Header_login } from '@/app/ui/login-form';
 
 export default function LoginPage() {
     return (
-        <div>
+        <div className="bg-fixed bg-gradient-to-r from-violet-500 to-fuchsia-500">
             <div>
                 <Header_login />
             </div>
