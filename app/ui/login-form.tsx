@@ -13,6 +13,7 @@ import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
 
+
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
@@ -93,11 +94,11 @@ function LoginButton() {
 
 export function Header_login() {
   return (
-    <div className="flex-1 pb-10 pt-20 "> {/*bg-green-500*/}
-      <h1 className="font-family:'Comic Sans MS'; text-center text-3xl">
+    <div className="">
+      <h1 className="font-handwritten text-center text-2xl flex-1 pb-5 pt-5">
         Tahara, Sei Lab
       </h1>
-      <h1 className="font-family:'Yu Gothic'; text-center text-4xl font-bold">
+      <h1 className="font-family:'Yu Gothic'; text-white text-center text-5xl bg-cyan-600 flex-1 pb-5 pt-5">
         飲料管理サイト
       </h1>
     </div>
