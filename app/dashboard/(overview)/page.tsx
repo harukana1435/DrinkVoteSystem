@@ -27,7 +27,7 @@ export default async function Page({
     <main>
       <div>
         <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-          飲料投票ページ
+          飲料投票ページaa
         </h1>
       </div>
       <div className="md:h-200 p-4">
