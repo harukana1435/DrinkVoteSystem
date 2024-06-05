@@ -11,12 +11,12 @@ export default async function Page({
   searchParams,
 }: {
   searchParams?: {
-    query?: string;
+    select?: string;
     page?: string;
     search?: string;
   };
 }) {
-  const query = searchParams?.query || '';
+  const select = searchParams?.select || '';
   const search = searchParams?.search || '';
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchDrinkPages(search);

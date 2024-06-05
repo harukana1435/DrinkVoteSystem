@@ -112,7 +112,7 @@ export async function createVote(
 
   // Revalidate the cache for the invoices page and redirect the user.
   revalidatePath('/dashboard');
-  redirect('/dashboard');
+  redirect('/dashboard?search=');
 }
 
 export async function updateVote(
@@ -168,7 +168,7 @@ export async function updateVote(
   }
 
   revalidatePath('/dashboard');
-  redirect('/dashboard');
+  redirect('/dashboard?search=');
 }
 
 export async function deleteVote(
@@ -218,5 +218,5 @@ export async function deleteVote(
   }
 
   revalidatePath('/dashboard');
-  redirect('/dashboard');
+  redirect('/dashboard?search=');
 }

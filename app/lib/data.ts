@@ -127,15 +127,15 @@ export async function fetchVote() {
 }
 
 const ITEMS_PER_PAGE = 10;
-export async function fetchDrinkPages(query: string) {
+export async function fetchDrinkPages(select: string) {
   noStore();
   try {
     const count = await sql`SELECT COUNT(*)
     FROM drink
     WHERE
-      drink.id ILIKE ${`%${query}%`} OR
-      drink.name ILIKE ${`%${query}%`} OR
-      drink.price::text ILIKE ${`%${query}%`}
+      drink.id ILIKE ${`%${select}%`} OR
+      drink.name ILIKE ${`%${select}%`} OR
+      drink.price::text ILIKE ${`%${select}%`}
   `;
 
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
@@ -146,7 +146,7 @@ export async function fetchDrinkPages(query: string) {
   }
 }
 
-export async function fetchFilteredDrink(query: string, currentPage: number) {
+export async function fetchFilteredDrink(select: string, currentPage: number) {
   noStore();
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
@@ -154,9 +154,9 @@ export async function fetchFilteredDrink(query: string, currentPage: number) {
     const invoices = await sql<Drink>`
       SELECT * FROM drink
       WHERE
-      drink.id ILIKE ${`%${query}%`} OR
-      drink.name ILIKE ${`%${query}%`} OR
-      drink.price::text ILIKE ${`%${query}%`}
+      drink.id ILIKE ${`%${select}%`} OR
+      drink.name ILIKE ${`%${select}%`} OR
+      drink.price::text ILIKE ${`%${select}%`}
       ORDER BY drink.voted DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;

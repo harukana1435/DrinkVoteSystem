@@ -1,5 +1,10 @@
 const { db } = require('@vercel/postgres');
-const { users, drink, vote } = require('../app/lib/placeholder-data.js');
+const {
+  users,
+  drink,
+  vote,
+  system,
+} = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
 async function seedUsers(client) {
@@ -135,12 +140,52 @@ async function seedVote(client) {
   }
 }
 
+//追加↓
+async function seedSystem(client) {
+  await client.sql`
+      DROP TABLE IF EXISTS system;
+    `;
+
+  try {
+    // Create the "system" table if it doesn't exist
+    const createTable = await client.sql`
+    CREATE TABLE IF NOT EXISTS system (
+        lastVotereset TEXT NOT NULL,
+        lastTotalization TEXT NOT NULL
+    );
+`;
+
+    console.log(`Created "system" table`);
+
+    // Insert data into the "system" table
+    const insertedSystem = await Promise.all(
+      system.map(
+        (system) => client.sql`
+        INSERT INTO system (lastVotereset, lastTotalization)
+        VALUES (${system.lastVotereset}, ${system.lastTotalization});
+      `,
+      ),
+    );
+
+    console.log(`Seeded ${insertedSystem.length} system data`);
+
+    return {
+      createTable,
+      vote: insertedSystem,
+    };
+  } catch (error) {
+    console.error('Error seeding system data:', error);
+    throw error;
+  }
+}
+
 async function main() {
   const client = await db.connect();
 
   await seedUsers(client);
   await seedDrink(client);
   await seedVote(client);
+  await seedSystem(client);
 
   await client.end();
 }
