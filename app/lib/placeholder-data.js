@@ -141,19 +141,20 @@ const drink = [
     path: '/drink/soukenbicha.png',
     totalvoted: 0,
   },
+
 ];
 
 const vote = [];
 
 const system = [
-  {
-    lastTotalization: '2024-05-01',
-  },
+    {
+        lastTotalization: '2024-05-01',
+    },
 ];
 
 module.exports = {
-  users,
-  drink,
-  vote,
-  system,
+    users,
+    drink,
+    vote,
+    system,
 };

@@ -14,10 +14,10 @@ import {
 } from './data';
 
 const FormSchema = z.object({
-  email: z.string(),
-  drink: z.string(),
-  voted: z.coerce.boolean(),
-  date: z.string(),
+    email: z.string(),
+    drink: z.string(),
+    voted: z.coerce.boolean(),
+    date: z.string(),
 });
 
 const CreateVote = FormSchema.omit({ date: true });
@@ -28,65 +28,66 @@ const DeleteVote = FormSchema.omit({ drink: true, date: true });
 
 // This is temporary until @types/react-dom is updated
 export type State = {
-  errors?: {
-    email?: string[];
-    drink?: string[];
-    voted?: string[];
-    date?: string[];
-  };
-  message?: string | null;
+    errors?: {
+        email?: string[];
+        drink?: string[];
+        voted?: string[];
+        date?: string[];
+    };
+    message?: string | null;
 };
 
 export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
+    prevState: string | undefined,
+    formData: FormData,
 ) {
-  try {
-    await signIn('credentials', formData);
-  } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin': //CredentialsSigninの時にエラーが出た場合の警告文
-          //return 'Invalid credentials.';
-          return 'EmailかPasswordが間違っています';
-        default: //それ以外の場合の警告文
-          return 'Something went wrong.';
-      }
+    try {
+        await signIn('credentials', formData);
+    } catch (error) {
+        if (error instanceof AuthError) {
+            switch (error.type) {
+                case 'CredentialsSignin': //CredentialsSigninの時にエラーが出た場合の警告文
+                    //return 'Invalid credentials.';
+                    return 'EmailかPasswordが間違っています';
+                default: //それ以外の場合の警告文
+                    return 'Something went wrong.';
+            }
+        }
+        throw error;
     }
-    throw error;
-  }
 }
 
 export async function createVote(
-  _email: string,
-  _drink: string,
-  _voted: boolean,
-  prevState: State,
+    _email: string,
+    _drink: string,
+    _voted: boolean,
+    prevState: State,
 ) {
-  // Validate form fields using Zod
-  const validatedFields = CreateVote.safeParse({
-    email: _email,
-    drink: _drink,
-    voted: _voted,
-  });
+    // Validate form fields using Zod
+    const validatedFields = CreateVote.safeParse({
+        email: _email,
+        drink: _drink,
+        voted: _voted,
+    });
 
-  // If form validation fails, return errors early. Otherwise, continue.
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Create Vote.',
-    };
-  }
+    // If form validation fails, return errors early. Otherwise, continue.
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+            message: 'Missing Fields. Failed to Create Vote.',
+        };
+    }
 
-  // Prepare data for insertion into the database
-  const { email, drink, voted } = validatedFields.data;
-  const date = new Date().toISOString().split('T')[0];
+    // Prepare data for insertion into the database
+    const { email, drink, voted } = validatedFields.data;
+    const date = new Date().toISOString().split('T')[0];
 
-  if (voted) {
-    return {
-      message: 'You has voted already',
-    };
-  }
+    if (voted) {
+        return {
+            message: 'You has voted already',
+        };
+    }
+
 
   try {
     if ((await fetchDrinkExist(drink)) == false) {
@@ -106,6 +107,7 @@ export async function createVote(
     WHERE email = ${email}
       `;
 
+
     await sql`
     UPDATE drink
     SET voted = voted + 1, totalvoted = totalvoted +1
@@ -120,39 +122,41 @@ export async function createVote(
     };
   }
 
-  // Revalidate the cache for the invoices page and redirect the user.
-  revalidatePath('/dashboard');
-  redirect('/dashboard?search=');
+
+    // Revalidate the cache for the invoices page and redirect the user.
+    revalidatePath('/dashboard');
+    redirect('/dashboard?search=');
 }
 
 export async function updateVote(
-  _email: string,
-  _drink: string,
-  _voted: boolean,
-  prevState: State,
+    _email: string,
+    _drink: string,
+    _voted: boolean,
+    prevState: State,
 ) {
-  // Validate form fields using Zod
-  const validatedFields = UpdateVote.safeParse({
-    email: _email,
-    drink: _drink,
-    voted: _voted,
-  });
+    // Validate form fields using Zod
+    const validatedFields = UpdateVote.safeParse({
+        email: _email,
+        drink: _drink,
+        voted: _voted,
+    });
 
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Update Vote.',
-    };
-  }
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+            message: 'Missing Fields. Failed to Update Vote.',
+        };
+    }
 
-  const { email, drink, voted } = validatedFields.data;
-  const date = new Date().toISOString().split('T')[0];
+    const { email, drink, voted } = validatedFields.data;
+    const date = new Date().toISOString().split('T')[0];
 
-  if (!voted) {
-    return {
-      message: 'You has not voted yet',
-    };
-  }
+    if (!voted) {
+        return {
+            message: 'You has not voted yet',
+        };
+    }
+
 
   try {
     if ((await VoteExist(email, date)) == false) {
@@ -169,7 +173,7 @@ export async function updateVote(
             WHERE voter = ${email} AND date=${date}
         `;
 
-    await sql`
+        await sql`
     UPDATE users
     SET voted = ${true}
     WHERE email = ${email}
@@ -191,28 +195,29 @@ export async function updateVote(
     return { message: 'Database Error: Failed to Update Vote.' };
   }
 
-  revalidatePath('/dashboard');
-  redirect('/dashboard?search=');
+
+    revalidatePath('/dashboard');
+    redirect('/dashboard?search=');
 }
 
 export async function deleteVote(
-  _email: string,
-  _voted: boolean,
-  prevState: State,
+    _email: string,
+    _voted: boolean,
+    prevState: State,
 ) {
-  // Validate form fields using Zod
-  const validatedFields = DeleteVote.safeParse({
-    email: _email,
-    voted: _voted,
-  });
+    // Validate form fields using Zod
+    const validatedFields = DeleteVote.safeParse({
+        email: _email,
+        voted: _voted,
+    });
 
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Missing Fields. Failed to Update Vote.',
-    };
-  }
-
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+            message: 'Missing Fields. Failed to Update Vote.',
+        };
+    }
+  
   const { email, voted } = validatedFields.data;
   const date = new Date().toISOString().split('T')[0];
   if (!voted) {
@@ -235,11 +240,12 @@ export async function deleteVote(
     WHERE voter = ${email} AND date = ${date}
           `;
 
-    await sql`
+        await sql`
       UPDATE users
       SET voted = ${false}, sum_voted = sum_voted+1
       WHERE email = ${email}
         `;
+
 
     await sql`
     UPDATE drink
@@ -252,6 +258,6 @@ export async function deleteVote(
     return { message: 'Database Error: Failed to Delete Vote.' };
   }
 
-  revalidatePath('/dashboard');
-  redirect('/dashboard?search=');
+    revalidatePath('/dashboard');
+    redirect('/dashboard?search=');
 }
