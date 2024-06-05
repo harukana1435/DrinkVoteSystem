@@ -141,8 +141,16 @@ const drink = [
 
 const vote = [];
 
+const system = [
+  {
+    lastVotereset: '2024-05-01',
+    lastTotalization: '2024-05-01',
+  },
+];
+
 module.exports = {
   users,
   drink,
   vote,
+  system,
 };

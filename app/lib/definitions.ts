@@ -25,6 +25,11 @@ export type Drink = {
   totalvoted: number; //総投票数
 };
 
+export type System = {
+  lastVotereset: string; //最後に投票をリセットした日付
+  lastTotalization: string; //最後に投票を集計した日付
+};
+
 export type DrinkID = {
   drink: string;
 };
