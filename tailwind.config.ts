@@ -18,6 +18,9 @@ const config: Config = {
           600: '#2F6FEB',
         },
       },
+      fontFamily: {
+        'handwritten': ['Caveat', 'cursive'],
+      },
     },
     keyframes: {
       shimmer: {

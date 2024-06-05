@@ -1,6 +1,9 @@
 // This file contains type definitions for your data.
 // It describes the shape of the data, and what data type each property should accept.
 // For simplicity of teaching, we're manually defining these types.
+
+import { StringValidation } from "zod";
+
 // However, these types are generated automatically if you're using an ORM such as Prisma.
 export type User = {
     name: string;
@@ -19,8 +22,16 @@ export type Vote = {
 export type Drink = {
     id: string;
     name: string;
-    voted: number; //今回の投票数
+    voted: number; //今回(2週間以内)の投票数
     price: number; //値段
     path: string; //画像ファイルのパス
-    totalvoted: number; //総投票数
+    totalvoted: number; //総投票数(これまでの全期間)
 };
+
+export type DrinkID = {
+    drink: string;
+};
+
+export type DrinkVoted = {
+    voted: number;
+}
