@@ -48,7 +48,7 @@ export async function fetchDrink() {
   noStore();
   try {
     const data = await sql<Drink>`SELECT * FROM drink ORDER BY drink.id ASC`;
-    console.log(data);
+
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
