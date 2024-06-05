@@ -7,10 +7,14 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 export function Drink_Panel({
   id,
   path,
+  votedcount,
+  totalvoted,
   userSelect,
 }: {
   id: string;
   path: string;
+  votedcount: number;
+  totalvoted: number;
   userSelect: string;
 }) {
   const searchParams = useSearchParams();
@@ -29,7 +33,10 @@ export function Drink_Panel({
 
   return (
     <div>
-      <p>クリック: {searchParams.get('select')?.toString()}</p>
+      <p>
+        クリック: {searchParams.get('select')?.toString()} 投票数: {votedcount}{' '}
+        総投票数：{totalvoted}
+      </p>
       <button
         key={id}
         onClick={() => handleClick(id)}
