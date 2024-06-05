@@ -79,13 +79,13 @@ export async function createVote(
 
     if (voted) {
         return {
-            message: 'You have voted already',
+            message: 'You has voted already',
         };
     }
 
     if ((await fetchDrinkExist(drink)) == false) {
         return {
-            message: 'You have voted already',
+            message: 'You has voted already',
         };
     }
 
@@ -140,7 +140,7 @@ export async function updateVote(
 
     if (!voted) {
         return {
-            message: 'You have not voted yet',
+            message: 'You has not voted yet',
         };
     }
 
@@ -193,7 +193,7 @@ export async function deleteVote(
     const date = new Date().toISOString().split('T')[0];
     if (!voted) {
         return {
-            message: 'You have not voted yet',
+            message: 'You has not voted yet',
         };
     }
     if ((await VoteExist(email, date)) == false) {
