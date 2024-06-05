@@ -20,23 +20,23 @@ export function Drink_Panel({
     function handleClick(term: string) {
         const params = new URLSearchParams(searchParams);
         if (term) {
-            params.set('query', term);
+            params.set('select', term);
         } else {
-            params.delete('query');
+            params.delete('select');
         }
-        replace(`${pathname}?${params.toString()}`);
+        replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
 
     return (
         <div>
-            <p>クリック: {searchParams.get('query')?.toString()}</p>
+            <p>クリック: {searchParams.get('select')?.toString()}</p>
             <button
                 key={id}
                 onClick={() => handleClick(id)}
                 className={
                     userSelect === id
                         ? 'rounded-md bg-red-200'
-                        : searchParams.get('query')?.toString() === id
+                        : searchParams.get('select')?.toString() === id
                             ? 'rounded-md bg-blue-200'
                             : 'rounded-md bg-gray-200'
                 }

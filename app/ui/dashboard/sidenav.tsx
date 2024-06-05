@@ -3,6 +3,7 @@ import NavLinks from '@/app/ui/dashboard/nav-links';
 import AcmeLogo from '@/app/ui/acme-logo';
 import { PowerIcon } from '@heroicons/react/24/outline';
 import { signOut } from '@/auth';
+import VoteButton from '@/app/ui/drink_vote/vote-button';
 
 export default function SideNav() {
     return (
@@ -14,9 +15,14 @@ export default function SideNav() {
                 { /* <h1 className="font-handwritten text-white text-2xl flex-1">Tahara, Sei Lab</h1> */}
                 <h1 className="font-family:'Yu Gothic'; text-white text-2xl flex-1">飲料管理サイト</h1>
             </Link>
-            <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
+            {/*<div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
                 <NavLinks />
-                <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
+                <div className="flex-grow hidden h-auto w-full grow rounded-md bg-gray-50 md:block">
+                    <VoteButton />
+    </div>*/}
+            <div className="hidden h-auto w-full flex flex-col grow rounded-md bg-gray-50 md:flex md:flex-col">
+                <div className="flex-grow"><NavLinks /></div>
+                <div className="mb-4"><VoteButton /></div>
                 <form
                     action={async () => {
                         'use server';

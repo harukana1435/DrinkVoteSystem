@@ -11,6 +11,7 @@ export type User = {
     password: string;
     voted: boolean; //今日1回でも投票を行ったかどうか
     sum_voted: number; //現在の総投票数
+    lastvotereset: string;
 };
 
 export type Vote = {
@@ -26,6 +27,10 @@ export type Drink = {
     price: number; //値段
     path: string; //画像ファイルのパス
     totalvoted: number; //総投票数(これまでの全期間)
+};
+
+export type System = {
+    lasttotalization: string; //最後に投票を集計した日付
 };
 
 export type DrinkID = {

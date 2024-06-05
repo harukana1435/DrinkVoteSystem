@@ -14,22 +14,22 @@ export default async function Page({
     searchParams,
 }: {
     searchParams?: {
-        query?: string;
+        select?: string;
         page?: string;
         search?: string;
     };
 }) {
-    const query = searchParams?.query || '';
+    const select = searchParams?.select || '';
     const search = searchParams?.search || '';
     const currentPage = Number(searchParams?.page) || 1;
     const totalPages = await fetchDrinkPages(search);
-    console.log('a');
-    console.log(totalPages);
 
     return (
         <main>
             <div>
-                <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+                <h1
+                    className={`${lusitana.className} mb-4 flex-1 rounded-lg bg-neutral-100 pb-5 pt-5 text-xl`}
+                >
                     飲料投票ページ
                 </h1>
             </div>
@@ -41,7 +41,7 @@ export default async function Page({
                 <Drink_info search={search} currentPage={currentPage} />
             </div>
 
-            <VoteButton />
+            {/* <VoteButton /> */}
 
             <div className="mt-5 flex w-full justify-center">
                 {<Pagination totalPages={totalPages} />}
