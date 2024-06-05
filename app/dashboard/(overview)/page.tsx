@@ -26,8 +26,8 @@ export default async function Page({
   return (
     <main>
       <div>
-        <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-          飲料投票ページ
+        <h1 className={`${lusitana.className} bg-neutral-100 flex-1 rounded-lg pb-5 pt-5 mb-4 text-xl`}>
+        　飲料投票ページ
         </h1>
       </div>
       <div className="md:h-200 p-4">
@@ -38,7 +38,7 @@ export default async function Page({
         <Drink_info search={search} currentPage={currentPage} />
       </div>
 
-      <VoteButton />
+      {/* <VoteButton /> */}
 
       <div className="mt-5 flex w-full justify-center">
         {<Pagination totalPages={totalPages} />}

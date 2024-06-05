@@ -15,25 +15,25 @@ export default async function VoteButton() {
   console.log(votedata[0]);
   return (
     <>
-      <div>
+      <div className="flex justify-center m-2">{votedata[0]?.drink}</div>
+      <div className="flex justify-center">
         <SubmitVote
           email={session?.user?.email ?? ''}
           voted={user?.voted ?? false}
         />
       </div>
-      <div>
+      <div className="flex justify-center">
         <ChangeVote
           email={session?.user?.email ?? ''}
           voted={user?.voted ?? false}
         />
       </div>
-      <div>
+      <div className="flex justify-center">
         <DeleteVote
           email={session?.user?.email ?? ''}
           voted={user?.voted ?? false}
         />
       </div>
-      <div>{votedata[0]?.drink}</div>
     </>
   );
 }

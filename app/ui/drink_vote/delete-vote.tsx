@@ -17,7 +17,7 @@ export function DeleteVote({
 
   return (
     <form action={dispatch}>
-      <div className="m-4">
+      <div className="flex items-center m-2">
         <Button type="submit" isdeActive={!voted}>
           <p>取り消し</p>
         </Button>

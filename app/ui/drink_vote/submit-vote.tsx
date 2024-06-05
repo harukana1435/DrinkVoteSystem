@@ -23,9 +23,9 @@ export function SubmitVote({
 
   return (
     <form action={dispatch}>
-      <div className="m-4">
+      <div className="flex items-center m-2">
         <Button type="submit" isdeActive={voted}>
-          <p>投票</p>
+          <p>投票　　</p>
         </Button>
       </div>
     </form>
