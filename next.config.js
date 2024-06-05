@@ -3,6 +3,7 @@ const nextConfig = {};
 
 // module.exports = nextConfig;
 
+
 module.exports = {
     env: {
         ROOT: __dirname,
