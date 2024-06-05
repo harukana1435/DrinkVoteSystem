@@ -3,6 +3,7 @@ import { Button } from '../button';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { createVote } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
+import clsx from 'clsx';
 
 export function SubmitVote({
   email,
@@ -20,11 +21,17 @@ export function SubmitVote({
     voted,
   );
   const [state, dispatch] = useFormState(createVotewithUserinfo, initialState);
+  const className = clsx(
+    'bg-cyan-600',
+    {
+      'hover:bg-cyan-400 active:bg-cyan-600': voted,
+    },
+  );
 
   return (
     <form action={dispatch}>
       <div className="flex items-center m-2">
-        <Button type="submit" isdeActive={voted}>
+        <Button className={className} type="submit" isdeActive={voted}>
           <p>投票　　</p>
         </Button>
       </div>

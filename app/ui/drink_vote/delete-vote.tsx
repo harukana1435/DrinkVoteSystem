@@ -3,6 +3,7 @@ import { Button } from '../button';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { deleteVote } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
+import clsx from 'clsx';
 
 export function DeleteVote({
   email,
@@ -14,11 +15,17 @@ export function DeleteVote({
   const initialState = { message: null, errors: {} };
   const deleteVotewithUserinfo = deleteVote.bind(null, email, voted);
   const [state, dispatch] = useFormState(deleteVotewithUserinfo, initialState);
+  const className = clsx(
+    'bg-cyan-600',
+    {
+      'hover:bg-cyan-500 active:bg-cyan-600': voted,
+    },
+  );
 
   return (
     <form action={dispatch}>
       <div className="flex items-center m-2">
-        <Button type="submit" isdeActive={!voted}>
+        <Button className={className} type="submit" isdeActive={!voted}>
           <p>取り消し</p>
         </Button>
       </div>
