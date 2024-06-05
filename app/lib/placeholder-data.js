@@ -8,13 +8,15 @@ const users = [
     password: 'satogo',
     voted: false,
     sum_voted: 0,
+    lastvotereset: '2024-06-04',
   },
   {
     name: '岡野日翔',
     email: 'okano.haruka@ohsuga.lab.uec.ac.jp',
     password: 'okanoharuka',
-    voted: false,
+    voted: true,
     sum_voted: 0,
+    lastvotereset: '2024-06-04',
   },
   {
     name: '美濃岡知樹',
@@ -22,6 +24,7 @@ const users = [
     password: 'minokatomoki',
     voted: false,
     sum_voted: 0,
+    lastvotereset: '2024-06-04',
   },
   {
     name: '木村晃和',
@@ -29,6 +32,7 @@ const users = [
     password: 'kimuraakikazu',
     voted: false,
     sum_voted: 0,
+    lastvotereset: '2024-06-04',
   },
 ];
 
@@ -143,7 +147,6 @@ const vote = [];
 
 const system = [
   {
-    lastVotereset: '2024-05-01',
     lastTotalization: '2024-05-01',
   },
 ];

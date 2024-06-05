@@ -21,16 +21,13 @@ export function ChangeVote({
     voted,
   );
   const [state, dispatch] = useFormState(updateVotewithUserinfo, initialState);
-  const className = clsx(
-    'bg-cyan-600',
-    {
-      'hover:bg-cyan-500 active:bg-cyan-600': voted,
-    },
-  );
+  const className = clsx('bg-cyan-600', {
+    'hover:bg-cyan-500 active:bg-cyan-600': voted,
+  });
 
   return (
     <form action={dispatch}>
-      <div className="flex items-center m-2">
+      <div className="m-2 flex items-center">
         <Button className={className} type="submit" isdeActive={!voted}>
           <p>再投票　</p>
         </Button>

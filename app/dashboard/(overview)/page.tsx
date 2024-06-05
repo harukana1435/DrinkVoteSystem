@@ -20,14 +20,14 @@ export default async function Page({
   const search = searchParams?.search || '';
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchDrinkPages(search);
-  console.log('a');
-  console.log(totalPages);
 
   return (
     <main>
       <div>
-        <h1 className={`${lusitana.className} bg-neutral-100 flex-1 rounded-lg pb-5 pt-5 mb-4 text-xl`}>
-        　飲料投票ページ
+        <h1
+          className={`${lusitana.className} mb-4 flex-1 rounded-lg bg-neutral-100 pb-5 pt-5 text-xl`}
+        >
+          　飲料投票ページ
         </h1>
       </div>
       <div className="md:h-200 p-4">

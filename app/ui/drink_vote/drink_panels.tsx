@@ -24,7 +24,7 @@ export function Drink_Panel({
     } else {
       params.delete('select');
     }
-    replace(`${pathname}?${params.toString()}`);
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
   return (
