@@ -45,15 +45,15 @@ export async function fetchUserByEmail(email: string): Promise<User | null> {
 }
 
 export async function fetchDrink() {
-    noStore();
-    try {
-        const data = await sql<Drink>`SELECT * FROM drink`;
+  noStore();
+  try {
+    const data = await sql<Drink>`SELECT * FROM drink ORDER BY drink.id ASC`;
 
-        return data.rows;
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch drink data.');
-    }
+    return data.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch drink data.');
+  }
 }
 
 export async function fetchSelectDrink(email: string, date: string) {
@@ -146,18 +146,20 @@ export async function fetchDrinkPages(select: string) {
     }
 }
 
-export async function fetchFilteredDrink(select: string, currentPage: number) {
-    noStore();
-    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+export async function fetchFilteredDrink(search: string, currentPage: number) {
+  noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
 
     try {
         const invoices = await sql<Drink>`
       SELECT * FROM drink
       WHERE
-      drink.id ILIKE ${`%${select}%`} OR
-      drink.name ILIKE ${`%${select}%`} OR
-      drink.price::text ILIKE ${`%${select}%`}
-      ORDER BY drink.voted DESC
+      drink.id ILIKE ${`%${search}%`} OR
+      drink.name ILIKE ${`%${search}%`} OR
+      drink.price::text ILIKE ${`%${search}%`}
+      ORDER BY drink.voted DESC, drink.totalvoted DESC, drink.name DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
 
