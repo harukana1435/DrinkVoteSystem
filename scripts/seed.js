@@ -20,7 +20,8 @@ async function seedUsers(client) {
         email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
         voted BOOLEAN NOT NULL DEFAULT false,
-        sum_voted INTEGER NOT NULL DEFAULT 0
+        sum_voted INTEGER NOT NULL DEFAULT 0,
+        lastvotereset TEXT NOT NULL
     );
     `;
 
@@ -31,10 +32,10 @@ async function seedUsers(client) {
       users.map(async (user) => {
         const hashedPassword = await bcrypt.hash(user.password, 10);
         return client.sql`
-        INSERT INTO users (name, email, password, voted, sum_voted) 
-        VALUES (${user.name}, ${user.email}, ${hashedPassword}, ${user.voted}, ${user.sum_voted})
+        INSERT INTO users (name, email, password, voted, sum_voted, lastvotereset) 
+        VALUES (${user.name}, ${user.email}, ${hashedPassword}, ${user.voted}, ${user.sum_voted}, ${user.lastvotereset})
         ON CONFLICT (email) DO UPDATE
-        SET name=${user.name}, email = ${user.email}, password = ${hashedPassword}, voted = ${user.voted}, sum_voted = ${user.sum_voted} ;
+        SET name=${user.name}, email = ${user.email}, password = ${hashedPassword}, voted = ${user.voted}, sum_voted = ${user.sum_voted} ,lastvotereset = ${user.lastvotereset};
     `;
       }),
     );
@@ -150,7 +151,6 @@ async function seedSystem(client) {
     // Create the "system" table if it doesn't exist
     const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS system (
-        lastVotereset TEXT NOT NULL,
         lastTotalization TEXT NOT NULL
     );
 `;
@@ -161,8 +161,8 @@ async function seedSystem(client) {
     const insertedSystem = await Promise.all(
       system.map(
         (system) => client.sql`
-        INSERT INTO system (lastVotereset, lastTotalization)
-        VALUES (${system.lastVotereset}, ${system.lastTotalization});
+        INSERT INTO system (lastTotalization)
+        VALUES (${system.lastTotalization});
       `,
       ),
     );

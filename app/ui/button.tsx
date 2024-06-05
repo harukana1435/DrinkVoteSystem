@@ -22,7 +22,7 @@ export function Button({
           'cursor-not-allowed bg-gray-500 text-gray-400 opacity-50 focus-visible:outline-gray-500':
             isdeActive,
         },
-        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2  ',
+        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
         className,
       )}
       disabled={isdeActive} // isdeActiveがtrueの場合にボタンを無効にする

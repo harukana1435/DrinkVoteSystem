@@ -8,6 +8,7 @@ export type User = {
   password: string;
   voted: boolean; //今日1回でも投票を行ったかどうか
   sum_voted: number; //現在の総投票数
+  lastvotereset: string;
 };
 
 export type Vote = {
@@ -26,8 +27,7 @@ export type Drink = {
 };
 
 export type System = {
-  lastVotereset: string; //最後に投票をリセットした日付
-  lastTotalization: string; //最後に投票を集計した日付
+  lasttotalization: string; //最後に投票を集計した日付
 };
 
 export type DrinkID = {
