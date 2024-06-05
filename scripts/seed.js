@@ -1,17 +1,27 @@
 const { db } = require('@vercel/postgres');
-const { users, drink, vote } = require('../app/lib/placeholder-data.js');
+const {
+    users,
+    drink,
+    vote,
+    system,
+} = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
 async function seedUsers(client) {
     try {
+        await client.sql`
+      DROP TABLE IF EXISTS users;
+    `;
+
         // Create the "users" table if it doesn't exist
         const createTable = await client.sql`
         CREATE TABLE IF NOT EXISTS users (
         name VARCHAR(255) NOT NULL,
         email TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL,
-        voted BOOLEAN NOT NULL,
-        sum_voted INTEGER NOT NULL DEFAULT 0
+        voted BOOLEAN NOT NULL DEFAULT false,
+        sum_voted INTEGER NOT NULL DEFAULT 0,
+        lastvotereset TEXT NOT NULL
     );
     `;
 
@@ -22,10 +32,10 @@ async function seedUsers(client) {
             users.map(async (user) => {
                 const hashedPassword = await bcrypt.hash(user.password, 10);
                 return client.sql`
-        INSERT INTO users (name, email, password, voted, sum_voted) 
-        VALUES (${user.name}, ${user.email}, ${hashedPassword}, ${user.voted}, ${user.sum_voted})
+        INSERT INTO users (name, email, password, voted, sum_voted, lastvotereset) 
+        VALUES (${user.name}, ${user.email}, ${hashedPassword}, ${user.voted}, ${user.sum_voted}, ${user.lastvotereset})
         ON CONFLICT (email) DO UPDATE
-        SET name=${user.name}, email = ${user.email}, password = ${hashedPassword}, voted = ${user.voted}, sum_voted = ${user.sum_voted} ;
+        SET name=${user.name}, email = ${user.email}, password = ${hashedPassword}, voted = ${user.voted}, sum_voted = ${user.sum_voted} ,lastvotereset = ${user.lastvotereset};
     `;
             }),
         );
@@ -45,10 +55,14 @@ async function seedUsers(client) {
 //追加↓
 async function seedDrink(client) {
     try {
+        await client.sql`
+      DROP TABLE IF EXISTS drink CASCADE;
+    `;
+
         // Create the "drink" table if it doesn't exist
         const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS drink (
-        id SERIAL PRIMARY KEY,
+        id TEXT NOT NULL UNIQUE,
         name VARCHAR(255) NOT NULL,
         voted INTEGER NOT NULL DEFAULT 0,
         price DECIMAL(10, 2) NOT NULL,
@@ -86,13 +100,17 @@ async function seedDrink(client) {
 
 //追加↓
 async function seedVote(client) {
+    await client.sql`
+      DROP TABLE IF EXISTS vote;
+    `;
+
     try {
         // Create the "vote" table if it doesn't exist
         const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS vote (
         voter TEXT NOT NULL,
         drink TEXT NOT NULL REFERENCES drink(id),
-        date TIMESTAMP NOT NULL,
+        date TEXT NOT NULL,
         CONSTRAINT unique_voter_date UNIQUE (voter, date)
     );
 `;
@@ -123,12 +141,51 @@ async function seedVote(client) {
     }
 }
 
+//追加↓
+async function seedSystem(client) {
+    await client.sql`
+      DROP TABLE IF EXISTS system;
+    `;
+
+    try {
+        // Create the "system" table if it doesn't exist
+        const createTable = await client.sql`
+    CREATE TABLE IF NOT EXISTS system (
+        lastTotalization TEXT NOT NULL
+    );
+`;
+
+        console.log(`Created "system" table`);
+
+        // Insert data into the "system" table
+        const insertedSystem = await Promise.all(
+            system.map(
+                (system) => client.sql`
+        INSERT INTO system (lastTotalization)
+        VALUES (${system.lastTotalization});
+      `,
+            ),
+        );
+
+        console.log(`Seeded ${insertedSystem.length} system data`);
+
+        return {
+            createTable,
+            vote: insertedSystem,
+        };
+    } catch (error) {
+        console.error('Error seeding system data:', error);
+        throw error;
+    }
+}
+
 async function main() {
     const client = await db.connect();
 
     await seedUsers(client);
     await seedDrink(client);
     await seedVote(client);
+    await seedSystem(client);
 
     await client.end();
 }

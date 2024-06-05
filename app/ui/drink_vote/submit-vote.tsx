@@ -2,42 +2,35 @@
 import { Button } from '../button';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { createVote } from '@/app/lib/actions';
-import { Session } from 'next-auth';
-import { useState, useEffect } from 'react';
-import { User } from '@/app/lib/definitions';
+import { useFormState } from 'react-dom';
+import clsx from 'clsx';
 
-export function Vote_Button() {
+export function SubmitVote({
+    email,
+    voted,
+}: {
+    email: string;
+    voted: boolean;
+}) {
     const searchParams = useSearchParams();
-    console.log('client component');
-
-    const [session, setSession] = useState<Session | null>(null);
-
-    const [vote_state, setVote_state] = useState<User | null>(null);
-
-    useEffect(() => {
-        async function fetchSession() {
-            const res = await fetch('/api/auth/session');
-
-            const sessionData = await res.json();
-            console.log('sessionData', sessionData);
-            setSession(sessionData);
-        }
-
-        fetchSession();
-    }, []);
-
-    console.log(session?.user?.id);
+    const initialState = { message: null, errors: {} };
+    const createVotewithUserinfo = createVote.bind(
+        null,
+        email,
+        searchParams.get('select') ?? '',
+        voted,
+    );
+    const [state, dispatch] = useFormState(createVotewithUserinfo, initialState);
+    const className = clsx('bg-cyan-600', {
+        'hover:bg-cyan-500 active:bg-cyan-600': !voted,
+    });
 
     return (
-        <form action="createVote">
-            <div className="m-4">
-                <Button type="submit">
-                    <p>投票</p>
+        <form action={dispatch}>
+            <div className="m-2 flex items-center">
+                <Button className={className} type="submit" isdeActive={voted}>
+                    <p>投票　　</p>
                 </Button>
-            </div>
-            <div>
-                <h1>My Client Component</h1>
-                <h2>User ID: {session?.user?.email}</h2>
             </div>
         </form>
     );

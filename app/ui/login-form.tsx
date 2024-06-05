@@ -2,8 +2,6 @@
 
 import { lusitana } from '@/app/ui/fonts';
 import {
-  AtSymbolIcon,
-  KeyIcon,
   ExclamationCircleIcon,
   LockClosedIcon,
   EnvelopeIcon,
@@ -19,7 +17,7 @@ export default function LoginForm() {
   return (
     <form action={dispatch} className="space-y-3">
       <div className="flex-1 rounded-lg bg-blue-50 px-6 pb-4 pt-8">
-        <h1 className={`${lusitana.className} text-center mb-3 text-2xl`}>
+        <h1 className={`${lusitana.className} mb-3 text-center text-2xl`}>
           ログイン
         </h1>
         <div className="w-full">
@@ -85,21 +83,8 @@ function LoginButton() {
   const { pending } = useFormStatus();
 
   return (
-    <Button className="mt-4 w-full" aria-disabled={pending}>
+    <Button className="mt-4 w-full bg-cyan-600 hover:bg-cyan-500 active:bg-cyan-600" aria-disabled={pending}>
       Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
     </Button>
-  );
-}
-
-export function Header_login() {
-  return (
-    <div className="flex-1 pb-10 pt-20 "> {/*bg-green-500*/}
-      <h1 className="font-family:'Comic Sans MS'; text-center text-3xl">
-        Tahara, Sei Lab
-      </h1>
-      <h1 className="font-family:'Yu Gothic'; text-center text-4xl font-bold">
-        飲料管理サイト
-      </h1>
-    </div>
   );
 }
