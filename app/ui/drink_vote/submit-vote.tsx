@@ -22,17 +22,17 @@ export function SubmitVote({
   );
   const [state, dispatch] = useFormState(createVotewithUserinfo, initialState);
   const className = clsx(
-    'bg-cyan-600',
+    'bg-cyan-600 w-60 h-12 flex justify-center items-center',
     {
-      'hover:bg-cyan-400 active:bg-cyan-600': voted,
+      'hover:bg-cyan-500 active:bg-cyan-600': !voted,
     },
   );
 
   return (
     <form action={dispatch}>
-      <div className="flex items-center m-2">
+      <div className="flex items-center">
         <Button className={className} type="submit" isdeActive={voted}>
-          <p>投票　　</p>
+          <p>投票</p>
         </Button>
       </div>
     </form>
