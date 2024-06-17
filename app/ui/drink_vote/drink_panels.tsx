@@ -17,21 +17,20 @@ export function Drink_Panel({
   totalvoted: number;
   userSelect: string;
 }) {
-    const searchParams = useSearchParams();
-    const pathname = usePathname();
-    const { replace } = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
-    function handleClick(term: string) {
-        const params = new URLSearchParams(searchParams);
-        if (term) {
-            params.set('select', term);
-        } else {
-            params.delete('select');
-        }
-        replace(`${pathname}?${params.toString()}`, { scroll: false });
+  function handleClick(term: string) {
+    const params = new URLSearchParams(searchParams);
+    if (term) {
+      params.set('select', term);
+    } else {
+      params.delete('select');
     }
+    replace(`${pathname}?${params.toString()}`, { scroll: false });
+  }
 
-    
   return (
     <div>
       <p>
@@ -55,9 +54,9 @@ export function Drink_Panel({
           height={200}
           className="hidden md:block"
           alt="Screenshots of the dashboard project showing desktop version"
+          priority={true}
         />
       </button>
     </div>
   );
 }
-
