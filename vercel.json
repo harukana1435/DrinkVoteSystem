@@ -1,7 +1,7 @@
 {
     "crons": [
         {
-            "path": "/Users/satogo/Downloads/就活/Webapp/next.js/app/api/cron",
+            "path": "/api/cron/cron",
             "schedule": "* * * * *"
         }
     ]
