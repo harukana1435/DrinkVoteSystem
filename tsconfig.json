@@ -35,7 +35,7 @@
         ".next/types/**/*.ts",
         "app/lib/placeholder-data.js",
         "scripts/seed.js",
-        "app/api/cron/cron.js"
+        "app/api/cron.js"
     ],
     "exclude": [
         "node_modules"
