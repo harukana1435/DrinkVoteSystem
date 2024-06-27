@@ -6,22 +6,23 @@ import VoteButton from '@/app/ui/drink_vote/vote-button';
 import Search from '@/app/ui/search';
 import { fetchDrinkPages } from '@/app/lib/data';
 import Pagination from '@/app/ui/invoices/pagination';
+// import RealtimeClock from '@/app/ui/drink_vote/ShowResult';
+// import TimerComponent from '@/app/ui/drink_vote/ShowResult';
+// import TwoWeeksResult from '@/app/ui/drink_vote/Result';
 
 export default async function Page({
-  searchParams,
+    searchParams,
 }: {
-  searchParams?: {
-    select?: string;
-    page?: string;
-    search?: string;
-  };
+    searchParams?: {
+        select?: string;
+        page?: string;
+        search?: string;
+    };
 }) {
-  const select = searchParams?.select || '';
-  const search = searchParams?.search || '';
-  const currentPage = Number(searchParams?.page) || 1;
-  const totalPages = await fetchDrinkPages(search);
-  console.log('a');
-  console.log(totalPages);
+    const select = searchParams?.select || '';
+    const search = searchParams?.search || '';
+    const currentPage = Number(searchParams?.page) || 1;
+    const totalPages = await fetchDrinkPages(search);
 
   return (
     <main>
@@ -45,4 +46,5 @@ export default async function Page({
       </div>
     </main>
   );
+
 }

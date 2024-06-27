@@ -6,12 +6,13 @@ import { useFormState } from 'react-dom';
 import clsx from 'clsx';
 
 export function DeleteVote({
-  email,
-  voted,
+    email,
+    voted,
 }: {
-  email: string;
-  voted: boolean;
+    email: string;
+    voted: boolean;
 }) {
+  
   const initialState = { message: null, errors: {} };
   const deleteVotewithUserinfo = deleteVote.bind(null, email, voted);
   const [state, dispatch] = useFormState(deleteVotewithUserinfo, initialState);
@@ -31,4 +32,5 @@ export function DeleteVote({
       </div>
     </form>
   );
+
 }

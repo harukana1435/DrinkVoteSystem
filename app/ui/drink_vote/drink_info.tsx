@@ -7,9 +7,7 @@ import {
 } from '@/app/lib/data';
 import { Drink_Panel } from './drink_panels';
 import { Session } from 'next-auth';
-import { User } from '@/app/lib/definitions';
 import { auth } from '@/auth';
-import { fetchUserByEmail } from '@/app/lib/data';
 
 export default async function Drink_info({
   search,
@@ -18,7 +16,6 @@ export default async function Drink_info({
   search: string;
   currentPage: number;
 }) {
-  //const DrinkDatas = await fetchDrink();
   const DrinkDatas = await fetchFilteredDrink(search, currentPage);
   const session: Session | null = await auth();
   const date = new Date().toISOString().split('T')[0];
@@ -35,6 +32,8 @@ export default async function Drink_info({
             <Drink_Panel
               id={drink.id}
               path={drink.path}
+              votedcount={drink.voted}
+              totalvoted={drink.totalvoted}
               userSelect={selectDrink?.drink ?? ''}
             />
           }

@@ -1,6 +1,6 @@
 import { sql } from '@vercel/postgres';
 import { unstable_noStore as noStore } from 'next/cache';
-import { User, Vote, Drink, DrinkID } from './definitions';
+import { User, Vote, Drink, DrinkID, DrinkVoted } from './definitions';
 import { formatCurrency } from './utils';
 
 export async function getUser(email: string) {
@@ -47,8 +47,8 @@ export async function fetchUserByEmail(email: string): Promise<User | null> {
 export async function fetchDrink() {
   noStore();
   try {
-    const data = await sql<Drink>`SELECT * FROM drink`;
-
+    const data = await sql<Drink>`SELECT * FROM drink ORDER BY drink.id ASC`;
+    console.log(data);
     return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -146,7 +146,7 @@ export async function fetchDrinkPages(select: string) {
   }
 }
 
-export async function fetchFilteredDrink(select: string, currentPage: number) {
+export async function fetchFilteredDrink(search: string, currentPage: number) {
   noStore();
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
@@ -154,10 +154,10 @@ export async function fetchFilteredDrink(select: string, currentPage: number) {
     const invoices = await sql<Drink>`
       SELECT * FROM drink
       WHERE
-      drink.id ILIKE ${`%${select}%`} OR
-      drink.name ILIKE ${`%${select}%`} OR
-      drink.price::text ILIKE ${`%${select}%`}
-      ORDER BY drink.voted DESC
+      drink.id ILIKE ${`%${search}%`} OR
+      drink.name ILIKE ${`%${search}%`} OR
+      drink.price::text ILIKE ${`%${search}%`}
+      ORDER BY drink.voted DESC, drink.totalvoted DESC, drink.name DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
 

@@ -21,6 +21,7 @@ export function ChangeVote({
     voted,
   );
   const [state, dispatch] = useFormState(updateVotewithUserinfo, initialState);
+
   const className = clsx(
     'bg-cyan-600 w-60 h-12 flex justify-center items-center',
     {

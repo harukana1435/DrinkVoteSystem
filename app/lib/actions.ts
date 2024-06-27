@@ -6,7 +6,12 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
-import { fetchDrinkExist, fetchDrinkNum, VoteExist } from './data';
+import {
+  fetchDrinkExist,
+  fetchDrinkNum,
+  fetchSelectDrink,
+  VoteExist,
+} from './data';
 
 const FormSchema = z.object({
   email: z.string(),
@@ -50,6 +55,7 @@ export async function authenticate(
     }
     throw error;
   }
+  redirect('/dashboard');
 }
 
 export async function createVote(
@@ -83,24 +89,29 @@ export async function createVote(
     };
   }
 
-  if ((await fetchDrinkExist(drink)) == false) {
-    return {
-      message: 'You has voted already',
-    };
-  }
-
   try {
-    console.log({ email, drink, date });
+    if ((await fetchDrinkExist(drink)) == false) {
+      return {
+        message: 'You has voted already',
+      };
+    }
+
     await sql`
             INSERT INTO vote (voter, drink, date)
             VALUES (${email}, ${drink}, ${date})
         `;
-    console.log({ email, drink, date });
+
     await sql`
     UPDATE users
-    SET voted = ${true}
+    SET voted = ${true}, sum_voted = sum_voted + 1
     WHERE email = ${email}
       `;
+
+    await sql`
+    UPDATE drink
+    SET voted = voted + 1, totalvoted = totalvoted +1
+    WHERE id = ${drink}
+     `;
 
     console.log({ email, drink, voted });
   } catch (error) {
@@ -144,13 +155,15 @@ export async function updateVote(
     };
   }
 
-  if ((await VoteExist(email, date)) == false) {
-    return {
-      message: 'no drink',
-    };
-  }
-
   try {
+    if ((await VoteExist(email, date)) == false) {
+      return {
+        message: 'no drink',
+      };
+    }
+
+    const selectedDrink = await fetchSelectDrink(email, date);
+
     await sql`
             UPDATE vote
             SET drink= ${drink}
@@ -162,6 +175,18 @@ export async function updateVote(
     SET voted = ${true}
     WHERE email = ${email}
       `;
+
+    await sql`
+      UPDATE drink
+      SET voted = voted + 1, totalvoted = totalvoted + 1
+      WHERE id = ${drink}
+       `;
+
+    await sql`
+       UPDATE drink
+       SET voted = voted - 1, totalvoted = totalvoted - 1
+       WHERE id = ${selectedDrink.drink}
+        `;
     console.log({ email, drink, date });
   } catch (error) {
     return { message: 'Database Error: Failed to Update Vote.' };
@@ -196,12 +221,16 @@ export async function deleteVote(
       message: 'You has not voted yet',
     };
   }
-  if ((await VoteExist(email, date)) == false) {
-    return {
-      message: 'no drink',
-    };
-  }
+
   try {
+    if ((await VoteExist(email, date)) == false) {
+      return {
+        message: 'no drink',
+      };
+    }
+
+    const selectedDrink = await fetchSelectDrink(email, date);
+
     await sql`
     DELETE FROM vote
     WHERE voter = ${email} AND date = ${date}
@@ -209,9 +238,16 @@ export async function deleteVote(
 
     await sql`
       UPDATE users
-      SET voted = ${false}
+      SET voted = ${false}, sum_voted = sum_voted+1
       WHERE email = ${email}
         `;
+
+    await sql`
+    UPDATE drink
+    SET voted = voted - 1, totalvoted = totalvoted -1
+    WHERE id = ${selectedDrink.drink}
+     `;
+
     console.log({ email, date });
   } catch (error) {
     return { message: 'Database Error: Failed to Delete Vote.' };
