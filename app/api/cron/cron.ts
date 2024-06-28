@@ -4,10 +4,7 @@ import { DrinkVoted } from '../../lib/definitions';
 import { fetchTwoteeksResult, addVoteEveryTwoWeeks, deleteVoteEveryTwoWeeks } from '@/app/lib/data';
 
 
-
-
-
-export async function EveryTwoWeeks() {
+export async function EveryTwoWeeks(request: Request) {
     const VotedList = await fetchTwoteeksResult();
     await addVoteEveryTwoWeeks(); // votedの中身をtotalvotedに追加
     await deleteVoteEveryTwoWeeks(); // votedの中身を削除する
