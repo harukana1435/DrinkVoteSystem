@@ -14,7 +14,7 @@ const users = [
         name: '岡野日翔',
         email: 'okano.haruka@ohsuga.lab.uec.ac.jp',
         password: 'okanoharuka',
-        voted: true,
+        voted: false,
         sum_voted: 0,
         lastvotereset: '2024-06-04',
     },
@@ -43,7 +43,7 @@ const drink = [
         voted: 0,
         price: 150,
         path: '/drink/cider.png',
-        totalvoted: 0,
+        totalvoted: 10,
     },
     {
         id: 'd1',
@@ -51,15 +51,15 @@ const drink = [
         voted: 0,
         price: 150,
         path: '/drink/cocacola.png',
-        totalvoted: 0,
+        totalvoted: 30,
     },
     {
         id: 'd2',
         name: 'calpis',
-        voted: 0,
+        voted: 21,
         price: 150,
         path: '/drink/calpis.png',
-        totalvoted: 0,
+        totalvoted: 20,
     },
     {
         id: 'd3',
@@ -67,7 +67,7 @@ const drink = [
         voted: 0,
         price: 150,
         path: '/drink/grape_calpis.png',
-        totalvoted: 0,
+        totalvoted: 60,
     },
     {
         id: 'd4',
@@ -75,12 +75,12 @@ const drink = [
         voted: 0,
         price: 150,
         path: '/drink/fanta_orange.png',
-        totalvoted: 0,
+        totalvoted: 30,
     },
     {
         id: 'd5',
         name: 'calpis_soda',
-        voted: 0,
+        voted: 7,
         price: 150,
         path: '/drink/calpis_soda.png',
         totalvoted: 0,
@@ -88,7 +88,7 @@ const drink = [
     {
         id: 'd6',
         name: 'cclemon',
-        voted: 0,
+        voted: 4,
         price: 150,
         path: '/drink/cclemon.png',
         totalvoted: 0,
@@ -96,7 +96,7 @@ const drink = [
     {
         id: 'd7',
         name: 'mets_cola',
-        voted: 0,
+        voted: 32,
         price: 150,
         path: '/drink/mets_cola.png',
         totalvoted: 0,
@@ -120,7 +120,7 @@ const drink = [
     {
         id: 'd10',
         name: 'kirin_lemon',
-        voted: 0,
+        voted: 3,
         price: 150,
         path: '/drink/kirin_lemon.png',
         totalvoted: 0,
@@ -128,7 +128,7 @@ const drink = [
     {
         id: 'd11',
         name: 'pepsi_zero',
-        voted: 0,
+        voted: 5,
         price: 150,
         path: '/drink/pepsi_zero.png',
         totalvoted: 0,
@@ -136,11 +136,12 @@ const drink = [
     {
         id: 'd12',
         name: 'soukenbicha',
-        voted: 0,
+        voted: 9,
         price: 150,
         path: '/drink/soukenbicha.png',
         totalvoted: 0,
     },
+
 ];
 
 const vote = [];

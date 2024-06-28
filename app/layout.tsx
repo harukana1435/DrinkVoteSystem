@@ -1,7 +1,7 @@
 import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
 import { Metadata } from 'next';
-
+import Head from 'next/head';
 
 export const metadata: Metadata = {
     title: {
@@ -19,6 +19,12 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
+            <Head>
+                <meta
+                    http-equiv="Content-Security-Policy"
+                    content="upgrade-insecure-requests"
+                />
+            </Head>
             <body className={`${inter.className} antialiased`}>{children}</body>
         </html>
     );
