@@ -9,5 +9,4 @@ export default async function GET() {
     const VotedList = await fetchTwoteeksResult();
     await addVoteEveryTwoWeeks(); // votedの中身をtotalvotedに追加
     await deleteVoteEveryTwoWeeks(); // votedの中身を削除する
-    return Response.json({ message: 'Cron job executed successfully', VotedList });
 }
