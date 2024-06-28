@@ -5,8 +5,9 @@ import { fetchTwoteeksResult, addVoteEveryTwoWeeks, deleteVoteEveryTwoWeeks } fr
 import { NextRequest } from 'next/server';
 
 
-export async function GET() {
+export default async function GET(request: NextRequest) {
     const VotedList = await fetchTwoteeksResult();
     await addVoteEveryTwoWeeks(); // votedの中身をtotalvotedに追加
     await deleteVoteEveryTwoWeeks(); // votedの中身を削除する
+    return Response.json({ message: 'Cron job executed successfully', VotedList });
 }
