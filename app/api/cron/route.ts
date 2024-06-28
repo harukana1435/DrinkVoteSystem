@@ -5,7 +5,7 @@ import { fetchTwoteeksResult, addVoteEveryTwoWeeks, deleteVoteEveryTwoWeeks } fr
 import { NextRequest } from 'next/server';
 
 
-export async function EveryTwoWeeks(request: NextRequest) {
+export async function EveryTwoWeeks() {
     const VotedList = await fetchTwoteeksResult();
     await addVoteEveryTwoWeeks(); // votedの中身をtotalvotedに追加
     await deleteVoteEveryTwoWeeks(); // votedの中身を削除する
