@@ -256,3 +256,25 @@ export async function deleteVote(
     revalidatePath('/dashboard');
     redirect('/dashboard?search=');
 }
+
+export async function addVoteEveryTwoWeeks() {
+    try {
+        await sql`
+            UPDATE drink
+            SET totalvoted = totalvoted + voted
+        `;
+    } catch (error) {
+        return { message: 'Database Error: Failed to add vote every two weeks' };
+    }
+}
+
+export async function deleteVoteEveryTwoWeeks() {
+    try {
+        await sql`
+            UPDATE drink
+            SET voted = 0
+        `;
+    } catch (error) {
+        return { message: 'Database Error: Failed to delete vote every two weeks' };
+    }
+}

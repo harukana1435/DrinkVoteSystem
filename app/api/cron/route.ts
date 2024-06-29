@@ -1,7 +1,8 @@
 import { sql } from '@vercel/postgres';
 import { unstable_noStore as noStore } from 'next/cache';
 import { DrinkVoted } from '../../lib/definitions';
-import { fetchTwoteeksResult, addVoteEveryTwoWeeks, deleteVoteEveryTwoWeeks } from '@/app/lib/data';
+import { fetchTwoteeksResult } from '@/app/lib/data';
+import { addVoteEveryTwoWeeks, deleteVoteEveryTwoWeeks } from '@/app/lib/actions';
 import { NextRequest } from 'next/server';
 
 
