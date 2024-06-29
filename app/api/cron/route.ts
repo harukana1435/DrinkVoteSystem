@@ -8,7 +8,7 @@ import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
     try {
-        const VotedList = await fetchTwoteeksResult();
+        //const VotedList = await fetchTwoteeksResult();
         await addVoteEveryTwoWeeks(); // votedの中身をtotalvotedに追加
         await deleteVoteEveryTwoWeeks(); // votedの中身を削除する
 
