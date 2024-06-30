@@ -13,11 +13,26 @@ export async function GET(request: NextRequest) {
         await deleteVoteEveryTwoWeeks(); // votedの中身を削除
         const messages = VotedList.map(DrinkResult => `${DrinkResult.name}を${DrinkResult.price}円分購入します`);
         console.log(messages)
-        alert(messages)
-        return Response.json({ success: true, message: 'completed cron jobs successfully.' })
+        const messagesJson = JSON.stringify(messages); // メッセージをJSON文字列に変換
+        return new Response(`
+            <html>
+            <head>
+                <title>Cron Jobs Result</title>
+                <script>
+                    // サーバーサイドからのデータを取得して画面に表示する
+                    const messages = ${messagesJson};
+                    alert(messages.join('\\n')); // メッセージをアラートで表示する例
+                    // 他の画面への反映
+                </script>
+            </head>
+            <body>
+                <h1>Cron Jobs Result</h1>
+                <p>Completed cron jobs successfully.</p>
+            </body>
+            </html>
+        `, { headers: { 'Content-Type': 'text/html' } });
     } catch (error) {
         console.error('cron jobs error', error);
         throw new Error('Failed to do cron jobs');
     }
-
 }
