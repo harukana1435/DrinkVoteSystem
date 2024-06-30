@@ -8,8 +8,8 @@ import Result from './a';
 
 export async function GET(request: NextRequest) {
     const VotedList = await fetchTwoteeksResult();
+    Result();
     try {
-        Result();
         await addVoteEveryTwoWeeks(); // votedの中身をtotalvotedに追加
         await deleteVoteEveryTwoWeeks(); // votedの中身を削除
         const messages = VotedList.map(DrinkResult => `${DrinkResult.name}を${DrinkResult.price}円分購入します`);
