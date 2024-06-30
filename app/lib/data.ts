@@ -168,11 +168,11 @@ export async function fetchFilteredDrink(search: string, currentPage: number) {
     }
 }
 
-export async function fetchTwoteeksResult() {
+export async function fetchTwoteeksResult(): Promise<number> {
     noStore();
     try {
-        const result = Number(await sql`SELECT SUM(drink.voted) FROM drink`) | 0
-        const value = Math.floor(1500 / result) | 0
+        const result = await sql<DrinkVoted>`SELECT SUM(drink.voted) FROM drink`
+        const value = Math.floor(1500 / result.rows[0].voted)
         return value
     } catch (error) {
         console.error('Database Error:', error);
