@@ -171,9 +171,9 @@ export async function fetchFilteredDrink(search: string, currentPage: number) {
 export async function fetchTwoteeksResult(): Promise<number> {
     noStore();
     try {
-        const result = await sql`SELECT SUM(drink.voted) FROM drink`
-        const value = Math.floor(1500 / Number(result.rows[0].count))
-        return value
+        const result = await sql`SELECT SUM(drink.voted) FROM drink`;
+        const value = Math.floor(1500 / Number(result.rows[0].count));
+        return value;
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to fetch two weeks result.');
