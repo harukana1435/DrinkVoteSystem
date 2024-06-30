@@ -4,7 +4,6 @@ import { DrinkVoted } from '../../lib/definitions';
 import { fetchTwoteeksResult } from '@/app/lib/data';
 import { addVoteEveryTwoWeeks, deleteVoteEveryTwoWeeks } from '@/app/lib/actions';
 import { NextRequest } from 'next/server';
-import Result from './a';
 
 export async function GET(request: NextRequest) {
     const VotedList = await fetchTwoteeksResult();
