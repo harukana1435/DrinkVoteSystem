@@ -175,7 +175,7 @@ export async function fetchTwoteeksResult() {
         const value = Math.round(1500 / result.rows[0].sum) || 0;
         const result2 = await sql`SELECT SUM(drink.voted) AS sum FROM drink WHERE ${value} * drink.voted > 150`;
         const value2 = Math.round(1500 / result2.rows[0].sum) || 0;
-        const result3 = await sql`SELECT drink.name, ${value2} * drink.voted FROM drink WHERE ${value} * drink.voted > 150`;
+        const result3 = await sql<DrinkResult>`SELECT drink.name, ${value2} * drink.voted FROM drink WHERE ${value} * drink.voted > 150`;
         return result3.rows;
     } catch (error) {
         console.error('Database Error:', error);
