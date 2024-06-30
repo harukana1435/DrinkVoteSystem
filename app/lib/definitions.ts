@@ -40,3 +40,8 @@ export type DrinkID = {
 export type DrinkVoted = {
     voted: number;
 }
+
+export type DrinkResult = {
+    name: string;
+    price: number;
+}
