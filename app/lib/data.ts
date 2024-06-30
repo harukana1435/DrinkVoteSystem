@@ -173,6 +173,7 @@ export async function fetchTwoteeksResult() {
     try {
         const result = Number(await sql<DrinkVoted>`SELECT SUM(drink.voted) FROM drink`);
         const value = Math.floor(1500 / result)
+        return value
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to fetch two weeks result.');
