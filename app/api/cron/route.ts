@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
         await addVoteEveryTwoWeeks(); // votedの中身をtotalvotedに追加
         await deleteVoteEveryTwoWeeks(); // votedの中身を削除
 
-        console.log(`total ${VotedList} vote`)
+        console.log(`${VotedList}`)
         return Response.json({ success: true, message: 'completed cron jobs successfully.' })
     } catch (error) {
         console.error('cron jobs error', error);
