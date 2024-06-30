@@ -172,7 +172,9 @@ export async function fetchTwoteeksResult(): Promise<number> {
     noStore();
     try {
         const result = await sql`SELECT SUM(drink.voted) AS sum FROM drink`;
-        const value = Math.floor(1500 / result.rows[0].sum);
+        const value = Math.round(1500 / result.rows[0].sum) || 0;
+        const result2 = await sql`SELECT SUM(drink.voted) AS sum FROM drink where ${value} * drink.voted > 150`;
+        const value2 = Math.round(1500 / result.rows[0].sum) || 0;
         return value;
     } catch (error) {
         console.error('Database Error:', error);
