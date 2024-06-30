@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
         await deleteVoteEveryTwoWeeks(); // votedの中身を削除
         const messages = VotedList.map(DrinkResult => `${DrinkResult.name}を${DrinkResult.price}円分購入します`);
         console.log(messages)
+        alert(messages)
         return Response.json({ success: true, message: 'completed cron jobs successfully.' })
     } catch (error) {
         console.error('cron jobs error', error);
