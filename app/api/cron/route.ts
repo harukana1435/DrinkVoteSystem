@@ -4,12 +4,10 @@ import { DrinkVoted } from '../../lib/definitions';
 import { fetchTwoteeksResult } from '@/app/lib/data';
 import { addVoteEveryTwoWeeks, deleteVoteEveryTwoWeeks } from '@/app/lib/actions';
 import { NextRequest } from 'next/server';
-import { ShowResult } from './result';
 
 
 export async function GET(request: NextRequest) {
     const VotedList = await fetchTwoteeksResult();
-    ShowResult(VotedList);
     try {
         await addVoteEveryTwoWeeks(); // votedの中身をtotalvotedに追加
         await deleteVoteEveryTwoWeeks(); // votedの中身を削除
