@@ -171,8 +171,8 @@ export async function fetchFilteredDrink(search: string, currentPage: number) {
 export async function fetchTwoteeksResult() {
     noStore();
     try {
-        const result = Number(await sql`SELECT SUM(drink.voted) FROM drink`);
-        const value = Math.floor(1500 / result)
+        const result = Number(await sql`SELECT SUM(drink.voted) FROM drink`) | 0
+        const value = Math.floor(1500 / result) | 0
         return value
     } catch (error) {
         console.error('Database Error:', error);
