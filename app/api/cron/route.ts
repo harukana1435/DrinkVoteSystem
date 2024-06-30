@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const VotedList = await fetchTwoteeksResult();
     try {
         await addVoteEveryTwoWeeks(); // votedの中身をtotalvotedに追加
-        await deleteVoteEveryTwoWeeks(); // votedの中身を削除する
+        await deleteVoteEveryTwoWeeks(); // votedの中身を削除
 
         return Response.json({ success: true, message: 'completed cron jobs successfully.' })
     } catch (error) {
