@@ -6,9 +6,6 @@ import VoteButton from '@/app/ui/drink_vote/vote-button';
 import Search from '@/app/ui/search';
 import { fetchDrinkPages } from '@/app/lib/data';
 import Pagination from '@/app/ui/invoices/pagination';
-// import RealtimeClock from '@/app/ui/drink_vote/ShowResult';
-// import TimerComponent from '@/app/ui/drink_vote/ShowResult';
-// import TwoWeeksResult from '@/app/ui/drink_vote/Result';
 
 export default async function Page({
     searchParams,
@@ -23,7 +20,6 @@ export default async function Page({
     const search = searchParams?.search || '';
     const currentPage = Number(searchParams?.page) || 1;
     const totalPages = await fetchDrinkPages(search);
-
     return (
         <main>
             <div className="min-h-screen flex flex-col">
