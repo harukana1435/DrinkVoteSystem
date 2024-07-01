@@ -21,8 +21,8 @@ const FormSchema = z.object({
 });
 
 const FormResultSchema = z.object({
-    name: z.array(z.string()),
-    price: z.array(z.number()),
+    name: z.string(),
+    price: z.number(),
 });
 
 const CreateVote = FormSchema.omit({ date: true });
@@ -287,8 +287,8 @@ export async function deleteVoteEveryTwoWeeks() {
 }
 
 export async function updateresult(
-    _name: string[],
-    _price: number[],
+    _name: string,
+    _price: number,
 ) {
 
     // Validate form fields using Zod
@@ -307,10 +307,12 @@ export async function updateresult(
 
     // Prepare data for insertion into the database
     const { name, price } = validatedFields.data;
+    const date = new Date().toISOString().split('T')[0];
+
     try {
         await sql`
-            UPDATE result
-            SET name = name, price = price
+            INSERT INTO result (date, name, price)
+            VALUES (${date}, ${name}, ${price})
         `;
     } catch (error) {
         return { message: 'Database Error: Failed to update result' };

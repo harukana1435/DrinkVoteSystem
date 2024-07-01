@@ -190,8 +190,9 @@ async function seedResult(client) {
         // Create the "reuslt" table if it doesn't exist
         const createTable = await client.sql`
     CREATE TABLE IF NOT EXISTS result (
-        name TEXT[],
-        price INTEGER[]
+        date TEXT,
+        name TEXT,
+        price INTEGER
     );
 `;
         console.log(`Created "result" table`);
@@ -200,8 +201,8 @@ async function seedResult(client) {
         const insertedResult = await Promise.all(
             result.map(
                 () => client.sql`
-        INSERT INTO result (name, price)
-        VALUES (${result.name}, ${result.price});
+        INSERT INTO result (date, name, price)
+        VALUES (${result.date}, ${result.name}, ${result.price});
       `,
             ),
         );
