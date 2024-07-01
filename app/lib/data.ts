@@ -126,7 +126,7 @@ export async function fetchVote() {
   }
 }
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 6;
 export async function fetchDrinkPages(select: string) {
   noStore();
   try {

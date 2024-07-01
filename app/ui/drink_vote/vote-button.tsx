@@ -16,7 +16,7 @@ export default async function VoteButton() {
 
   return (
     <>
-      <div className="flex justify-center m-4">{votedata[0]?.drink}</div>
+      {/* <div className="flex justify-center m-4">{votedata[0]?.drink}</div> */}
       <div className="flex justify-center m-2">
         <SubmitVote
           email={session?.user?.email ?? ''}
