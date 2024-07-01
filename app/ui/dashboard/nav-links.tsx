@@ -9,6 +9,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import { useEffect, useState } from 'react';
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -24,6 +25,22 @@ const links = [
 
 export default function NavLinks() {
     const pathname = usePathname();
+    const [messages, setMessages] = useState([]);
+
+    useEffect(() => {
+        // APIエンドポイントにリクエストを送る
+        fetch('/api/cron/route') // 実際のエンドポイントに置き換えてください
+            .then(response => response.json())
+            .then(data => {
+                if (data.text) {
+                    setMessages(data.text); // messagesを状態に保存
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
+
     return (
         <>
             {links.map((link) => {
@@ -44,6 +61,11 @@ export default function NavLinks() {
                     </Link>
                 );
             })}
+            <div>
+                {messages.map((message, index) => (
+                    <li key={index}>{message}</li>
+                ))}
+            </div>
         </>
     );
 }

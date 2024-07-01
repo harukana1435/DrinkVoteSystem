@@ -4,25 +4,8 @@ import AcmeLogo from '@/app/ui/acme-logo';
 import { PowerIcon } from '@heroicons/react/24/outline';
 import { signOut } from '@/auth';
 import VoteButton from '@/app/ui/drink_vote/vote-button';
-import { useEffect, useState } from 'react';
 
 export default function SideNav() {
-    const [messages, setMessages] = useState([]);
-
-    useEffect(() => {
-        // APIエンドポイントにリクエストを送る
-        fetch('/api/cron/route') // 実際のエンドポイントに置き換えてください
-            .then(response => response.json())
-            .then(data => {
-                if (data.text) {
-                    setMessages(data.text); // messagesを状態に保存
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    }, []);
-
     return (
         <div className="flex h-full flex-col px-3 py-4 md:px-2">
             <Link
@@ -51,10 +34,7 @@ export default function SideNav() {
                     </button>
                 </form>
             </div>
-            <div>
-                {messages.map((message, index) => (
-                    <li key={index}>{message}</li>))}
-            </div>
         </div>
     );
 }
+
