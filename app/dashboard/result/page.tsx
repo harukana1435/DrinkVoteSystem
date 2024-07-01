@@ -1,5 +1,5 @@
-import { GET } from "@/app/api/cron/route";
 import ShowResult from "@/app/ui/result/showresult";
+import { fetchLatestResult } from "@/app/lib/data";
 
 export default function Page() {
     return (

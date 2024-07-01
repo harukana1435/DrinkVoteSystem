@@ -182,3 +182,7 @@ export async function fetchTwoteeksResult() {
         throw new Error('Failed to fetch two weeks result.');
     }
 }
+
+export async function fetchLatestResult() {
+    noStore();
+}
