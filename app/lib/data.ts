@@ -1,6 +1,6 @@
 import { sql } from '@vercel/postgres';
 import { unstable_noStore as noStore } from 'next/cache';
-import { User, Vote, Drink, DrinkID, DrinkVoted, DrinkResult } from './definitions';
+import { User, Vote, Drink, DrinkID, DrinkResult } from './definitions';
 import { formatCurrency } from './utils';
 
 export async function getUser(email: string) {

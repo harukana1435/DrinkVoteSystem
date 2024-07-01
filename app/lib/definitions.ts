@@ -37,11 +37,13 @@ export type DrinkID = {
     drink: string;
 };
 
-export type DrinkVoted = {
-    voted: number;
+export type DrinkResult = {
+    name: string;
+    price: number;
 }
 
-export type DrinkResult = {
+export type Result = {
+    date: string;
     name: string;
     price: number;
 }

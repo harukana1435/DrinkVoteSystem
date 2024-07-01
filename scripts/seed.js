@@ -200,7 +200,7 @@ async function seedResult(client) {
         // Insert data into the "result" table
         const insertedResult = await Promise.all(
             result.map(
-                () => client.sql`
+                (result) => client.sql`
         INSERT INTO result (date, name, price)
         VALUES (${result.date}, ${result.name}, ${result.price});
       `,

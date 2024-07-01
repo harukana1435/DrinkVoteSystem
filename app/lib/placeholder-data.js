@@ -152,7 +152,13 @@ const system = [
     },
 ];
 
-const result = [];
+const result = [
+    {
+        date: '2024-07-01',
+        name: 'cocacola',
+        price: 1500,
+    },
+];
 
 module.exports = {
     users,
