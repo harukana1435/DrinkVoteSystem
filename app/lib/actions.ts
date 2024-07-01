@@ -21,8 +21,8 @@ const FormSchema = z.object({
 });
 
 const FormResultSchema = z.object({
-    name: z.string(),
-    price: z.number(),
+    name: z.array(z.string()),
+    price: z.array(z.number()),
 });
 
 const CreateVote = FormSchema.omit({ date: true });
@@ -310,7 +310,7 @@ export async function updateresult(
     try {
         await sql`
             UPDATE result
-            SET name = ${name}, proce = ${price}
+            SET name = name, price = price
         `;
     } catch (error) {
         return { message: 'Database Error: Failed to update result' };
