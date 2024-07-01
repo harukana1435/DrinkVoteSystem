@@ -6,6 +6,7 @@ import VoteButton from '@/app/ui/drink_vote/vote-button';
 import Search from '@/app/ui/search';
 import { fetchDrinkPages } from '@/app/lib/data';
 import Pagination from '@/app/ui/invoices/pagination';
+import { GET } from '@/app/api/cron/route';
 
 export default async function Page({
     searchParams,
@@ -20,6 +21,8 @@ export default async function Page({
     const search = searchParams?.search || '';
     const currentPage = Number(searchParams?.page) || 1;
     const totalPages = await fetchDrinkPages(search);
+
+
     return (
         <main>
             <div className="min-h-screen flex flex-col">
