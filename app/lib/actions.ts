@@ -307,7 +307,7 @@ export async function updateresult(
 
     // Prepare data for insertion into the database
     const { name, price } = validatedFields.data;
-    const date = new Date().toISOString().split('T')[0];
+    const date = new Date(Date.now() + ((new Date().getTimezoneOffset() + (540)) * 60 * 1000)).toISOString().split('T')[0];
 
     try {
         await sql`
