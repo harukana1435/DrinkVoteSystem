@@ -20,11 +20,18 @@ const FormSchema = z.object({
     date: z.string(),
 });
 
+const FormResultSchema = z.object({
+    name: z.string(),
+    price: z.number(),
+});
+
 const CreateVote = FormSchema.omit({ date: true });
 
 const UpdateVote = FormSchema.omit({ date: true });
 
 const DeleteVote = FormSchema.omit({ drink: true, date: true });
+
+const UpdateResult = FormResultSchema;
 
 // This is temporary until @types/react-dom is updated
 export type State = {
@@ -276,5 +283,36 @@ export async function deleteVoteEveryTwoWeeks() {
         `;
     } catch (error) {
         return { message: 'Database Error: Failed to delete vote every two weeks' };
+    }
+}
+
+export async function updateresult(
+    _name: string[],
+    _price: number[],
+) {
+
+    // Validate form fields using Zod
+    const validatedFields = UpdateResult.safeParse({
+        name: _name,
+        price: _price,
+    });
+
+    // If form validation fails, return errors early. Otherwise, continue.
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+            message: 'Missing Fields. Failed to Update Result.',
+        };
+    }
+
+    // Prepare data for insertion into the database
+    const { name, price } = validatedFields.data;
+    try {
+        await sql`
+            UPDATE result
+            SET name = ${name}, proce = ${price}
+        `;
+    } catch (error) {
+        return { message: 'Database Error: Failed to update result' };
     }
 }

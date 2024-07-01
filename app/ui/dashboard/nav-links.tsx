@@ -5,6 +5,7 @@ import {
     HomeIcon,
     DocumentDuplicateIcon,
     CheckCircleIcon,
+    ClipboardDocumentListIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -15,31 +16,11 @@ import { useEffect, useState } from 'react';
 // Depending on the size of the application, this would be stored in a database.
 const links = [
     { name: '飲料投票ページ', href: '/dashboard', icon: CheckCircleIcon },
-    /*{
-        name: 'Invoices',
-        href: '/dashboard/invoices',
-        icon: DocumentDuplicateIcon,
-    },
-    { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },*/
+    { name: '前回の投票結果', href: '/dashboard/result', icon: ClipboardDocumentListIcon },
 ];
 
 export default function NavLinks() {
     const pathname = usePathname();
-    const [messages, setMessages] = useState([]);
-
-    useEffect(() => {
-        // APIエンドポイントにリクエストを送る
-        fetch('/api/cron/route') // 実際のエンドポイントに置き換えてください
-            .then(response => response.json())
-            .then(data => {
-                if (data.text) {
-                    setMessages(data.text); // messagesを状態に保存
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    }, []);
 
     return (
         <>
@@ -61,11 +42,6 @@ export default function NavLinks() {
                     </Link>
                 );
             })}
-            <div>
-                {messages.map((message, index) => (
-                    <li key={index}>{message}</li>
-                ))}
-            </div>
         </>
     );
 }

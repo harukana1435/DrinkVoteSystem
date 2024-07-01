@@ -4,6 +4,7 @@ const {
     drink,
     vote,
     system,
+    result
 } = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
@@ -179,6 +180,43 @@ async function seedSystem(client) {
     }
 }
 
+//追加↓
+async function seedResult(client) {
+    await client.sql`
+      DROP TABLE IF EXISTS result;
+    `;
+
+    try {
+        // Create the "reuslt" table if it doesn't exist
+        const createTable = await client.sql`
+    CREATE TABLE IF NOT EXISTS result (
+        name TEXT[],
+        price INTEGER[]
+    );
+`;
+        console.log(`Created "result" table`);
+
+        // Insert data into the "result" table
+        const insertedResult = await Promise.all(
+            result.map(
+                () => client.sql`
+        INSERT INTO result (name, price)
+        VALUES (${result.name}, ${result.price});
+      `,
+            ),
+        );
+
+        console.log(`Seeded ${insertedResult.length} result data`);
+
+        return {
+            createTable,
+            result: insertedResult,
+        };
+    } catch (error) {
+        console.error('Error seeding result data:', error);
+        throw error;
+    }
+}
 async function main() {
     const client = await db.connect();
 
@@ -186,6 +224,7 @@ async function main() {
     await seedDrink(client);
     await seedVote(client);
     await seedSystem(client);
+    await seedResult(client);
 
     await client.end();
 }

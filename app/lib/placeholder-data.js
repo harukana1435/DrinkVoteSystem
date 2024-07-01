@@ -152,9 +152,12 @@ const system = [
     },
 ];
 
+const result = [];
+
 module.exports = {
     users,
     drink,
     vote,
     system,
+    result,
 };
