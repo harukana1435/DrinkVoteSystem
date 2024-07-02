@@ -32,6 +32,7 @@ export default async function Drink_info({
             <Drink_Panel
               id={drink.id}
               path={drink.path}
+              name={drink.name}
               votedcount={drink.voted}
               totalvoted={drink.totalvoted}
               userSelect={selectDrink?.drink ?? ''}

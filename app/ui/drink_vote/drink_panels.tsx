@@ -9,12 +9,14 @@ import { fredoka } from '../fonts';
 export function Drink_Panel({
   id,
   path,
+  name,
   votedcount,
   totalvoted,
   userSelect,
 }: {
   id: string;
   path: string;
+  name: string;
   votedcount: number;
   totalvoted: number;
   userSelect: string;

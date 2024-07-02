@@ -36,11 +36,11 @@ export default async function Page({
           <div className="md:h-200 p-4">
             <Search placeholder="Search drinks..." />
           </div>
-          <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+          <div className="mt-4 flex items-center justify-between gap-2 md:mt-8 mb-10">
             <Drink_info search={search} currentPage={currentPage} />
           </div>
         </div>
-        <div className="mb-32 flex justify-center">
+        <div className="flex justify-center">
           {<Pagination totalPages={totalPages} />}
         </div>
       </div>
