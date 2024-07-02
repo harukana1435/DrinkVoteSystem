@@ -8,11 +8,12 @@ import { DeleteVote } from './delete-vote';
 import { VoteReset } from '@/app/lib/api';
 
 export default async function VoteButton() {
-  const session: Session | null = await auth();
-  const user: User | null = await fetchUserByEmail(session?.user?.email ?? '');
-  const votedata = await fetchVote();
+    const session: Session | null = await auth();
+    const user: User | null = await fetchUserByEmail(session?.user?.email ?? '');
+    const votedata = await fetchVote();
 
-  await VoteReset(user?.email ?? '', user?.lastvotereset ?? '');
+    await VoteReset(user?.email ?? '', user?.lastvotereset ?? '');
+
 
   return (
     <>

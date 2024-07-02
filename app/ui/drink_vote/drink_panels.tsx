@@ -21,19 +21,20 @@ export function Drink_Panel({
   totalvoted: number;
   userSelect: string;
 }) {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const { replace } = useRouter();
 
-  function handleClick(term: string) {
-    const params = new URLSearchParams(searchParams);
-    if (term) {
-      params.set('select', term);
-    } else {
-      params.delete('select');
+    function handleClick(term: string) {
+        const params = new URLSearchParams(searchParams);
+        if (term) {
+            params.set('select', term);
+        } else {
+            params.delete('select');
+        }
+        replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
-    replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }
+
 
   return (
     <div>

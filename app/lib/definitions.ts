@@ -23,6 +23,7 @@ export type Vote = {
 export type Drink = {
     id: string;
     name: string;
+    japanesename: string;
     voted: number; //今回(2週間以内)の投票数
     price: number; //値段
     path: string; //画像ファイルのパス
@@ -37,6 +38,14 @@ export type DrinkID = {
     drink: string;
 };
 
-export type DrinkVoted = {
-    voted: number;
+export type DrinkResult = {
+    name: string;
+    japanesename: string;
+    price: number;
+}
+
+export type Result = {
+    date: string;
+    name: string;
+    price: number;
 }

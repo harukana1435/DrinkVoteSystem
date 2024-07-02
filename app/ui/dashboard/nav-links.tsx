@@ -5,25 +5,23 @@ import {
     HomeIcon,
     DocumentDuplicateIcon,
     CheckCircleIcon,
+    ClipboardDocumentListIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import { useEffect, useState } from 'react';
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
     { name: '飲料投票ページ', href: '/dashboard', icon: CheckCircleIcon },
-    /* {
-        name: 'Invoices',
-        href: '/dashboard/invoices',
-        icon: DocumentDuplicateIcon,
-    },
-    { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon }, */
+    { name: '前回の投票結果', href: '/dashboard/result', icon: ClipboardDocumentListIcon },
 ];
 
 export default function NavLinks() {
     const pathname = usePathname();
+
     return (
         <>
             {links.map((link) => {
