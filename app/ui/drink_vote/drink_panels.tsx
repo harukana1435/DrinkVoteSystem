@@ -7,12 +7,14 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 export function Drink_Panel({
   id,
   path,
+  name,
   votedcount,
   totalvoted,
   userSelect,
 }: {
   id: string;
   path: string;
+  name: string;
   votedcount: number;
   totalvoted: number;
   userSelect: string;
@@ -38,7 +40,7 @@ export function Drink_Panel({
         総投票数：{totalvoted}
       </p> */}
       <p className="text-2xl ml-2 mb-1">
-        {id}
+        {name}
       </p>
       <button
         key={id}
