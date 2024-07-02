@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 
 export async function VoteReset(email: string, lastvotereset: string) {
   if (email === '' || lastvotereset === '') return;
+  console.log('o');
 
   const date = new Date().toISOString().split('T')[0];
   if (lastvotereset === date) return;
