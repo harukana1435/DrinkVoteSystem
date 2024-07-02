@@ -40,5 +40,7 @@ export default async function Drink_info({
             />
           }
         </div>
-    );
+      ))}
+    </div>
+  );
 }
