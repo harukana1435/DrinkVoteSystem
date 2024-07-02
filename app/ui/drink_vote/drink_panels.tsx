@@ -3,6 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { montserrat } from '../fonts';
+import { fredoka } from '../fonts';
 
 export function Drink_Panel({
   id,
@@ -39,19 +41,11 @@ export function Drink_Panel({
         クリック：{searchParams.get('select')?.toString()}
         総投票数：{totalvoted}
       </p> */}
-      <p className="text-2xl ml-2 mb-1">
-        {name}
-      </p>
+      <p className="mb-1 ml-2 text-2xl">{id}</p>
       <button
         key={id}
         onClick={() => handleClick(id)}
-        className={
-          userSelect === id
-            ? 'rounded-md bg-red-200 hover:scale-110 active:scale-105'
-            : searchParams.get('select')?.toString() === id
-              ? 'rounded-md bg-blue-200 hover:scale-110 active:scale-105'
-              : 'rounded-md bg-gray-200 hover:scale-110 active:scale-105'
-        }
+        className={`rounded-md hover:scale-110 ${userSelect === id ? 'bg-psychedelic-blue' : searchParams.get('select')?.toString() === id ? 'border-5 bg-psychedelic-blue-lamp border-blue-500 ' : 'bg-gray-200'}`}
       >
         <Image
           src={path}
@@ -62,8 +56,8 @@ export function Drink_Panel({
           priority={true}
         />
       </button>
-      <p className="ml-2">
-      投票数 : {votedcount}
+      <p className={`ml-2 ${fredoka.className} extrabold text-xl`}>
+        Votes : {votedcount}
       </p>
     </div>
   );
