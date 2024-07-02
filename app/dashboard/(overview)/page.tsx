@@ -22,7 +22,6 @@ export default async function Page({
     const currentPage = Number(searchParams?.page) || 1;
     const totalPages = await fetchDrinkPages(search);
 
-
     return (
         <main>
             <div className="min-h-screen flex flex-col">
@@ -45,5 +44,6 @@ export default async function Page({
             </div>
         </main>
     );
+
 
 }

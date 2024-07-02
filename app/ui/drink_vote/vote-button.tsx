@@ -14,27 +14,28 @@ export default async function VoteButton() {
 
     await VoteReset(user?.email ?? '', user?.lastvotereset ?? '');
 
-    return (
-        <>
-            <div className="flex justify-center m-4">{votedata[0]?.drink}</div>
-            <div className="flex justify-center m-2">
-                <SubmitVote
-                    email={session?.user?.email ?? ''}
-                    voted={user?.voted ?? false}
-                />
-            </div>
-            <div className="flex justify-center m-2">
-                <ChangeVote
-                    email={session?.user?.email ?? ''}
-                    voted={user?.voted ?? false}
-                />
-            </div>
-            <div className="flex justify-center m-2">
-                <DeleteVote
-                    email={session?.user?.email ?? ''}
-                    voted={user?.voted ?? false}
-                />
-            </div>
-        </>
-    );
+
+  return (
+    <>
+      {/* <div className="flex justify-center m-4">{votedata[0]?.drink}</div> */}
+      <div className="flex justify-center m-2">
+        <SubmitVote
+          email={session?.user?.email ?? ''}
+          voted={user?.voted ?? false}
+        />
+      </div>
+      <div className="flex justify-center m-2">
+        <ChangeVote
+          email={session?.user?.email ?? ''}
+          voted={user?.voted ?? false}
+        />
+      </div>
+      <div className="flex justify-center m-2">
+        <DeleteVote
+          email={session?.user?.email ?? ''}
+          voted={user?.voted ?? false}
+        />
+      </div>
+    </>
+  );
 }
