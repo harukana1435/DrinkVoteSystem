@@ -45,10 +45,10 @@ export function Drink_Panel({
         onClick={() => handleClick(id)}
         className={
           userSelect === id
-            ? 'rounded-md bg-red-200 hover:scale-110'
+            ? 'rounded-md bg-red-200 hover:scale-110 active:scale-105'
             : searchParams.get('select')?.toString() === id
-              ? 'rounded-md bg-blue-200 hover:scale-110'
-              : 'rounded-md bg-gray-200 hover:scale-110'
+              ? 'rounded-md bg-blue-200 hover:scale-110 active:scale-105'
+              : 'rounded-md bg-gray-200 hover:scale-110 active:scale-105'
         }
       >
         <Image
