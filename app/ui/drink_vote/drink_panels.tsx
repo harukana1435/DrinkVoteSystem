@@ -33,19 +33,22 @@ export function Drink_Panel({
 
   return (
     <div>
-      <p>
-        クリック: {searchParams.get('select')?.toString()} 投票数: {votedcount}{' '}
+      {/* <p>
+        クリック：{searchParams.get('select')?.toString()}
         総投票数：{totalvoted}
+      </p> */}
+      <p className="text-2xl ml-2 mb-1">
+        {id}
       </p>
       <button
         key={id}
         onClick={() => handleClick(id)}
         className={
           userSelect === id
-            ? 'rounded-md bg-red-200'
+            ? 'rounded-md bg-red-200 hover:scale-110'
             : searchParams.get('select')?.toString() === id
-              ? 'rounded-md bg-blue-200'
-              : 'rounded-md bg-gray-200'
+              ? 'rounded-md bg-blue-200 hover:scale-110'
+              : 'rounded-md bg-gray-200 hover:scale-110'
         }
       >
         <Image
@@ -57,6 +60,9 @@ export function Drink_Panel({
           priority={true}
         />
       </button>
+      <p className="ml-2">
+      投票数 : {votedcount}
+      </p>
     </div>
   );
 }

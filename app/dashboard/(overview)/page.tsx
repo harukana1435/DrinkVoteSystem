@@ -27,10 +27,10 @@ export default async function Page({
   return (
     <main>
       <div className="min-h-screen flex flex-col">
-        <div className="flex-grow">
+        <div className="flex-1">
           <div>
             <h1 className={`${lusitana.className} bg-neutral-100 flex-1 rounded-lg pb-5 pt-5 mb-4 pl-4 text-xl`}>
-            飲料投票ページ
+              飲料投票ページ
             </h1>
           </div>
           <div className="md:h-200 p-4">
@@ -40,7 +40,7 @@ export default async function Page({
             <Drink_info search={search} currentPage={currentPage} />
           </div>
         </div>
-        <div className="mt-5 flex w-full justify-center">
+        <div className="mb-32 flex justify-center">
           {<Pagination totalPages={totalPages} />}
         </div>
       </div>
