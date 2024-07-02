@@ -40,6 +40,7 @@ const drink = [
     {
         id: 'd0',
         name: 'cider',
+        japanesename: 'サイダー',
         voted: 0,
         price: 150,
         path: '/drink/cider.png',
@@ -48,6 +49,7 @@ const drink = [
     {
         id: 'd1',
         name: 'cocacola',
+        japanesename: 'コカコーラ',
         voted: 0,
         price: 150,
         path: '/drink/cocacola.png',
@@ -56,6 +58,7 @@ const drink = [
     {
         id: 'd2',
         name: 'calpis',
+        japanesename: 'カルピス',
         voted: 21,
         price: 150,
         path: '/drink/calpis.png',
@@ -64,6 +67,7 @@ const drink = [
     {
         id: 'd3',
         name: 'grape_calpis',
+        japanesename: 'グレープカルピス',
         voted: 0,
         price: 150,
         path: '/drink/grape_calpis.png',
@@ -72,6 +76,7 @@ const drink = [
     {
         id: 'd4',
         name: 'fanta_orange',
+        japanesename: 'ファンタオレンジ',
         voted: 0,
         price: 150,
         path: '/drink/fanta_orange.png',
@@ -80,6 +85,7 @@ const drink = [
     {
         id: 'd5',
         name: 'calpis_soda',
+        japanesename: 'カルピスソーダ',
         voted: 7,
         price: 150,
         path: '/drink/calpis_soda.png',
@@ -88,6 +94,7 @@ const drink = [
     {
         id: 'd6',
         name: 'cclemon',
+        japanesename: 'CCレモン',
         voted: 4,
         price: 150,
         path: '/drink/cclemon.png',
@@ -96,6 +103,7 @@ const drink = [
     {
         id: 'd7',
         name: 'mets_cola',
+        japanesename: 'メッツコーラ',
         voted: 32,
         price: 150,
         path: '/drink/mets_cola.png',
@@ -104,6 +112,7 @@ const drink = [
     {
         id: 'd8',
         name: 'orangina',
+        japanesename: 'オランジーナ',
         voted: 0,
         price: 150,
         path: '/drink/orangina.png',
@@ -112,6 +121,7 @@ const drink = [
     {
         id: 'd9',
         name: 'iemon',
+        japanesename: '伊右衛門',
         voted: 0,
         price: 150,
         path: '/drink/iemon.png',
@@ -120,6 +130,7 @@ const drink = [
     {
         id: 'd10',
         name: 'kirin_lemon',
+        japanesename: 'キリンレモン',
         voted: 3,
         price: 150,
         path: '/drink/kirin_lemon.png',
@@ -128,6 +139,7 @@ const drink = [
     {
         id: 'd11',
         name: 'pepsi_zero',
+        japanesename: 'ペプシゼロ',
         voted: 5,
         price: 150,
         path: '/drink/pepsi_zero.png',
@@ -136,6 +148,7 @@ const drink = [
     {
         id: 'd12',
         name: 'soukenbicha',
+        japanesename: '爽健美茶',
         voted: 9,
         price: 150,
         path: '/drink/soukenbicha.png',
@@ -156,6 +169,7 @@ const result = [
     {
         date: '2024-07-01',
         name: 'cocacola',
+        japanesename: 'コカコーラ',
         price: 1500,
     },
 ];

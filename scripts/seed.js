@@ -65,6 +65,7 @@ async function seedDrink(client) {
     CREATE TABLE IF NOT EXISTS drink (
         id TEXT NOT NULL UNIQUE,
         name VARCHAR(255) NOT NULL,
+        japanesename VARCHAR(255) NOT NULL,
         voted INTEGER NOT NULL DEFAULT 0,
         price DECIMAL(10, 2) NOT NULL,
         path TEXT NOT NULL,
@@ -79,10 +80,10 @@ async function seedDrink(client) {
             drink.map(
                 (
                     drink,
-                ) => client.sql`INSERT INTO drink (id, name, voted, price, path, totalvoted)
-        VALUES (${drink.id}, ${drink.name}, ${drink.voted}, ${drink.price}, ${drink.path}, ${drink.totalvoted})
+                ) => client.sql`INSERT INTO drink (id, name, japanesename, voted, price, path, totalvoted)
+        VALUES (${drink.id}, ${drink.name}, ${drink.japanesename}, ${drink.voted}, ${drink.price}, ${drink.path}, ${drink.totalvoted})
         ON CONFLICT (id) DO UPDATE
-        SET id=${drink.id}, name = ${drink.name}, voted = ${drink.voted}, price = ${drink.price}, path = ${drink.path}, totalvoted = ${drink.totalvoted} ;
+        SET id=${drink.id}, name = ${drink.name}, japanesename = ${drink.japanesename}, voted = ${drink.voted}, price = ${drink.price}, path = ${drink.path}, totalvoted = ${drink.totalvoted} ;
       `,
             ),
         );
@@ -192,6 +193,7 @@ async function seedResult(client) {
     CREATE TABLE IF NOT EXISTS result (
         date TEXT,
         name TEXT,
+        japanesename TEXT,
         price INTEGER
     );
 `;
@@ -201,8 +203,8 @@ async function seedResult(client) {
         const insertedResult = await Promise.all(
             result.map(
                 (result) => client.sql`
-        INSERT INTO result (date, name, price)
-        VALUES (${result.date}, ${result.name}, ${result.price});
+        INSERT INTO result (date, name, japanesename, price)
+        VALUES (${result.date}, ${result.name}, ${result.japanesename},  ${result.price});
       `,
             ),
         );
