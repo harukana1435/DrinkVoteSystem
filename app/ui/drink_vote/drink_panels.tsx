@@ -7,12 +7,14 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 export function Drink_Panel({
   id,
   path,
+  name,
   votedcount,
   totalvoted,
   userSelect,
 }: {
   id: string;
   path: string;
+  name: string;
   votedcount: number;
   totalvoted: number;
   userSelect: string;
@@ -38,17 +40,17 @@ export function Drink_Panel({
         総投票数：{totalvoted}
       </p> */}
       <p className="text-2xl ml-2 mb-1">
-        {id}
+        {name}
       </p>
       <button
         key={id}
         onClick={() => handleClick(id)}
         className={
           userSelect === id
-            ? 'rounded-md bg-red-200 hover:scale-110'
+            ? 'rounded-md bg-red-200 hover:scale-110 active:scale-105'
             : searchParams.get('select')?.toString() === id
-              ? 'rounded-md bg-blue-200 hover:scale-110'
-              : 'rounded-md bg-gray-200 hover:scale-110'
+              ? 'rounded-md bg-blue-200 hover:scale-110 active:scale-105'
+              : 'rounded-md bg-gray-200 hover:scale-110 active:scale-105'
         }
       >
         <Image
