@@ -5,7 +5,7 @@ export default async function Page() {
     const resultlist = await fetchLatestResult();
     return (
         <div>
-            <p>Result Page</p>
+            <p>前回の結果</p>
             <div className="display: flex flex-wrap gap-10">
                 {resultlist.map((result) => (
                     <div

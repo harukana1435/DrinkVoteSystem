@@ -13,9 +13,8 @@ export default function ShowResult({
     return (
         <div>
             <p>
-                {name}を{price}円分購入します
+                {name} : {price}円分
             </p>
-            <p>a</p>
         </div>
     );
 }
