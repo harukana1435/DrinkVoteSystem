@@ -30,7 +30,7 @@ export async function fetchUser_vote() {
 
 //追加↓
 export async function fetchUserByEmail(email: string): Promise<User | null> {
-    // Add noStore() here to prevent the response from being cached.
+    // Add noStore() here to prevent the response from being cached
     // This is equivalent to in fetch(..., {cache: 'no-store'}).
     noStore();
     try {
