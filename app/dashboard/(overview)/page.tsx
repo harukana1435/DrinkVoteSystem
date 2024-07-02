@@ -6,9 +6,7 @@ import VoteButton from '@/app/ui/drink_vote/vote-button';
 import Search from '@/app/ui/search';
 import { fetchDrinkPages } from '@/app/lib/data';
 import Pagination from '@/app/ui/invoices/pagination';
-// import RealtimeClock from '@/app/ui/drink_vote/ShowResult';
-// import TimerComponent from '@/app/ui/drink_vote/ShowResult';
-// import TwoWeeksResult from '@/app/ui/drink_vote/Result';
+import { GET } from '@/app/api/cron/route';
 
 export default async function Page({
     searchParams,
@@ -24,27 +22,28 @@ export default async function Page({
     const currentPage = Number(searchParams?.page) || 1;
     const totalPages = await fetchDrinkPages(search);
 
-  return (
-    <main>
-      <div className="min-h-screen flex flex-col">
-        <div className="flex-grow">
-          <div>
-            <h1 className={`${lusitana.className} bg-neutral-100 flex-1 rounded-lg pb-5 pt-5 mb-4 pl-4 text-xl`}>
-            飲料投票ページ
-            </h1>
-          </div>
-          <div className="md:h-200 p-4">
-            <Search placeholder="Search drinks..." />
-          </div>
-          <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-            <Drink_info search={search} currentPage={currentPage} />
-          </div>
-        </div>
-        <div className="mt-5 flex w-full justify-center">
-          {<Pagination totalPages={totalPages} />}
-        </div>
-      </div>
-    </main>
-  );
+    return (
+        <main>
+            <div className="min-h-screen flex flex-col">
+                <div className="flex-grow">
+                    <div>
+                        <h1 className={`${lusitana.className} bg-neutral-100 flex-1 rounded-lg pb-5 pt-5 mb-4 pl-4 text-xl`}>
+                            飲料投票ページ
+                        </h1>
+                    </div>
+                    <div className="md:h-200 p-4">
+                        <Search placeholder="Search drinks..." />
+                    </div>
+                    <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+                        <Drink_info search={search} currentPage={currentPage} />
+                    </div>
+                </div>
+                <div className="mt-5 flex w-full justify-center">
+                    {<Pagination totalPages={totalPages} />}
+                </div>
+            </div>
+        </main>
+    );
+
 
 }

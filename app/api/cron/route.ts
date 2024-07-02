@@ -1,38 +1,24 @@
 import { sql } from '@vercel/postgres';
 import { unstable_noStore as noStore } from 'next/cache';
-import { DrinkVoted } from '../../lib/definitions';
+import { fetchTwoteeksResult } from '@/app/lib/data';
+import { addVoteEveryTwoWeeks, deleteVoteEveryTwoWeeks, updateresult } from '@/app/lib/actions';
+import { NextRequest } from 'next/server';
 
-export async function fetchTwoteeksResult() {
-    noStore();
+
+export async function GET() {
+    const VotedList = await fetchTwoteeksResult();
+    const messages = VotedList.map(DrinkResult => `${DrinkResult.japanesename}を${DrinkResult.price}円分購入します`);
     try {
-        const data = await sql<DrinkVoted>`SELECT SUM(drink.voted) FROM drink`;
-        return data.rows;
+        await Promise.all(VotedList.map(async (DrinkResult) => {
+            const { name, japanesename, price } = DrinkResult;
+            await updateresult(name, japanesename, price)
+        }));
+        await addVoteEveryTwoWeeks(); // votedの中身をtotalvotedに追加
+        await deleteVoteEveryTwoWeeks(); // votedの中身を削除
+        console.log(messages);
+        return new Response(JSON.stringify({ text: messages }));
     } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch two weeks result.');
+        console.error('cron jobs error', error);
+        throw new Error('Failed to do cron jobs');
     }
 }
-
-
-export async function addVoteEveryTwoWeeks() {
-    try {
-        await sql`
-            UPDATE drink
-            SET totalvoted = totalvoted + voted
-        `;
-    } catch (error) {
-        return { message: 'Database Error: Failed to add vote every two weeks' };
-    }
-}
-
-export async function deleteVoteEveryTwoWeeks() {
-    try {
-        await sql`
-            UPDATE drink
-            SET voted = 0
-        `;
-    } catch (error) {
-        return { message: 'Database Error: Failed to delete vote every two weeks' };
-    }
-}
-

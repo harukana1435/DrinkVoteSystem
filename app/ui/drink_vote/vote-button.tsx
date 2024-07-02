@@ -8,15 +8,16 @@ import { DeleteVote } from './delete-vote';
 import { VoteReset } from '@/app/lib/api';
 
 export default async function VoteButton() {
-  const session: Session | null = await auth();
-  const user: User | null = await fetchUserByEmail(session?.user?.email ?? '');
-  const votedata = await fetchVote();
+    const session: Session | null = await auth();
+    const user: User | null = await fetchUserByEmail(session?.user?.email ?? '');
+    const votedata = await fetchVote();
 
-  await VoteReset(user?.email ?? '', user?.lastvotereset ?? '');
+    await VoteReset(user?.email ?? '', user?.lastvotereset ?? '');
+
 
   return (
     <>
-      <div className="flex justify-center m-4">{votedata[0]?.drink}</div>
+      {/* <div className="flex justify-center m-4">{votedata[0]?.drink}</div> */}
       <div className="flex justify-center m-2">
         <SubmitVote
           email={session?.user?.email ?? ''}
