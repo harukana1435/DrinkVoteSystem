@@ -188,7 +188,7 @@ export async function fetchLatestResult() {
     try {
         const latestdate = await sql`SELECT date FROM result ORDER BY date DESC LIMIT 1`;
         const latestdatestr = latestdate.rows[0].toString()
-        const drinklist = await sql<DrinkResult>`SELECT result.name, result.price WHERE drink.date = ${latestdatestr}`;
+        const drinklist = await sql<DrinkResult>`SELECT result.name, result.price FROM result WHERE drink.date = ${latestdatestr}`;
         return drinklist.rows
     } catch (error) {
         console.error('Database Error:', error);
