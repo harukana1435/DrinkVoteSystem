@@ -186,8 +186,8 @@ export async function fetchTwoteeksResult() {
 export async function fetchLatestResult() {
     noStore();
     try {
-        const latestdate = await sql`SELECT result.date AS a FROM result ORDER BY result.date DESC LIMIT 1`;
-        const latestdatestr = latestdate.rows[0].a.toString();
+        const latestdate = await sql`SELECT result.date AS resultdate FROM result ORDER BY result.date DESC LIMIT 1`;
+        const latestdatestr = latestdate.rows[0].resultdate.toString();
         const drinklist = await sql<DrinkResult>`SELECT result.name, result.price FROM result WHERE result.date = ${latestdatestr}`;
         return drinklist.rows
     } catch (error) {
