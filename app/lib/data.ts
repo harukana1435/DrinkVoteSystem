@@ -175,7 +175,7 @@ export async function fetchTwoteeksResult() {
         const value = Math.floor(1500 / result.rows[0].sum) || 0;
         const result2 = await sql`SELECT SUM(drink.voted) AS sum FROM drink WHERE ${value} * drink.voted > 150`;
         const value2 = Math.floor(1500 / result2.rows[0].sum) || 0;
-        const result3 = await sql<DrinkResult>`SELECT drink.japanesename, (${value2} * drink.voted) AS price FROM drink WHERE ${value} * drink.voted > 150`;
+        const result3 = await sql<DrinkResult>`SELECT drink.name, drink.japanesename, (${value2} * drink.voted) AS price FROM drink WHERE ${value} * drink.voted > 150`;
         return result3.rows;
     } catch (error) {
         console.error('Database Error:', error);
@@ -188,7 +188,7 @@ export async function fetchLatestResult() {
     try {
         const latestdate = await sql`SELECT result.date AS resultdate FROM result ORDER BY result.date DESC LIMIT 1`;
         const latestdatestr = latestdate.rows[0].resultdate.toString();
-        const drinklist = await sql<DrinkResult>`SELECT result.japanesename, result.price FROM result WHERE result.date = ${latestdatestr}`;
+        const drinklist = await sql<DrinkResult>`SELECT result.name, result.japanesename, result.price FROM result WHERE result.date = ${latestdatestr}`;
         return drinklist.rows
     } catch (error) {
         console.error('Database Error:', error);

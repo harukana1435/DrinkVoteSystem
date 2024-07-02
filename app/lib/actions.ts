@@ -22,6 +22,7 @@ const FormSchema = z.object({
 
 const FormResultSchema = z.object({
     name: z.string(),
+    japanesename: z.string(),
     price: z.number(),
 });
 
@@ -288,6 +289,7 @@ export async function deleteVoteEveryTwoWeeks() {
 
 export async function updateresult(
     _name: string,
+    _japanesename: string,
     _price: number,
 ) {
 
@@ -295,6 +297,7 @@ export async function updateresult(
     const validatedFields = UpdateResult.safeParse({
         name: _name,
         price: _price,
+        japanesename: _japanesename,
     });
 
     // If form validation fails, return errors early. Otherwise, continue.
@@ -306,13 +309,13 @@ export async function updateresult(
     }
 
     // Prepare data for insertion into the database
-    const { name, price } = validatedFields.data;
+    const { name, japanesename, price } = validatedFields.data;
     const date = new Date(Date.now() + ((new Date().getTimezoneOffset() + (540)) * 60 * 1000)).toISOString().split('T')[0]; //日本時間で日付を取得
 
     try {
         await sql`
-            INSERT INTO result (date, name, price)
-            VALUES (${date}, ${name}, ${price})
+            INSERT INTO result (date, name, japanesename, price)
+            VALUES (${date}, ${name}, ${japanesename}, ${price})
         `;
     } catch (error) {
         return { message: 'Database Error: Failed to update result' };

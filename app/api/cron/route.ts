@@ -7,11 +7,11 @@ import { NextRequest } from 'next/server';
 
 export async function GET() {
     const VotedList = await fetchTwoteeksResult();
-    const messages = VotedList.map(DrinkResult => `${DrinkResult.name}を${DrinkResult.price}円分購入します`);
+    const messages = VotedList.map(DrinkResult => `${DrinkResult.japanesename}を${DrinkResult.price}円分購入します`);
     try {
         await Promise.all(VotedList.map(async (DrinkResult) => {
-            const { name, price } = DrinkResult;
-            await updateresult(name, price)
+            const { name, japanesename, price } = DrinkResult;
+            await updateresult(name, japanesename, price)
         }));
         await addVoteEveryTwoWeeks(); // votedの中身をtotalvotedに追加
         await deleteVoteEveryTwoWeeks(); // votedの中身を削除

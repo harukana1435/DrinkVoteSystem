@@ -15,6 +15,7 @@ export default async function Page() {
                         {
                             <ShowResult
                                 name={result.name}
+                                japanesename={result.japanesename}
                                 price={result.price}
                             />
                         }

@@ -4,16 +4,18 @@ import Image from 'next/image';
 
 export default function ShowResult({
     name,
+    japanesename,
     price,
 }: {
     name: string;
+    japanesename: string;
     price: number;
 }) {
 
     return (
         <div>
             <p>
-                {name} : {price}円分
+                {japanesename} : {price}円分
             </p>
             <Image
                 src={"/drink/" + name + ".png"}
