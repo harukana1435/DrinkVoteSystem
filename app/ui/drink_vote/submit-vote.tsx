@@ -24,8 +24,8 @@ export function SubmitVote({
     const className = clsx(
         'bg-cyan-600 w-60 h-12 flex justify-center items-center',
         {
-        'hover:bg-cyan-500 active:bg-cyan-600': !voted,
-    });
+            'hover:bg-cyan-500 active:bg-cyan-600': !voted,
+        });
 
     return (
         <form action={dispatch}>
