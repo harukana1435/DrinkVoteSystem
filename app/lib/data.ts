@@ -177,7 +177,7 @@ export async function fetchTwoteeksResult() {
         const value2 = Math.floor(1500 / result2.rows[0].sum) || 0;
         const result3 = await sql<DrinkResult>`SELECT drink.name, drink.japanesename, (${value2} * drink.voted) AS price 
         FROM drink WHERE ${value} * drink.voted > 0
-        ORDER BY price DESC
+        ORDER BY drink.voted DESC
         `;
         return result3.rows;
     } catch (error) {
