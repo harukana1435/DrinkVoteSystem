@@ -1,4 +1,10 @@
-import { Inter, Lusitana, Fredoka, Montserrat } from 'next/font/google';
+import {
+  Inter,
+  Lusitana,
+  Fredoka,
+  Montserrat,
+  Noto_Sans_JP,
+} from 'next/font/google';
 
 export const inter = Inter({ subsets: ['latin'] });
 
@@ -13,6 +19,11 @@ export const fredoka = Fredoka({
 });
 
 export const montserrat = Montserrat({
+  weight: ['500', '900'],
+  subsets: ['latin'],
+});
+
+export const noto_sans_jp = Noto_Sans_JP({
   weight: ['500', '900'],
   subsets: ['latin'],
 });
