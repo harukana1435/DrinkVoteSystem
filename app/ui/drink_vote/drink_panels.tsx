@@ -7,19 +7,19 @@ import { montserrat } from '../fonts';
 import { fredoka, noto_sans_jp } from '../fonts';
 
 export function Drink_Panel({
-  id,
-  path,
-  name,
-  votedcount,
-  totalvoted,
-  userSelect,
+    id,
+    path,
+    name,
+    votedcount,
+    totalvoted,
+    userSelect,
 }: {
-  id: string;
-  path: string;
-  name: string;
-  votedcount: number;
-  totalvoted: number;
-  userSelect: string;
+    id: string;
+    path: string;
+    name: string;
+    votedcount: number;
+    totalvoted: number;
+    userSelect: string;
 }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -35,12 +35,13 @@ export function Drink_Panel({
     replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
-  return (
-    <div>
-      {/* <p>
+    return (
+        <div>
+            {/* <p>
         クリック：{searchParams.get('select')?.toString()}
         総投票数：{totalvoted}
       </p> */}
+        
       <button
         key={id}
         onClick={() => handleClick(id)}
@@ -60,4 +61,5 @@ export function Drink_Panel({
       </p>
     </div>
   );
+
 }

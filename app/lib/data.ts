@@ -135,6 +135,7 @@ export async function fetchDrinkPages(select: string) {
     WHERE
       drink.id ILIKE ${`%${select}%`} OR
       drink.name ILIKE ${`%${select}%`} OR
+      drink.japanesename ILIKE ${`%${select}%`} OR
       drink.price::text ILIKE ${`%${select}%`}
   `;
 
@@ -156,6 +157,7 @@ export async function fetchFilteredDrink(search: string, currentPage: number) {
       WHERE
       drink.id ILIKE ${`%${search}%`} OR
       drink.name ILIKE ${`%${search}%`} OR
+      drink.japanesename ILIKE ${`%${search}%`} OR
       drink.price::text ILIKE ${`%${search}%`}
       ORDER BY drink.voted DESC, drink.totalvoted DESC, drink.name DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
@@ -199,3 +201,4 @@ export async function fetchLatestResult() {
     throw new Error('Failed to fetch result data');
   }
 }
+
