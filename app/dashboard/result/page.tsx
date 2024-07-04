@@ -1,27 +1,16 @@
 import ShowResult from "@/app/ui/result/showresult";
+import ResultInfo from "@/app/ui/result/result_info";
 import { fetchLatestResult } from "@/app/lib/data";
+import { lusitana } from '@/app/ui/fonts';
 
 export default async function Page() {
-    const resultlist = await fetchLatestResult();
+
     return (
         <div>
-            <p>前回の結果</p>
-            <div className="display: flex flex-wrap gap-10">
-                {resultlist.map((result) => (
-                    <div
-                        key={result.name}
-                        className="mt-3 flex flex-col items-center justify-center"
-                    >
-                        {
-                            <ShowResult
-                                name={result.name}
-                                japanesename={result.japanesename}
-                                price={result.price}
-                            />
-                        }
-                    </div>
-                ))}
-            </div>
+            <h1 className={`${lusitana.className} bg-neutral-100 flex-1 rounded-lg pb-5 pt-5 mb-4 pl-4 text-xl`}>
+                前回の結果
+            </h1>
+            <ResultInfo />
         </div>
     );
 }
