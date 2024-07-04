@@ -21,7 +21,7 @@ export default function ShowResult({
                 src={"/drink/" + name + ".png"}
                 width={200}
                 height={200}
-                className="hidden md:block bg-gray-200"
+                className="rounded-md hidden md:block bg-gray-200"
                 alt="Screenshots of the dashboard project showing desktop version"
                 priority={true}
             />
