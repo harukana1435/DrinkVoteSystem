@@ -1,6 +1,5 @@
-import ShowResult from "@/app/ui/result/showresult";
 import ResultInfo from "@/app/ui/result/result_info";
-import { fetchLatestResult } from "@/app/lib/data";
+
 import { lusitana } from '@/app/ui/fonts';
 
 export default async function Page() {
