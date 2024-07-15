@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import {
     UserGroupIcon,
@@ -15,8 +15,12 @@ import { useEffect, useState } from 'react';
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-    { name: '飲料投票ページ', href: '/dashboard', icon: CheckCircleIcon },
-    { name: '前回の投票結果', href: '/dashboard/result', icon: ClipboardDocumentListIcon },
+    { name: '飲料投票', href: '/dashboard', icon: CheckCircleIcon },
+    {
+        name: '前回の投票結果',
+        href: '/dashboard/result',
+        icon: ClipboardDocumentListIcon,
+    },
 ];
 
 export default function NavLinks() {

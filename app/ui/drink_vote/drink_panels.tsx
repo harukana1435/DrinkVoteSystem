@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { montserrat } from '../fonts';
-import { fredoka } from '../fonts';
+import { fredoka, noto_sans_jp } from '../fonts';
 
 export function Drink_Panel({
     id,
@@ -35,18 +35,17 @@ export function Drink_Panel({
         replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
 
-
     return (
         <div>
             {/* <p>
         クリック：{searchParams.get('select')?.toString()}
         総投票数：{totalvoted}
       </p> */}
-            <p className="mb-1 ml-2 text-2xl">{id}</p>
+
             <button
                 key={id}
                 onClick={() => handleClick(id)}
-                className={`rounded-md hover:scale-110 ${userSelect === id ? 'bg-psychedelic-blue' : searchParams.get('select')?.toString() === id ? 'border-5 bg-psychedelic-blue-lamp border-blue-500 ' : 'bg-gray-200'}`}
+                className={`button rounded-md hover:scale-110 ${userSelect === id ? 'bg-psychedelic-blue' : searchParams.get('select')?.toString() === id ? 'border-5 bg-psychedelic-blue-lamp border-blue-500 ' : 'bg-gray-200'}`}
             >
                 <Image
                     src={path}
@@ -62,4 +61,5 @@ export function Drink_Panel({
             </p>
         </div>
     );
+
 }
