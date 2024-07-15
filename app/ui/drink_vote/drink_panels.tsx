@@ -21,19 +21,19 @@ export function Drink_Panel({
     totalvoted: number;
     userSelect: string;
 }) {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const { replace } = useRouter();
 
-  function handleClick(term: string) {
-    const params = new URLSearchParams(searchParams);
-    if (term) {
-      params.set('select', term);
-    } else {
-      params.delete('select');
+    function handleClick(term: string) {
+        const params = new URLSearchParams(searchParams);
+        if (term) {
+            params.set('select', term);
+        } else {
+            params.delete('select');
+        }
+        replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
-    replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }
 
     return (
         <div>
@@ -41,25 +41,25 @@ export function Drink_Panel({
         クリック：{searchParams.get('select')?.toString()}
         総投票数：{totalvoted}
       </p> */}
-        
-      <button
-        key={id}
-        onClick={() => handleClick(id)}
-        className={`button rounded-md hover:scale-110 ${userSelect === id ? 'bg-psychedelic-blue' : searchParams.get('select')?.toString() === id ? 'border-5 bg-psychedelic-blue-lamp border-blue-500 ' : 'bg-gray-200'}`}
-      >
-        <Image
-          src={path}
-          width={200}
-          height={200}
-          className="hidden md:block"
-          alt="Screenshots of the dashboard project showing desktop version"
-          priority={true}
-        />
-      </button>
-      <p className={`ml-2 ${fredoka.className} extrabold text-xl`}>
-        Votes : {votedcount}
-      </p>
-    </div>
-  );
+
+            <button
+                key={id}
+                onClick={() => handleClick(id)}
+                className={`button rounded-md hover:scale-110 ${userSelect === id ? 'bg-psychedelic-blue' : searchParams.get('select')?.toString() === id ? 'border-5 bg-psychedelic-blue-lamp border-blue-500 ' : 'bg-gray-200'}`}
+            >
+                <Image
+                    src={path}
+                    width={200}
+                    height={200}
+                    className="hidden md:block"
+                    alt="Screenshots of the dashboard project showing desktop version"
+                    priority={true}
+                />
+            </button>
+            <p className={`ml-2 ${fredoka.className} extrabold text-xl`}>
+                Votes : {votedcount}
+            </p>
+        </div>
+    );
 
 }

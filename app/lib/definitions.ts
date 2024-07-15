@@ -47,5 +47,6 @@ export type DrinkResult = {
 export type Result = {
     date: string;
     name: string;
+    japanesename: string;
     price: number;
 }
