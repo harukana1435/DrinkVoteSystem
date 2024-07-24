@@ -352,6 +352,15 @@ const drink = [
         path: '/drink/sujata_orange.png',
         totalvoted: 0,
     },
+    {
+        id: 'd14',
+        name: 'tea_straight',
+        japanesename: '午後の紅茶ストレート',
+        voted: 0,
+        price: 150,
+        path: '/drink/teastraight.png',
+        totalvoted: 0,
+    },
 ];
 
 const vote = [];
