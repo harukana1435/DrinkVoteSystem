@@ -204,6 +204,15 @@ const drink = [
     path: '/drink/fanta_grape.png',
     totalvoted: 0,
   },
+  {
+    id: 'd21',
+    name: 'cocacola_zero',
+    japanesename: 'コカ・コーラゼロ',
+    voted: 0,
+    price: 150,
+    path: '/drink/cocacola_zero.png',
+    totalvoted: 0,
+  },
 ];
 
 const vote = [];
