@@ -22,25 +22,25 @@ export default async function Drink_info({
     const selectDrink = await fetchSelectDrink(session?.user?.email ?? '', date);
 
 
-  return (
-    <div className="display: flex flex-wrap gap-10">
-      {DrinkDatas.map((drink) => (
-        <div
-          key={drink.id}
-          className="mt-3 flex flex-col items-center justify-center"
-        >
-          {
-            <Drink_Panel
-              id={drink.id}
-              path={drink.path}
-              name={drink.name}
-              votedcount={drink.voted}
-              totalvoted={drink.totalvoted}
-              userSelect={selectDrink?.drink ?? ''}
-            />
-          }
+    return (
+        <div className="display: flex flex-wrap gap-10">
+            {DrinkDatas.map((drink) => (
+                <div
+                    key={drink.id}
+                    className="mt-3 flex flex-col items-center justify-center"
+                >
+                    {
+                        <Drink_Panel
+                            id={drink.id}
+                            path={drink.path}
+                            name={drink.name}
+                            votedcount={drink.voted}
+                            totalvoted={drink.totalvoted}
+                            userSelect={selectDrink?.drink ?? ''}
+                        />
+                    }
+                </div>
+            ))}
         </div>
-      ))}
-    </div>
-  );
+    );
 }
