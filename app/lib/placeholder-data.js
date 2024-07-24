@@ -195,6 +195,15 @@ const drink = [
     path: '/drink/sujata_orange.png',
     totalvoted: 0,
   },
+  {
+    id: 'd18',
+    name: 'fanta_grape',
+    japanesename: 'ファンタ グレープ',
+    voted: 0,
+    price: 150,
+    path: '/drink/fanta_grape.png',
+    totalvoted: 0,
+  },
 ];
 
 const vote = [];
