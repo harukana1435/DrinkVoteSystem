@@ -213,6 +213,15 @@ const drink = [
     path: '/drink/cocacola_zero.png',
     totalvoted: 0,
   },
+  {
+    id: 'd22',
+    name: 'budou_karupisu',
+    japanesename: 'ぶどう&カルピス',
+    voted: 0,
+    price: 150,
+    path: '/drink/budou_calpis.png',
+    totalvoted: 0,
+  },
 ];
 
 const vote = [];
