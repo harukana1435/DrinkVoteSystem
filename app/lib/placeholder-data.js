@@ -345,7 +345,7 @@ const drink = [
   },
   {
     id: 'd13',
-    name: 'sujata_nomukajitu_orange',
+    name: 'sujata_orange',
     japanesename: 'スジャータ のむ果実 オレンジ',
     voted: 0,
     price: 150,
