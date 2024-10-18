@@ -24,9 +24,12 @@ export default async function ResultInfo() {
           </div>
         ))}
       </div>
-      <p className={`ml-2 ${fredoka.className} extrabold text-xl`}>
-        Total Prices: {totalPrice}円分
-      </p>
+      <div className="mt-4 flex justify-end shadow-md">
+        <p className={`text-2xl font-semibold text-gray-800`}>
+          合計金額:{' '}
+          <span className="font-bold text-blue-600">{totalPrice}</span>円
+        </p>
+      </div>
     </div>
   );
 }
