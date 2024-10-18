@@ -3,114 +3,142 @@
 @tailwind utilities;
 
 input[type='number'] {
-    -moz-appearance: textfield;
-    appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 input[type='number']::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type='number']::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 @layer utilities {
-    .bg-psychedelic-blue {
-        background-image: linear-gradient(135deg,
-                #00aaff,
-                #bedafffd,
-                #00ffcc,
-                #00ccff,
-                #00aaff);
-        background-size: 400% 400%;
-        animation: gradientAnimationBlue 15s ease infinite;
-        background-repeat: no-repeat;
-    }
+  .bg-psychedelic-blue {
+    background-image: linear-gradient(
+      135deg,
+      #00aaff,
+      #bedafffd,
+      #00ffcc,
+      #00ccff,
+      #00aaff
+    );
+    background-size: 400% 400%;
+    animation: gradientAnimationBlue 15s ease infinite;
+    background-repeat: no-repeat;
+  }
 
-    @keyframes gradientAnimationBlue {
-        0% {
-            background-position: 0% 0%;
-        }
-
-        50% {
-            background-position: 100% 100%;
-        }
-
-        100% {
-            background-position: 0% 0%;
-        }
-    }
-}
-
-@layer utilities {
-    .bg-psychedelic-blue-lamp {
-        background-image: linear-gradient(135deg,
-                rgba(0, 170, 255, 0.3),
-                rgba(190, 218, 255, 0.3),
-                rgba(0, 255, 204, 0.2),
-                rgba(0, 204, 255, 0.3),
-                rgba(0, 170, 255, 0.3));
-        background-size: 400% 400%;
-        animation:
-            gradientAnimationBlue 15s ease infinite,
-            flickerAnimationBlue 2.5s ease-in-out infinite;
-        background-repeat: no-repeat;
-    }
-
-    @keyframes gradientAnimationBlue {
-        0% {
-            background-position: 0% 0%;
-        }
-
-        50% {
-            background-position: 100% 100%;
-        }
-
-        100% {
-            background-position: 0% 0%;
-        }
-    }
-
-    @keyframes flickerAnimationBlue {
-
-        0%,
-        100% {
-            opacity: 1;
-        }
-
-        50% {
-            opacity: 0.5;
-        }
-    }
-}
-
-@keyframes clickShrink {
+  @keyframes gradientAnimationBlue {
     0% {
-        transform: scale(1);
+      background-position: 0% 0%;
     }
 
     50% {
-        transform: scale(0.95);
+      background-position: 100% 100%;
     }
 
     100% {
-        transform: scale(1);
+      background-position: 0% 0%;
     }
+  }
+}
+
+@layer utilities {
+  .bg-psychedelic-blue-lamp {
+    background-image: linear-gradient(
+      135deg,
+      rgba(0, 170, 255, 0.3),
+      rgba(190, 218, 255, 0.3),
+      rgba(0, 255, 204, 0.2),
+      rgba(0, 204, 255, 0.3),
+      rgba(0, 170, 255, 0.3)
+    );
+    background-size: 400% 400%;
+    animation:
+      gradientAnimationBlue 15s ease infinite,
+      flickerAnimationBlue 2.5s ease-in-out infinite;
+    background-repeat: no-repeat;
+  }
+
+  @keyframes gradientAnimationBlue {
+    0% {
+      background-position: 0% 0%;
+    }
+
+    50% {
+      background-position: 100% 100%;
+    }
+
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+
+  @keyframes flickerAnimationBlue {
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+  }
+}
+
+@keyframes clickShrink {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .button-click {
-    display: inline-block;
-    padding: 10px 20px;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.2s ease;
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
 .button:active {
-    animation: clickShrink 0.2s ease;
+  animation: clickShrink 0.2s ease;
+}
+.specialTitle {
+  position: relative;
+  margin: 15px auto; /* 上下のマージンを調整 */
+  padding: 15px; /* 内側の余白を調整 */
+  font-size: 2rem; /* フォントサイズを少し小さく */
+  font-weight: bold;
+  color: #007bff; /* テキストの色を青に設定 */
+  text-align: center;
+  border-radius: 12px;
+  background-color: rgba(230, 240, 255, 0.8); /* 背景色を少し濃く */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.specialTitle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  border: 3px solid rgba(0, 123, 255, 0.5);
+  z-index: -1;
 }

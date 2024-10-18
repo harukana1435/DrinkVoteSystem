@@ -281,6 +281,7 @@ async function main() {
 
   await updateUsers(client);
   await updateDrink(client);
+  await seedResult(client);
 
   await client.end();
 }
