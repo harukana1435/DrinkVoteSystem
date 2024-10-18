@@ -202,10 +202,17 @@ export async function fetchLatestResult() {
     const twoWeeksAgoStr = twoWeeksAgo.toISOString().split('T')[0]; // 2週間前のYYYY-MM-DD形式
 
     // 今日から2週間以内の日付を取得
+    // const latestdate =
+    //     await sql`SELECT result.date AS resultdate
+    //               FROM result
+    //               WHERE result.date >= ${twoWeeksAgoStr}
+    //               AND result.date <= ${todayStr}
+    //               ORDER BY result.date DESC
+    //               LIMIT 1`;
+    // 今日から2週間以内の日付を取得
     const latestdate = await sql`SELECT result.date AS resultdate 
                   FROM result 
-                  WHERE result.date >= ${twoWeeksAgoStr} 
-                  AND result.date <= ${todayStr}
+
                   ORDER BY result.date DESC 
                   LIMIT 1`;
 

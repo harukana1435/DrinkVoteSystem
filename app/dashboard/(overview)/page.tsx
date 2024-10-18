@@ -2,11 +2,11 @@ import { lusitana, noto_sans_jp } from '@/app/ui/fonts';
 //import Drink from '@/app/ui/drink_vote/page';
 // import { Vote } from '@/app/ui/drink_vote/page';
 import Drink_info from '@/app/ui/drink_vote/drink_info';
-import VoteButton from '@/app/ui/drink_vote/vote-button';
 import Search from '@/app/ui/search';
 import { fetchDrinkPages } from '@/app/lib/data';
 import Pagination from '@/app/ui/invoices/pagination';
 import { GET } from '@/app/api/cron/route';
+import ShowVoteMessage from '@/app/ui/drink_vote/ShowVoteMessage';
 
 export default async function Page({
   searchParams,
@@ -24,7 +24,7 @@ export default async function Page({
 
   return (
     <main>
-      <div className="flex min-h-screen flex-col">
+      <div className="relative flex min-h-screen flex-col">
         <div className="flex-grow">
           <div>
             <h1 className={`${lusitana.className} specialTitle`}>
@@ -34,6 +34,7 @@ export default async function Page({
           <div className="md:h-200 p-4">
             <Search placeholder="Search drinks..." />
           </div>
+
           <div className="mt-5 flex w-full justify-center">
             {<Pagination totalPages={totalPages} />}
           </div>
@@ -41,6 +42,7 @@ export default async function Page({
             <Drink_info search={search} currentPage={currentPage} />
           </div>
         </div>
+        <ShowVoteMessage /> {/* ShowVoteMessageをここで呼び出す */}
       </div>
     </main>
   );
