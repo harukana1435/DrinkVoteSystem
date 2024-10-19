@@ -27,7 +27,7 @@ export default function ShowVoteMessage() {
         className={`mx-auto w-80 rounded-full bg-white p-4 text-center  ${isVisible ? 'shadow-lg' : ''}`}
       >
         {/* 楕円形を作成 */}
-        <p className="text-red-600">{isVisible ? message : ''}</p>
+        <p className="font-bold text-red-500">{isVisible ? message : ''}</p>
       </div>
     </div>
   );
