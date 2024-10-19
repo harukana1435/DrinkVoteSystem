@@ -14,7 +14,7 @@ export default function ShowResult({
   return (
     <div className="mb-4">
       <p
-        className={`inline-flex items-center rounded-full bg-blue-600 px-3 py-2 text-lg font-bold text-white shadow-md`}
+        className={`inline-flex w-[200px] items-center justify-between rounded-full bg-blue-600 px-3 py-2 text-lg font-bold text-white shadow-md`}
       >
         {japanesename} : <span className="text-yellow-300">{price}</span>円分
       </p>
