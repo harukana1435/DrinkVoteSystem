@@ -242,7 +242,8 @@ async function seedResult(client) {
         date TEXT,
         name TEXT,
         japanesename TEXT,
-        price INTEGER
+        price INTEGER,
+        path TEXT
     );
 `;
     console.log(`Created "result" table`);
@@ -251,8 +252,8 @@ async function seedResult(client) {
     const insertedResult = await Promise.all(
       result.map(
         (result) => client.sql`
-        INSERT INTO result (date, name, japanesename, price)
-        VALUES (${result.date}, ${result.name}, ${result.japanesename},  ${result.price});
+        INSERT INTO result (date, name, japanesename, price, path)
+        VALUES (${result.date}, ${result.name}, ${result.japanesename},  ${result.price}, ${result.path});
       `,
       ),
     );

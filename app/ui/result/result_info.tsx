@@ -5,6 +5,7 @@ import { fredoka } from '../fonts';
 export default async function ResultInfo() {
   const resultlist = await fetchLatestResult();
   const totalPrice = resultlist.reduce((acc, result) => acc + result.price, 0);
+  console.log(resultlist);
 
   return (
     <div>
@@ -19,6 +20,7 @@ export default async function ResultInfo() {
                 name={result.name}
                 japanesename={result.japanesename}
                 price={result.price}
+                path={result.path}
               />
             }
           </div>

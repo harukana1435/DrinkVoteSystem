@@ -3,10 +3,17 @@ import { lusitana, noto_sans_jp } from '@/app/ui/fonts';
 // import { Vote } from '@/app/ui/drink_vote/page';
 import Drink_info from '@/app/ui/drink_vote/drink_info';
 import Search from '@/app/ui/search';
-import { fetchDrinkPages } from '@/app/lib/data';
+import {
+  fetchDrinkPages,
+  fetchSelectDrink,
+  fetchDrinkNameByID,
+} from '@/app/lib/data';
 import Pagination from '@/app/ui/invoices/pagination';
 import { GET } from '@/app/api/cron/route';
 import ShowVoteMessage from '@/app/ui/drink_vote/ShowVoteMessage';
+import { Session } from 'next-auth';
+import { auth } from '@/auth';
+import GuideText from '@/app/ui/dashboard/GuideText';
 
 export default async function Page({
   searchParams,
@@ -21,6 +28,14 @@ export default async function Page({
   const search = searchParams?.search || '';
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchDrinkPages(search);
+  const session: Session | null = await auth();
+  const date = new Date().toISOString().split('T')[0];
+  const votedDrink = await fetchSelectDrink(session?.user?.email ?? '', date);
+  const votedDrinkname = await fetchDrinkNameByID(votedDrink?.drink);
+  const votedmessage =
+    '本日は  ' + votedDrinkname?.japanesename + '  に投票しました';
+  const normalmessage = '1日1回投票できるよ';
+  console.log(votedDrinkname);
 
   return (
     <main>
@@ -28,7 +43,9 @@ export default async function Page({
         <div className="flex-grow">
           <div>
             <h1 className={`${lusitana.className} specialTitle`}>
-              1日1回投票できるよ
+              {votedDrinkname?.japanesename != undefined
+                ? votedmessage
+                : normalmessage}
             </h1>
           </div>
           <div className="md:h-200 p-4">
@@ -42,7 +59,8 @@ export default async function Page({
             <Drink_info search={search} currentPage={currentPage} />
           </div>
         </div>
-        <ShowVoteMessage /> {/* ShowVoteMessageをここで呼び出す */}
+        <ShowVoteMessage votedDrink={votedDrink?.drink ?? ''} />{' '}
+        {/* ShowVoteMessageをここで呼び出す */}
       </div>
     </main>
   );
