@@ -20,7 +20,7 @@ function Header_login() {
                 Tahara, Sei Lab
             </h1>
             <h1 className="font-family:'Yu Gothic'; flex-1 bg-cyan-600 pb-5 pt-5 text-center text-5xl text-white">
-                飲料投票サイト
+                飲み物投票サイト
             </h1>
         </div>
     );
