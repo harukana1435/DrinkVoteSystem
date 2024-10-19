@@ -13,7 +13,10 @@ export default function SideNav() {
         className="mb-2 flex h-20 items-end justify-start rounded-md bg-cyan-600 p-4 md:h-40"
         href="/"
       >
-        <div className="flex flex-col items-center">
+        <div
+          className="mt-2 flex flex-col items-center"
+          style={{ transform: 'translateY(-30px)' }}
+        >
           <h2 className="mb-1 font-sans text-xl font-bold text-white">
             田原・清研究室
           </h2>
