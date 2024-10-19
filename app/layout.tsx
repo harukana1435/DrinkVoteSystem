@@ -5,8 +5,8 @@ import Head from 'next/head';
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | 田原・清研 飲み物投票',
-    default: '田原・清研 飲み物投票',
+    template: '%s | 飲み物投票 田原・清研 ',
+    default: '飲み物投票  田原・清研',
   },
   description: 'The official Next.js Learn Dashboard built with App Router.',
   metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
