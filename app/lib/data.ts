@@ -1,6 +1,13 @@
 import { sql } from '@vercel/postgres';
 import { unstable_noStore as noStore } from 'next/cache';
-import { User, Vote, Drink, DrinkID, DrinkResult } from './definitions';
+import {
+  User,
+  Vote,
+  Drink,
+  DrinkID,
+  DrinkResult,
+  DrinkName,
+} from './definitions';
 import { formatCurrency } from './utils';
 
 export async function getUser(email: string) {
@@ -61,6 +68,19 @@ export async function fetchSelectDrink(email: string, date: string) {
   try {
     const data =
       await sql<DrinkID>`SELECT vote.drink FROM vote WHERE vote.voter =${email} AND vote.date = ${date}`;
+
+    return data.rows[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch User Vote data.');
+  }
+}
+
+export async function fetchDrinkNameByID(id: string) {
+  noStore();
+  try {
+    const data =
+      await sql`SELECT drink.japanesename FROM drink WHERE drink.id =${id}`;
 
     return data.rows[0];
   } catch (error) {
@@ -179,7 +199,7 @@ export async function fetchTwoteeksResult() {
       await sql`SELECT SUM(drink.voted) AS sum FROM drink WHERE ${value} * drink.voted > 150`;
     const value2 = Math.floor(1500 / result2.rows[0].sum) || 0;
     const result3 =
-      await sql<DrinkResult>`SELECT drink.name, drink.japanesename, (${value2} * drink.voted) AS price FROM drink WHERE ${value} * drink.voted > 150`;
+      await sql<DrinkResult>`SELECT drink.name, drink.japanesename, (${value2} * drink.voted) AS price drink.path FROM drink WHERE ${value} * drink.voted > 150`;
     return result3.rows;
   } catch (error) {
     console.error('Database Error:', error);
@@ -219,7 +239,7 @@ export async function fetchLatestResult() {
     if (latestdate.rows.length > 0) {
       const latestdatestr = latestdate.rows[0].resultdate.toString();
       const drinklist =
-        await sql<DrinkResult>`SELECT result.name, result.japanesename, result.price 
+        await sql<DrinkResult>`SELECT result.name, result.japanesename, result.price, result.path
                               FROM result 
                               WHERE result.date = ${latestdatestr}`;
       return drinklist.rows;
