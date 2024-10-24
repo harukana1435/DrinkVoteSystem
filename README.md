@@ -14,7 +14,7 @@
 ![dripro13](https://github.com/user-attachments/assets/77c2c8ed-a284-47f5-9d3d-2a2d5640602f)
 
 ### 技術スタック
-- **Next.js** AppRouter
+- **Next.js**  | AppRouter
 - **Vercel**
 - **Auth.js**
 - **Node.js**
