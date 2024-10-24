@@ -11,7 +11,7 @@
  当研究室では、2週間ごとに1500円分の飲み物を購入する制度があり、購入する飲み物は学生による1日1回の任意投票で決定している。従来はホワイトボードを使用して投票と集計を行っていたが、手間がかかるため、これを効率化するためにWebアプリケーションの開発を行った。
 
 ## システム構成
-![dripro13](https://github.com/user-attachments/assets/77c2c8ed-a284-47f5-9d3d-2a2d5640602f)
+![dripro15](https://github.com/user-attachments/assets/0f6459cd-bdd3-4a79-8b03-d3619a5cb6f1)
 
 ### 技術スタック
 - **Next.js**  | AppRouter
